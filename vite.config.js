@@ -10,6 +10,10 @@ export default defineConfig({
           __dirname,
           "./src/pages/sign-in-page/sign-in-page.html",
         ),
+        "sign-out": resolve(
+          __dirname,
+          "./src/pages/sign-out-page/sign-out-page.html",
+        ),
       },
     },
   },
