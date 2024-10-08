@@ -41,4 +41,5 @@ export default () =>
   widgetAuthForm({
     title: "Вход",
     content: tmp(),
+    className: "sign-in-wrapper",
   });
