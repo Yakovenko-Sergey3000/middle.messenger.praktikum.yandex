@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import signInFrom from "./sing-in.tmpl.js";
 import { widgetFormLabel } from "@widgets/form-label/index.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
-import { uiButtonMain } from "@ui/buttons/index.js";
+import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
 import { widgetAuthForm } from "@widgets/auth-form/index.js";
 
 Handlebars.registerPartial(
@@ -32,6 +32,13 @@ Handlebars.registerPartial(
   uiButtonMain({
     type: "submit",
     label: "Авторизоваться",
+  }),
+);
+
+Handlebars.registerPartial(
+  "link_button",
+  uiButtonLink({
+    label: "Нет аккаунта?",
   }),
 );
 

@@ -4,6 +4,9 @@ export default `
       {{> login }}
       {{> password }}
     </div>
-    <div>{{> button }}</div>
+    <div class="sign-in-form__btns">
+      {{> button }}
+      <a href="../../../../src/pages/sign-out-page/sign-out-page.html">{{> link_button }}</a>
+    </div>
   </div>
 `;
