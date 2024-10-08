@@ -1,0 +1,13 @@
+.sign-in-form {
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__inputs {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
