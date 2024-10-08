@@ -11,6 +11,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@widgets": resolve(__dirname, "./src/components/widgets"),
+      "@ui": resolve(__dirname, "./src/components/ui"),
+      "@global-style": resolve(__dirname, "./src/style.css"),
     },
   },
 });
