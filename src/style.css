@@ -45,7 +45,7 @@ p {
   font-size: 12px;
 }
 
-.sign-in-page, .sign-out-page {
+.sign-in-page, .sign-out-page, ._500-page, ._400-page {
   width: 100vw;
   height: 100vh;
   display: flex;

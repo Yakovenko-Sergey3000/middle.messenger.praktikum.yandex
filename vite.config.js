@@ -14,6 +14,8 @@ export default defineConfig({
           __dirname,
           "./src/pages/sign-out-page/sign-out-page.html",
         ),
+        500: resolve(__dirname, "./src/pages/500-page/500.html"),
+        400: resolve(__dirname, "./src/pages/400-page/400.html"),
       },
     },
   },
