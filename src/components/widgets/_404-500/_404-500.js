@@ -1,6 +1,6 @@
-import "./_400-500.css";
+import "./_404-500.css";
 import Handlebars from "handlebars";
-import pageTemplate from "./_400-500.tmpl.js";
+import pageTemplate from "./_404-500.tmpl.js";
 import { uiButtonLink } from "@ui/buttons/index.js";
 
 const tmp = Handlebars.compile(pageTemplate);
