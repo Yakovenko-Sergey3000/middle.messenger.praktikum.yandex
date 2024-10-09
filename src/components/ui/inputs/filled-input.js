@@ -1,11 +1,11 @@
 import "./inputs.css";
 import Handlebars from "handlebars";
-import outlineInput from "./input-outline.tmpl.js";
+import input from "./flushed-input.tmpl.js";
 
-const tmp = Handlebars.compile(outlineInput);
+const tmp = Handlebars.compile(input);
 export default ({ type = "text", name, className = "" } = {}) =>
   tmp({
-    className: `flushed-input ${className}`,
+    className: `filled-input ${className}`,
     type,
     name,
   });

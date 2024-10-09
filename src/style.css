@@ -8,6 +8,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --ya-blue-500: #3369F3;
+  --ya-blue-50: #E4EDFD;
   --ya-gray-100: #FBFBFB;
   --ya-gray-200: #EFEFEF;
   --ya-gray-500: #999999;
@@ -21,6 +22,11 @@
   box-sizing: border-box;
   outline-color: var(--ya-gray-500);
   outline-offset: 3px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
 
 h1, h2, h4, p {
@@ -43,6 +49,11 @@ h4 {
 
 p {
   font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .sign-in-page, .sign-out-page, ._500-page, ._400-page {
