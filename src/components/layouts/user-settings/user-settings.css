@@ -1,0 +1,23 @@
+.user-settings {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  &__left-bar {
+    flex: 0 0 64px;
+    height: 100%;
+    background-color: var(--ya-gray-200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__right-bar {
+    flex: 1 1 auto;
+    height: 100%;
+  }
+}
+
+.return-back-button {
+  outline: none;
+  font-size: 16px;
+}

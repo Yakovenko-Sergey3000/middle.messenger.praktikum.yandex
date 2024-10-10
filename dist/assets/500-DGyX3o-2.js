@@ -1,0 +1,1 @@
+import"./style-8P9LypbU.js";import{l as t}from"./_404-500-R-2zL7Uc.js";import"./button-C1xl2RBC.js";import"./button-link-CxnH7awg.js";document.querySelector("#app").innerHTML=t({title:"500",subtitle:"Мы уже фиксим",href:"/"});

@@ -25,6 +25,10 @@
   cursor: pointer;
   color: var(--ya-blue-500);
 
+  &_red {
+    color: var(--ya-red-500);
+  }
+
   &:active {
     color: black;
   }

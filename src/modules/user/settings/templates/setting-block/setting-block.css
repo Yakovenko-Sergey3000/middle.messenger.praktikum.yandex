@@ -1,0 +1,13 @@
+.setting-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-text {
+  font-weight: 600;
+}
+
+.right-text {
+  color: var(--ya-gray-500) ;
+}
