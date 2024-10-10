@@ -1,9 +1,7 @@
 import "./_404-500.css";
 import Handlebars from "handlebars";
-import pageTemplate from "./_404-500.tmpl.js";
+import pageTemplate from "./_404-500.hbs";
 import { uiButtonLink } from "@ui/buttons/index.js";
-
-const tmp = Handlebars.compile(pageTemplate);
 
 Handlebars.registerPartial(
   "link_button",
@@ -13,7 +11,7 @@ Handlebars.registerPartial(
 );
 
 export default ({ title, subtitle, href } = {}) =>
-  tmp({
+  Handlebars.compile(pageTemplate)({
     title,
     subtitle,
     href,

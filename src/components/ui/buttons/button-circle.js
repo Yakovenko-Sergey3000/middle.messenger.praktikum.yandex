@@ -1,10 +1,8 @@
 import "./buttons.css";
 import Handlebars from "handlebars";
-import buttonTemplate from "@ui/buttons/button.tmpl.js";
-
-const tmp = Handlebars.compile(buttonTemplate);
+import buttonTemplate from "@ui/buttons/button.hbs";
 export default ({ label, type = "button", className = "" }) =>
-  tmp({
+  Handlebars.compile(buttonTemplate)({
     type,
     className: `button-circle ${className}`,
     label,

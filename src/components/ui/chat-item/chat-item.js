@@ -1,6 +1,6 @@
 import "./chat-item.css";
 import Handlebars from "handlebars";
-import chatItem from "./chat-item.tmpl.js";
+import chatItem from "./chat-item.hbs";
 
 Handlebars.registerHelper("time", (date) => {
   return "10:23";

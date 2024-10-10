@@ -1,6 +1,6 @@
 import "./sign-out.css";
 import Handlebars from "handlebars";
-import signOutForm from "./sign-out.tmpl.js";
+import signOutForm from "./sign-out.hbs";
 import { widgetAuthForm } from "@widgets/auth-form/index.js";
 import { widgetFormLabel } from "@widgets/form-label/index.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
@@ -94,10 +94,8 @@ Handlebars.registerPartial(
     label: "Войти",
   }),
 );
-
-const tmp = Handlebars.compile(signOutForm);
 export default () =>
   widgetAuthForm({
     title: "Регистрация",
-    content: tmp(),
+    content: Handlebars.compile(signOutForm)(),
   });

@@ -1,6 +1,6 @@
 import "./sing-in.css";
 import Handlebars from "handlebars";
-import signInFrom from "./sing-in.tmpl.js";
+import signInFrom from "./sing-in.hbs";
 import { widgetFormLabel } from "@widgets/form-label/index.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
@@ -42,11 +42,9 @@ Handlebars.registerPartial(
   }),
 );
 
-const tmp = Handlebars.compile(signInFrom);
-
 export default () =>
   widgetAuthForm({
     title: "Вход",
-    content: tmp(),
+    content: Handlebars.compile(signInFrom)(),
     className: "sign-in-wrapper",
   });

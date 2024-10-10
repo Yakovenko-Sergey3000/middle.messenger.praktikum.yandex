@@ -1,9 +1,8 @@
 import "./chat.css";
 import Handlebars from "handlebars";
-import chat from "./chat.tmpl.js";
+import chat from "./chat.hbs";
 
 const emptyTmp = Handlebars.compile("");
-const tmp = Handlebars.compile(chat);
 export default ({
   chatListContent = emptyTmp,
   chatDialogContent = emptyTmp,
@@ -11,5 +10,5 @@ export default ({
   Handlebars.registerPartial("chat_list_content", chatListContent);
   Handlebars.registerPartial("chat_dialog_content", chatDialogContent);
 
-  return tmp();
+  return Handlebars.compile(chat)();
 };

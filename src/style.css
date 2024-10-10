@@ -56,7 +56,7 @@ a {
   color: inherit;
 }
 
-.sign-in-page, .sign-out-page, ._500-page, ._400-page {
+.center-content {
   width: 100vw;
   height: 100vh;
   display: flex;
