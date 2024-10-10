@@ -24,3 +24,14 @@
     border: 1px solid var(--ya-gray-500);
   }
 }
+
+.un-styled-input {
+  border: 0;
+  &:focus {
+    outline: none;
+  }
+
+  &_begin-right {
+    text-align: right
+  }
+}

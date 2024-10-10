@@ -6,10 +6,12 @@ export default ({
   name,
   className = "",
   placeholder = "",
+  value = "",
 } = {}) =>
   Handlebars.compile(input)({
     className: `flushed-input ${className}`,
     type,
     name,
     placeholder,
+    value,
   });

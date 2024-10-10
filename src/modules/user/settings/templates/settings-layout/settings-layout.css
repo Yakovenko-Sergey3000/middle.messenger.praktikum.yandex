@@ -1,0 +1,47 @@
+.setting-wrapper {
+  width: 510px;
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__user-name {
+    margin-top: 21px;
+    font-size: 16px;
+  }
+
+  &__user-name__title {
+    font-size: 16px;
+  }
+
+  &__user-fields-info {
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  &__user-actions {
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  &__save_button {
+    width: 280px;
+    margin: 60px auto;
+  }
+}
+
+.user-field, .action {
+  padding: 10px 0;
+  border-bottom: 1px solid #EAEAEA;
+
+  &:last-child {
+    border: none;
+  }
+}
+
+.user-avatar-mock {
+  width: 130px;
+  height: 130px;
+  background-color: var(--ya-gray-200);
+  border-radius: 100%;
+}

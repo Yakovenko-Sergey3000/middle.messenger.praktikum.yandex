@@ -9,7 +9,7 @@ export default ({
   value = "",
 } = {}) =>
   Handlebars.compile(input)({
-    className: `filled-input ${className}`,
+    className: `un-styled-input ${className}`,
     type,
     name,
     placeholder,
