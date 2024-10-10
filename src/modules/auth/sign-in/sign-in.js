@@ -1,14 +1,14 @@
 import "./sing-in.css";
 import Handlebars from "handlebars";
 import signInFrom from "./sing-in.hbs";
-import { widgetFormLabel } from "@widgets/form-label/index.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
-import { widgetAuthForm } from "@widgets/auth-form/index.js";
+import { uiFormLabel } from "@ui/form-label/index.js";
+import { layoutAuthForm } from "@layouts/auth-form/index.js";
 
 Handlebars.registerPartial(
   "login",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Логин",
     element: uiFlushedInput({
       name: "login",
@@ -18,7 +18,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "password",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Пароль",
     element: uiFlushedInput({
       type: "password",
@@ -43,7 +43,7 @@ Handlebars.registerPartial(
 );
 
 export default () =>
-  widgetAuthForm({
+  layoutAuthForm({
     title: "Вход",
     content: Handlebars.compile(signInFrom)(),
     className: "sign-in-wrapper",

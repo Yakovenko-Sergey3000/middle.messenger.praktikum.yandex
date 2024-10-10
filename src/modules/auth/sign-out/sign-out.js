@@ -1,14 +1,14 @@
 import "./sign-out.css";
 import Handlebars from "handlebars";
 import signOutForm from "./sign-out.hbs";
-import { widgetAuthForm } from "@widgets/auth-form/index.js";
-import { widgetFormLabel } from "@widgets/form-label/index.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
+import { layoutAuthForm } from "@layouts/auth-form/index.js";
+import { uiFormLabel } from "@ui/form-label/index.js";
 
 Handlebars.registerPartial(
   "email",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Почта",
     element: uiFlushedInput({
       name: "email",
@@ -19,7 +19,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "login",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Логин",
     element: uiFlushedInput({
       name: "login",
@@ -29,7 +29,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "first_name",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Имя",
     element: uiFlushedInput({
       name: "first_name",
@@ -39,7 +39,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "last_name",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Фамилия",
     element: uiFlushedInput({
       name: "last_name",
@@ -49,7 +49,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "phone",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Телефон",
     element: uiFlushedInput({
       name: "phone",
@@ -59,7 +59,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "password",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Пароль",
     element: uiFlushedInput({
       type: "password",
@@ -70,7 +70,7 @@ Handlebars.registerPartial(
 
 Handlebars.registerPartial(
   "confirm_password",
-  widgetFormLabel({
+  uiFormLabel({
     label: "Пароль (еще раз)",
     element: uiFlushedInput({
       type: "password",
@@ -95,7 +95,7 @@ Handlebars.registerPartial(
   }),
 );
 export default () =>
-  widgetAuthForm({
+  layoutAuthForm({
     title: "Регистрация",
     content: Handlebars.compile(signOutForm)(),
   });

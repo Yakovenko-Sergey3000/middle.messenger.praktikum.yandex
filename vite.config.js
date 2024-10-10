@@ -22,7 +22,7 @@ export default defineConfig({
   plugins: [handlebars()],
   resolve: {
     alias: {
-      "@widgets": resolve(__dirname, "./src/components/widgets"),
+      "@layouts": resolve(__dirname, "./src/components/layouts"),
       "@ui": resolve(__dirname, "./src/components/ui"),
       "@global-style": resolve(__dirname, "./src/style.css"),
       "@modules": resolve(__dirname, "./src/modules"),

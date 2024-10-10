@@ -1,7 +1,7 @@
 import "@global-style";
-import { widgetNotFoundPage } from "@widgets/_404-500/index.js";
+import { layoutNotFoundPage } from "@layouts/_404-500/index.js";
 
-document.querySelector("#app").innerHTML = widgetNotFoundPage({
+document.querySelector("#app").innerHTML = layoutNotFoundPage({
   title: "500",
   subtitle: "Мы уже фиксим",
   href: "/",

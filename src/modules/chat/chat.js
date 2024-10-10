@@ -1,8 +1,8 @@
-import { widgetChat } from "@widgets/chat/index.js";
 import { moduleChatList } from "@modules/chat/chats-list/index.js";
 import { moduleDialog } from "@modules/chat/dialog/index.js";
+import { layoutChat } from "@layouts/chat/index.js";
 export default () =>
-  widgetChat({
+  layoutChat({
     chatListContent: moduleChatList(),
     chatDialogContent: moduleDialog(),
   });
