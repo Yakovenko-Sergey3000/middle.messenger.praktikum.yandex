@@ -5,11 +5,13 @@ import Handlebars from "handlebars";
 import settingsLayout from "../templates/settings-frame/settings-frame.hbs";
 import settingBlock from "../templates/setting-field/setting-field.hbs";
 import { VIEW_ACTIONS, VIEW_FIELDS_INFO } from "./fields.js";
+import { uiCircleAvatar } from "@ui/avatar/index.js";
 
 Handlebars.registerPartial("left_partial", (data) => data.left_partial);
 Handlebars.registerPartial("right_partial", (data) => data.right_partial);
 const settingBlockField = Handlebars.compile(settingBlock);
 
+Handlebars.registerPartial("avatar", uiCircleAvatar());
 Handlebars.registerPartial("field", settingBlockField);
 Handlebars.registerPartial("action", settingBlockField);
 

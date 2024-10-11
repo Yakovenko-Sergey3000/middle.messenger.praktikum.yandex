@@ -18,6 +18,11 @@
     gap: 10px;
   }
 
+  &__header__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
   &__header__menu {
     width: 25px;
     height: 25px;
@@ -77,11 +82,4 @@
 .send-message-input {
   border-radius: 30px;
   padding: 0 20px;
-}
-
-.dialog__header__mock-avatar {
-  width: 34px;
-  height: 34px;
-  background-color: var(--ya-gray-200);
-  border-radius: 100%;
 }

@@ -4,6 +4,7 @@ import dialog from "./dialog.hbs";
 import { uiFilledInput } from "@ui/inputs/index.js";
 import { uiButtonCircle } from "@ui/buttons/index.js";
 import addFileIcon from "@icons/add-file-icon.svg";
+import { uiCircleAvatar } from "@ui/avatar/index.js";
 
 Handlebars.registerPartial(
   "send_message_button",
@@ -21,6 +22,7 @@ Handlebars.registerPartial(
   }),
 );
 
+Handlebars.registerPartial("dialog_avatar", uiCircleAvatar());
 export default () =>
   Handlebars.compile(dialog)({
     user_name: "Вадим",

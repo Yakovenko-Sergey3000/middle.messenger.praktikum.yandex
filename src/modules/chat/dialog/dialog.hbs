@@ -2,8 +2,10 @@ export default `
   <div class="dialog">
     <div class="dialog__header">
       <div class="dialog__header__user-info">
-        <div class="dialog__header__mock-avatar"></div>
-        <h4>{{ user_name }}</h4>
+        <div class="dialog__header__avatar">
+          {{>dialog_avatar}}
+        </div>
+        <h4>{{user_name}}</h4>
       </div>
       <button class="dialog__header__menu">
         ︙
@@ -17,10 +19,10 @@ export default `
         <img src="{{sct_file_icon}}" alt="file-icon" >
       </div>
       <div class="dialog__footer__input">
-        {{> message_input }}
+        {{>message_input}}
       </div>
       <div class="dialog__footer__button">
-        {{> send_message_button }}
+        {{>send_message_button}}
       </div>
     </div>
   </div>

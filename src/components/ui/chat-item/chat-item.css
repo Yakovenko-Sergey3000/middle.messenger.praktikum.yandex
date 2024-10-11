@@ -4,6 +4,11 @@
   display: flex;
   padding: 12px 0;
 
+  &__avatar {
+    flex: 0 0 47px;
+    height: 47px;
+  }
+
   &__text-info {
     flex: 1 1 auto;
     margin-left: 10px;
@@ -17,13 +22,6 @@
     justify-content: space-between;
     align-items: end;
   }
-}
-
-.chat-item__mock-avatar {
-  width: 47px;
-  height: 47px;
-  background-color: var(--ya-gray-200);
-  border-radius: 100%;
 }
 
 .last_message {
