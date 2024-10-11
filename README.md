@@ -19,4 +19,3 @@
 - [Изменить пароль](https://scintillating-raindrop-9c168b.netlify.app/src/pages/change-user-password/change-user-password)
 - [500](https://scintillating-raindrop-9c168b.netlify.app/src/pages/500-page/500)
 - [404](https://scintillating-raindrop-9c168b.netlify.app/src/pages/404-page/404)
-

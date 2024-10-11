@@ -8,6 +8,9 @@
     "build": "vite build",
     "start": "vite build | vite preview --port 3000"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
