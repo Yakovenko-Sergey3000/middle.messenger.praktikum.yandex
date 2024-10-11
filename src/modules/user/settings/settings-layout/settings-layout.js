@@ -1,6 +1,6 @@
-import "./user-settings.css";
+import "./settings-layout.css";
 import Handlebars from "handlebars";
-import settingUser from "./user-settings.hbs";
+import settingUser from "./settings-layout.hbs";
 import { uiButtonCircle } from "@ui/buttons/index.js";
 
 Handlebars.registerPartial(

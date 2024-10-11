@@ -1,6 +1,6 @@
 import "./chat-list.css";
 import Handlebars from "handlebars";
-import chatList from "./chat-list.tmpl.js";
+import chatList from "./chat-list.hbs";
 import { uiFilledInput } from "@ui/inputs/index.js";
 import { uiChatItem } from "@ui/chat-item/index.js";
 import searchIcon from "@icons/search-icon.svg";
@@ -12,14 +12,14 @@ Handlebars.registerPartial(
   uiFilledInput({
     name: "chats-search",
     className: "search-input",
+    placeholder: "Поиск",
   }),
 );
 
 Handlebars.registerPartial("chat_item", uiChatItem);
 
-const tmp = Handlebars.compile(chatList);
 export default () =>
-  tmp({
+  Handlebars.compile(chatList)({
     chats_list: chatsList,
     src_search_icon: searchIcon,
     src_arrow_head: rightArrow,

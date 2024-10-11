@@ -4,7 +4,7 @@ import signInFrom from "./sing-in.hbs";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
 import { uiFormLabel } from "@ui/form-label/index.js";
-import { layoutAuthForm } from "@layouts/auth-form/index.js";
+import layoutAuthForm from "../auth-form-layout/auth-form.js";
 
 Handlebars.registerPartial(
   "login",

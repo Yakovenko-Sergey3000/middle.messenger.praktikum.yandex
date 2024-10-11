@@ -1,9 +1,9 @@
-import "../templates/settings-layout/settings-layout.css";
-import "../templates/setting-block/setting-block.css";
-import { layoutUserSettings } from "@layouts/user-settings/index.js";
+import "../templates/settings-frame/settings-frame.hbs";
+import "../templates/setting-field/setting-field.css";
+import userSettingsLayout from "../settings-layout/settings-layout.js";
 import Handlebars from "handlebars";
-import settingsLayout from "../templates/settings-layout/settings-layout.hbs";
-import settingBlock from "../templates/setting-block/setting-block.hbs";
+import settingsLayout from "../templates/settings-frame/settings-frame.hbs";
+import settingBlock from "../templates/setting-field/setting-field.hbs";
 import { VIEW_FIELDS_INFO } from "./fields.js";
 import { uiButtonMain } from "@ui/buttons/index.js";
 
@@ -26,6 +26,6 @@ const settingsBlockTml = Handlebars.compile(settingsLayout)({
 
 Handlebars.registerPartial("settings_block", settingsBlockTml);
 export default () =>
-  layoutUserSettings({
+  userSettingsLayout({
     content: settingsBlockTml,
   });

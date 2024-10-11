@@ -1,6 +1,6 @@
 import "./dialog.css";
 import Handlebars from "handlebars";
-import dialog from "./dialog.tmpl.js";
+import dialog from "./dialog.hbs";
 import { uiFilledInput } from "@ui/inputs/index.js";
 import { uiButtonCircle } from "@ui/buttons/index.js";
 import addFileIcon from "@icons/add-file-icon.svg";
@@ -21,9 +21,8 @@ Handlebars.registerPartial(
   }),
 );
 
-const tmp = Handlebars.compile(dialog);
 export default () =>
-  tmp({
+  Handlebars.compile(dialog)({
     user_name: "Вадим",
     sct_file_icon: addFileIcon,
   });

@@ -1,4 +1,4 @@
 import "@global-style";
-import { moduleSignIn } from "@modules/auth/sign-in/index.js";
+import { moduleSignIn } from "@modules/auth/index.js";
 
 document.querySelector("#app").innerHTML = moduleSignIn();
