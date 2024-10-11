@@ -1,1 +1,0 @@
-import"./style-8P9LypbU.js";import{b as r}from"./change-password-Db4Qkpdl.js";import"./button-C1xl2RBC.js";import"./button-link-CxnH7awg.js";import"./flushed-input-6HD5luNO.js";import"./button-main-B-eBI9Rk.js";import"./button-circle-BngciP30.js";document.querySelector("#app").innerHTML=r();
