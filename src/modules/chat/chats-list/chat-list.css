@@ -40,7 +40,7 @@
 
 .search-input {
   border-radius: 5px;
-  padding-left: 25px;
+  padding-left: 30px;
 
   &:focus {
     border: 1px solid black!important;

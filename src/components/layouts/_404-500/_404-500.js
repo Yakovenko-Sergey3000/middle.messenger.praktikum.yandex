@@ -4,7 +4,7 @@ import pageTemplate from "./_404-500.hbs";
 import { uiButtonLink } from "@ui/buttons/index.js";
 
 Handlebars.registerPartial(
-  "link_button",
+  "link_back_button",
   uiButtonLink({
     label: "Назад к чатам",
   }),

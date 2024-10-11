@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import signOutForm from "./sign-out.hbs";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
-import { layoutAuthForm } from "@layouts/auth-form/index.js";
+import layoutAuthForm from "../auth-form-layout/auth-form.js";
 import { uiFormLabel } from "@ui/form-label/index.js";
 
 Handlebars.registerPartial(
