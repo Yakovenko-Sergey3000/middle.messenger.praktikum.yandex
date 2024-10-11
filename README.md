@@ -7,7 +7,7 @@
 ### Команды для старта
     npm run dev
     npm run build
-    npm run start
+    npm start
 
 ### Ссылкы на опубликованный проект
 - [Главная ссылка](https://scintillating-raindrop-9c168b.netlify.app/)
