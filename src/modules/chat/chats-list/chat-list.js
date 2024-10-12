@@ -7,20 +7,21 @@ import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
 import { chatsList } from "@modules/chat/chats-list/mock-messages-data.js";
 
-Handlebars.registerPartial(
-  "search_input",
-  uiFilledInput({
-    name: "chats-search",
-    className: "search-input",
-    placeholder: "Поиск",
-  }),
-);
+export default () => {
+  Handlebars.registerPartial(
+    "search_input",
+    uiFilledInput({
+      name: "chats-search",
+      className: "search-input",
+      placeholder: "Поиск",
+    }),
+  );
 
-Handlebars.registerPartial("chat_item", uiChatItem);
+  Handlebars.registerPartial("chat_item", uiChatItem);
 
-export default () =>
-  Handlebars.compile(chatList)({
+  return Handlebars.compile(chatList)({
     chats_list: chatsList,
     src_search_icon: searchIcon,
     src_arrow_head: rightArrow,
   });
+};

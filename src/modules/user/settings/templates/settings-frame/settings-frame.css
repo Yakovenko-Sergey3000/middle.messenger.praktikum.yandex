@@ -37,7 +37,7 @@
 
 .user-field, .action {
   padding: 10px 0;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--ya-gray-150);
 
   &:last-child {
     border: none;
