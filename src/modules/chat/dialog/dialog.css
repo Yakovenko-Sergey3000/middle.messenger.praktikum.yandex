@@ -1,0 +1,85 @@
+.dialog {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    flex: 0 0 54px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin: 0 20px;
+    border-bottom: 1px solid var(--ya-gray-150);
+  }
+
+  &__header__user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__header__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__header__menu {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 100%;
+    font-size: 20px;
+    background: 0;
+    border: 0;
+    padding: 0 2px 2px;
+
+    &:active {
+      color: var(--ya-blue-500);
+      background-color: var(--ya-gray-200);
+    }
+  }
+
+  &__ribbon {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--ya-gray-500);
+  }
+
+  &__footer {
+    flex: 0 0 54px;
+    padding: 10px 0;
+    margin: 0 20px;
+    border-top: 1px solid var(--ya-gray-150);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__footer__add-file {
+    flex: 0 0 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  &__footer__input {
+    flex: 1 1 auto;
+    height: 32px;
+    border-radius: 30px;
+  }
+
+  &__footer__button {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.send-message-input {
+  border-radius: 30px;
+  padding: 0 20px;
+}
