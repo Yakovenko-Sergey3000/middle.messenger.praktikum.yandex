@@ -7,6 +7,7 @@ export default ({
   className = "",
   placeholder = "",
   value = "",
+  id = "",
 } = {}) =>
   Handlebars.compile(input)({
     className: `flushed-input ${className}`,
@@ -14,4 +15,5 @@ export default ({
     name,
     placeholder,
     value,
+    id,
   });

@@ -41,15 +41,19 @@ if (path.includes("change-user-information")) {
 if (path.includes("change-user-password")) {
   renderPage(moduleChangeUserPassword());
 }
+
 if (path.includes("chat")) {
   renderPage(moduleChat());
 }
+
 if (path.includes("sign-in-page")) {
   renderPage(moduleSignIn());
 }
+
 if (path.includes("sign-out-page")) {
   renderPage(moduleSignOut());
 }
+
 if (path.includes("view-user-settings")) {
   renderPage(moduleViewUserSetting());
 }
