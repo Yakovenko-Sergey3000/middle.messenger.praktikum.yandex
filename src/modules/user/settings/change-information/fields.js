@@ -6,6 +6,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "pochta@yandex.ru",
       className: "un-styled-input_begin-right",
+      name: "email",
     }),
   },
   {
@@ -13,6 +14,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "ivanivanov",
       className: "un-styled-input_begin-right",
+      name: "login",
     }),
   },
   {
@@ -20,6 +22,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "Иван",
       className: "un-styled-input_begin-right",
+      name: "first_name",
     }),
   },
   {
@@ -27,6 +30,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "Иванов",
       className: "un-styled-input_begin-right",
+      name: "second_name",
     }),
   },
   {
@@ -34,6 +38,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "Иван",
       className: "un-styled-input_begin-right",
+      name: "display_name",
     }),
   },
   {
@@ -41,6 +46,7 @@ export const VIEW_FIELDS_INFO = [
     right_partial: uiUnStyledInput({
       value: "+7 (909) 967 30 30",
       className: "un-styled-input_begin-right",
+      name: "phone",
     }),
   },
 ];

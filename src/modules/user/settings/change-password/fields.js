@@ -7,6 +7,7 @@ export const VIEW_FIELDS_INFO = [
       value: "12345",
       type: "password",
       className: "un-styled-input_begin-right",
+      name: "oldPassword",
     }),
   },
   {
@@ -15,6 +16,7 @@ export const VIEW_FIELDS_INFO = [
       value: "12345",
       type: "password",
       className: "un-styled-input_begin-right",
+      name: "newPassword",
     }),
   },
   {
@@ -23,6 +25,7 @@ export const VIEW_FIELDS_INFO = [
       value: "12345",
       type: "password",
       className: "un-styled-input_begin-right",
+      name: "confirmPassword",
     }),
   },
 ];
