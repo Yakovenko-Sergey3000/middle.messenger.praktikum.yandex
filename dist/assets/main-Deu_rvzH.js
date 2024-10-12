@@ -101,7 +101,7 @@ Expecting `+M.join(", ")+", got '"+(this.terminals_[b]||b)+"'":W="Parse error on
 `,N=({type:e="text",name:t,className:a="",placeholder:p="",value:f="",id:h=""}={})=>P.compile(et)({className:`flushed-input ${a}`,type:e,name:t,placeholder:p,value:f,id:h}),Bt=({type:e="text",name:t,className:a="",placeholder:p="",value:f="",id:h=""}={})=>P.compile(et)({className:`filled-input ${a}`,type:e,name:t,placeholder:p,value:f,id:h}),F=({type:e="text",name:t,className:a="",placeholder:p="",value:f="",id:h=""}={})=>P.compile(et)({className:`un-styled-input ${a}`,type:e,name:t,placeholder:p,value:f,id:h}),zn=[{left_text:"Почта",right_partial:F({value:"pochta@yandex.ru",className:"un-styled-input_begin-right",name:"email"})},{left_text:"Логин",right_partial:F({value:"ivanivanov",className:"un-styled-input_begin-right",name:"login"})},{left_text:"Имя",right_partial:F({value:"Иван",className:"un-styled-input_begin-right",name:"first_name"})},{left_text:"Фамилия",right_partial:F({value:"Иванов",className:"un-styled-input_begin-right",name:"second_name"})},{left_text:"Имя в чате",right_partial:F({value:"Иван",className:"un-styled-input_begin-right",name:"display_name"})},{left_text:"Телефон",right_partial:F({value:"+7 (909) 967 30 30",className:"un-styled-input_begin-right",name:"phone"})}],Qn=()=>{P.registerPartial("avatar",ne()),P.registerPartial("left_partial",a=>a.left_partial),P.registerPartial("right_partial",a=>a.right_partial);const e=P.compile($e);P.registerPartial("field",e),P.registerPartial("save_button",ce({label:"Сохранить"}));const t=P.compile(je)({user_fields_info:zn,is_change:!0});return P.registerPartial("settings_block",t),Xe({content:t})},Zn=[{left_text:"Старый пароль",right_partial:F({value:"12345",type:"password",className:"un-styled-input_begin-right",name:"oldPassword"})},{left_text:"Новый пароль",right_partial:F({value:"12345",type:"password",className:"un-styled-input_begin-right",name:"newPassword"})},{left_text:"Повторите новый пароль",right_partial:F({value:"12345",type:"password",className:"un-styled-input_begin-right",name:"confirmPassword"})}],Yn=()=>{P.registerPartial("avatar",ne()),P.registerPartial("left_partial",a=>a.left_partial),P.registerPartial("right_partial",a=>a.right_partial);const e=P.compile($e);P.registerPartial("field",e),P.registerPartial("save_button",ce({label:"Сохранить"}));const t=P.compile(je)({user_fields_info:Zn,is_change:!0});return P.registerPartial("settings_block",t),Xe({content:t})},Xn=`
   <div class="chat-list">
     <div class="chat-list__header">
-      <a href="../../../pages/view-user-settings.html">
+      <a href="/src/pages/view-user-settings.html">
         Профиль
       </a>
       <img width="14" height="10" src="{{src_arrow_head}}" alt="header arrow">
@@ -186,7 +186,7 @@ Expecting `+M.join(", ")+", got '"+(this.terminals_[b]||b)+"'":W="Parse error on
     </div>
     <div class="sign-in-form__btns">
       {{> button }}
-      <a href="../../../pages/sign-out-page.html">{{> link_button }}</a>
+      <a href="/src/pages/sign-out-page.html">{{> link_button }}</a>
     </div>
   </div>
 `,hi=`
