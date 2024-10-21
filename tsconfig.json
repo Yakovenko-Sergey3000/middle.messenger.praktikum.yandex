@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2016",
+    "declaration": false,
+    "module": "nodenext",
+    "baseUrl": ".",
+    "moduleResolution": "nodenext",
+    "paths": {
+      "*": ["node_modules/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@global-style": ["./src/style.css"],
+      "@layouts/*": ["./src/components/layouts/*"],
+      "@icons/*": ["./src/static/icons/*"]
+    },
+    "strictNullChecks": true,
+    "sourceMap": true
+  },
+}

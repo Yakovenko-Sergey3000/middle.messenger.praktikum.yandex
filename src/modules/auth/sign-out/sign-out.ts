@@ -1,6 +1,6 @@
 import "./sign-out.css";
 import Handlebars from "handlebars";
-import signOutForm from "./sign-out.hbs";
+import signOutForm from "./sign-out.hbs.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
 import layoutAuthForm from "../auth-form-layout/auth-form.js";
@@ -112,6 +112,6 @@ export default () => {
 
   return layoutAuthForm({
     title: "Регистрация",
-    content: Handlebars.compile(signOutForm)(),
+    content: Handlebars.compile(signOutForm)({}),
   });
 };

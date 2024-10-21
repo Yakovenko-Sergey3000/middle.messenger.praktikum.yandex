@@ -1,6 +1,6 @@
 import "./dialog.css";
 import Handlebars from "handlebars";
-import dialog from "./dialog.hbs";
+import dialog from "./dialog.hbs.js";
 import { uiFilledInput } from "@ui/inputs/index.js";
 import { uiButtonCircle } from "@ui/buttons/index.js";
 import addFileIcon from "@icons/add-file-icon.svg";

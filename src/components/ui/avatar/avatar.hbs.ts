@@ -1,5 +1,4 @@
 export default `
   <div class="avatar {{className}}">
-
   </div>
-`
+`;

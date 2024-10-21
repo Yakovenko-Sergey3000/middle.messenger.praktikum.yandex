@@ -1,6 +1,6 @@
 import "./chat-item.css";
 import Handlebars from "handlebars";
-import chatItem from "./chat-item.hbs";
+import chatItem from "./chat-item.hbs.js";
 import { uiCircleAvatar } from "@ui/avatar/index.js";
 
 Handlebars.registerHelper("time", (date) => {
@@ -21,7 +21,7 @@ export default ({
   last_message,
   message_created_at,
   unread_message_count,
-} = {}) =>
+}) =>
   Handlebars.compile(chatItem)({
     name,
     last_message,
