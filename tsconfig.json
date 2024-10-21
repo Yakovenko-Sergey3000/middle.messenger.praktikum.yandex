@@ -1,11 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "es2016",
-    "declaration": false,
-    "module": "nodenext",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
-    "moduleResolution": "nodenext",
     "paths": {
       "*": ["node_modules/*"],
       "@modules/*": ["./src/modules/*"],
@@ -15,6 +24,8 @@
       "@icons/*": ["./src/static/icons/*"]
     },
     "strictNullChecks": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": true,
   },
+  "include": ["src"]
 }

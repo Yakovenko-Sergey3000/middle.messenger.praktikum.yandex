@@ -6,13 +6,18 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build",
-    "start": "vite build && vite preview --port 3000"
+    "start": "vite build && vite preview --port 3000",
+    "prebuild": "tsc --noEmit",
+    "eslint": "eslint .",
+    "eslint-fix": "eslint . --fix"
   },
   "engines": {
     "node": ">=16.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "eslint-config-airbnb": "^19.0.4",
     "postcss": "^8.4.47",
     "postcss-load-config": "^6.0.1",
     "postcss-nested": "^6.2.0",
