@@ -1,11 +1,11 @@
 import "../templates/settings-frame/settings-frame.css";
 import "../templates/setting-field/setting-field.css";
-import userSettingsLayout from "../settings-layout/settings-layout.js";
 import Handlebars from "handlebars";
+import { uiCircleAvatar } from "@ui/avatar/index.js";
+import userSettingsLayout from "../settings-layout/settings-layout.js";
 import settingsLayout from "../templates/settings-frame/settings-frame.hbs.js";
 import settingBlock from "../templates/setting-field/setting-field.hbs.js";
 import { VIEW_ACTIONS, VIEW_FIELDS_INFO } from "./fields.js";
-import { uiCircleAvatar } from "@ui/avatar/index.js";
 
 export default () => {
   Handlebars.registerPartial("left_partial", (data) => data.left_partial);

@@ -1,4 +1,5 @@
 import { uiButtonLink } from "@ui/buttons/index.js";
+
 export const VIEW_FIELDS_INFO = [
   {
     left_text: "Почта",

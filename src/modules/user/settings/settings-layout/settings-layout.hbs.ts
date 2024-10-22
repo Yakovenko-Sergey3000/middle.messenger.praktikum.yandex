@@ -9,4 +9,4 @@ export default `
       {{> content }}
     </div>
   </div>
-`
+`;

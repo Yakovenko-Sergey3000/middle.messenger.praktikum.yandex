@@ -1,7 +1,7 @@
 import "./settings-layout.css";
 import Handlebars from "handlebars";
-import settingUser from "./settings-layout.hbs.js";
 import { uiButtonCircle } from "@ui/buttons/index.js";
+import settingUser from "./settings-layout.hbs.js";
 
 export default ({ content, backHref = "/" }) => {
   Handlebars.registerPartial(

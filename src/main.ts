@@ -7,7 +7,8 @@ import {
 } from "@modules/user/index.js";
 import { moduleChat } from "@modules/chat/index.js";
 import { moduleSignIn, moduleSignOut } from "@modules/auth/index.js";
-const app: any = document.querySelector("#app");
+
+const app = document.querySelector("#app");
 const renderPage = (el: string) => {
   app.innerHTML = el;
 };

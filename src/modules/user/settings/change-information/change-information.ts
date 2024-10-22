@@ -1,12 +1,12 @@
 import "../templates/settings-frame/settings-frame.css";
 import "../templates/setting-field/setting-field.css";
-import userSettingsLayout from "../settings-layout/settings-layout.js";
 import Handlebars from "handlebars";
+import { uiButtonMain } from "@ui/buttons/index.js";
+import { uiCircleAvatar } from "@ui/avatar/index.js";
+import userSettingsLayout from "../settings-layout/settings-layout.js";
 import settingsLayout from "../templates/settings-frame/settings-frame.hbs.js";
 import settingField from "../templates/setting-field/setting-field.hbs.js";
 import { VIEW_FIELDS_INFO } from "./fields.js";
-import { uiButtonMain } from "@ui/buttons/index.js";
-import { uiCircleAvatar } from "@ui/avatar/index.js";
 
 export default () => {
   Handlebars.registerPartial("avatar", uiCircleAvatar());

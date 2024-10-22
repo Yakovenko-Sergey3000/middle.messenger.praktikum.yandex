@@ -2,7 +2,7 @@ import "./form-label.css";
 import Handlebars from "handlebars";
 import formLabel from "./form-label.hbs.js";
 
-export default ({ element, label, error, id }: any) => {
+export default ({ element, label, error, id }) => {
   Handlebars.registerPartial("element", element);
   return Handlebars.compile(formLabel)({
     label,

@@ -15,14 +15,20 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.25.8",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.13.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.31.0",
     "postcss": "^8.4.47",
     "postcss-load-config": "^6.0.1",
     "postcss-nested": "^6.2.0",
     "prettier": "^3.3.3",
     "vite": "^5.4.8",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-handlebars": "^2.0.0"
   },
   "dependencies": {

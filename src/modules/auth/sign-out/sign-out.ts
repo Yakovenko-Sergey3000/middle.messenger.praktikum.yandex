@@ -1,10 +1,10 @@
 import "./sign-out.css";
 import Handlebars from "handlebars";
-import signOutForm from "./sign-out.hbs.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
-import layoutAuthForm from "../auth-form-layout/auth-form.js";
 import { uiFormLabel } from "@ui/form-label/index.js";
+import layoutAuthForm from "../auth-form-layout/auth-form.js";
+import signOutForm from "./sign-out.hbs.js";
 
 export default () => {
   Handlebars.registerPartial(

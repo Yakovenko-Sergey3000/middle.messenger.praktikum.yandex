@@ -1,6 +1,7 @@
 import "./inputs.css";
 import Handlebars from "handlebars";
 import input from "./flushed-input.hbs.js";
+
 export default ({
   type = "text",
   name,
@@ -8,12 +9,11 @@ export default ({
   placeholder = "",
   value = "",
   id = "",
-}) =>
-  Handlebars.compile(input)({
-    className: `un-styled-input ${className}`,
-    type,
-    name,
-    placeholder,
-    value,
-    id,
-  });
+}) => Handlebars.compile(input)({
+  className: `un-styled-input ${className}`,
+  type,
+  name,
+  placeholder,
+  value,
+  id,
+});

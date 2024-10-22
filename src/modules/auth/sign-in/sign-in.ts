@@ -1,9 +1,9 @@
 import "./sing-in.css";
 import Handlebars from "handlebars";
-import signInFrom from "./sing-in.hbs.js";
 import { uiFlushedInput } from "@ui/inputs/index.js";
 import { uiButtonLink, uiButtonMain } from "@ui/buttons/index.js";
 import { uiFormLabel } from "@ui/form-label/index.js";
+import signInFrom from "./sing-in.hbs.js";
 import layoutAuthForm from "../auth-form-layout/auth-form.js";
 
 export default () => {

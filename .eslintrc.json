@@ -1,0 +1,32 @@
+{
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended"],
+  "settings": {
+    "react": {
+      "version": "999.999.999"
+    },
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@ui", "./src/components/ui"],
+          ["@modules", "./src/modules"],
+          ["@layouts", "./src/components/layouts"],
+          ["@icons", "./src/static/icons"]
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      }
+    }
+  },
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "quotes": [2, "double"],
+    "max-len": [2, 100],
+    "max-params": [2, 3],
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies" : "off",
+    "import/prefer-default-export": "off",
+    "camelcase": 1,
+    "object-curly-newline": "off"
+  }
+}
+
+
