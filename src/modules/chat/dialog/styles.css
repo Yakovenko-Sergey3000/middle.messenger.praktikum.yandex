@@ -41,8 +41,17 @@
     }
   }
 
-  &__ribbon {
+  &__messages {
     flex: 1 1 auto;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: end;
+    gap: 20px;
+  }
+
+  &__ribbon {
     width: 100%;
     height: 100%;
     display: flex;
@@ -65,3 +74,5 @@
 .dialog-avatar {
   object-fit: cover;
 }
+
+

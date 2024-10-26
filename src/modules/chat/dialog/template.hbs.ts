@@ -10,8 +10,13 @@ export default `
         ︙
       </button>
     </div>
-    <div class="dialog__ribbon">
-      <p>Выберите чат чтобы отправить сообщение</p>
+    <div class="dialog__messages">
+    {{#unless messages.length}}
+      <div class="dialog__ribbon">
+        <p>У вас пока что нет сообщений</p>
+      </div>
+    {{/unless }}
+    {{{ messages }}}
     </div>
     {{{ footer }}}
 `;
