@@ -1,6 +1,6 @@
-import { SignOutFieldType } from "@modules/auth/sign-out/types.js";
+import { AuthFieldType } from "@modules/auth/types.js";
 
-export const FIELDS: SignOutFieldType[] = [
+export const FIELDS: AuthFieldType[] = [
   {
     id: "login",
     name: "login",

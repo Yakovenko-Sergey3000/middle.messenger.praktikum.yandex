@@ -31,6 +31,11 @@ class Dialog extends Component {
           data[key] = val;
         });
 
+        if (!data.message) {
+          console.log("Сообщение не оправлено!");
+          return;
+        }
+
         console.log(data);
 
         target.reset();

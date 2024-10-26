@@ -8,26 +8,37 @@ import { UiInput } from "@ui/inputs/index.js";
 import { UiForm } from "@ui/form/index.js";
 import { UiButton } from "@ui/buttons/index.js";
 import { UserType } from "../../../../utils/global-types/index.js";
-import Component from "../../../../utils/component.js";
+import Component, { IComponent } from "../../../../utils/component.js";
 import { USERS } from "../../../../enums.js";
+import ChatValidator, { IChatValidator } from "../../../../utils/validation/chat-validator.js";
 
 class ChangeInformation extends Component {
+  validator: IChatValidator;
+
+  fields: Record<string, IComponent>;
+
   constructor(props: { user: UserType }) {
     super("div", props);
+    this.validator = new ChatValidator();
+    this.fields = {};
 
     this.children.form = UiForm({
       content: SettingsWrapper({
         user: props.user,
-        fields: USER_SETTING_FIELDS.map((filed) =>
-          SettingsField({
+        fields: USER_SETTING_FIELDS.map((filed) => {
+          const settingField = SettingsField({
             leftContent: filed.label,
             rightContent: UiInput({
               className: "input-begin-right",
               attributes: { name: [filed.name], value: props.user[filed.name] },
               variant: "un-styled",
+              onBlur: this.onBlue.bind(this),
             }),
-          }),
-        ),
+          });
+
+          this.fields[filed.name] = settingField;
+          return settingField;
+        }),
         saveButton: UiButton({
           label: "Сохранить",
           attributes: { type: "submit" },
@@ -35,6 +46,22 @@ class ChangeInformation extends Component {
       }),
       onSubmit: this.onSubmit.bind(this),
     });
+  }
+
+  onBlue(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const { isValid, errors } = this.validator.userInformation({ [target.name]: target.value });
+
+    if (!isValid) {
+      const field = errors[0];
+      this.fields[field.key].setProps({
+        error: field.message,
+      });
+    } else {
+      this.fields[target.name].setProps({
+        error: "",
+      });
+    }
   }
 
   onSubmit(e: Event) {
@@ -46,6 +73,17 @@ class ChangeInformation extends Component {
     fd.forEach((val, key) => {
       data[key] = val;
     });
+
+    const { isValid, errors } = this.validator.userInformation(data);
+    errors.forEach((error) => {
+      this.fields[error.key].setProps({
+        error: error.message,
+      });
+    });
+
+    if (!isValid) {
+      return;
+    }
 
     console.log(data);
   }

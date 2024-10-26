@@ -1,4 +1,4 @@
-export type SignOutFieldType = {
+export type AuthFieldType = {
   id: string;
   name: string;
   label: string;

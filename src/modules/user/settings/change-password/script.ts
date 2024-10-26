@@ -10,14 +10,18 @@ import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-pas
 import { UserType } from "../../../../utils/global-types/index.js";
 import Component, { IComponent } from "../../../../utils/component.js";
 import { USERS } from "../../../../enums.js";
+import ChatValidator, { IChatValidator } from "../../../../utils/validation/chat-validator.js";
 
 class ChangePassword extends Component {
   formFields: Record<string, IComponent> = {};
+
+  validator: IChatValidator;
 
   constructor(props: { user: UserType }) {
     super("div", props);
 
     this.formFields = {};
+    this.validator = new ChatValidator();
     this.children.form = UiForm({
       content: SettingsWrapper({
         user: props.user,
@@ -41,6 +45,17 @@ class ChangePassword extends Component {
       data[key] = val;
     });
 
+    const { isValid, errors } = this.validator.userInformation(data);
+
+    errors.forEach((error) => {
+      this.formFields[error.key].setProps({
+        error: error.message,
+      });
+    });
+
+    if (!isValid) {
+      return;
+    }
     console.log(data);
     target.reset();
   }

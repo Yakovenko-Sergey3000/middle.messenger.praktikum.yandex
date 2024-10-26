@@ -1,15 +1,18 @@
 import "./styles.css";
 import { UiFormLabel } from "@ui/form-label/index.js";
-import { SignOutFieldType } from "@modules/auth/sign-out/types.js";
 import { FIELDS } from "@modules/auth/sign-out/fields.js";
 import { UiInput } from "@ui/inputs/index.js";
 import { UiButton } from "@ui/buttons/index.js";
+import { AuthFieldType } from "@modules/auth/types.js";
 import template from "./template.hbs.js";
 import Component from "../../../utils/component.js";
 import AuthFormLayout from "../auth-form-layout/script.js";
 import { PagesPath } from "../../../pages-path.js";
+import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.js";
 
 class SignOut extends Component {
+  validator: IChatValidator;
+
   constructor() {
     super("div", { attributes: { class: "sign-out-form" } });
     this.#registrationFields(FIELDS);
@@ -25,9 +28,27 @@ class SignOut extends Component {
         window.location.replace(PagesPath.SIGN_IN);
       },
     });
+
+    this.validator = new ChatValidator();
   }
 
-  #registrationFields(fields: SignOutFieldType[]) {
+  onBlur(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const { isValid, errors } = this.validator.userInformation({ [target.name]: target.value });
+
+    if (!isValid) {
+      const field = errors[0];
+      this.children[field.key].setProps({
+        error: field.message,
+      });
+    } else {
+      this.children[target.name].setProps({
+        error: "",
+      });
+    }
+  }
+
+  #registrationFields(fields: AuthFieldType[]) {
     fields.forEach((field) => {
       this.children[field.name] = UiFormLabel({
         label: field.label,
@@ -40,6 +61,7 @@ class SignOut extends Component {
             autocomplete: field.autocomplete,
           },
           variant: "flushed",
+          onBlur: this.onBlur.bind(this),
         }),
       });
     });
@@ -50,12 +72,15 @@ class SignOut extends Component {
   }
 }
 
-export default () =>
-  AuthFormLayout({
+export default () => {
+  const signOutForm = new SignOut();
+
+  return AuthFormLayout({
     title: "Регистрация",
-    content: new SignOut(),
+    content: signOutForm,
     onSubmit: (e: Event) => {
       e.preventDefault();
+      const { validator } = signOutForm;
       const target = e.target as HTMLFormElement;
       const fd: FormData = new FormData(target);
       const data: Record<string, FormDataEntryValue> = {};
@@ -64,8 +89,21 @@ export default () =>
         data[key] = val;
       });
 
+      const { isValid, errors } = validator.userInformation(data);
+
+      errors.forEach((error) => {
+        signOutForm.children[error.key].setProps({
+          error: error.message,
+        });
+      });
+
+      if (!isValid) {
+        return;
+      }
+
       console.log(data);
 
       target.reset();
     },
   });
+};
