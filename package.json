@@ -8,7 +8,7 @@
     "build": "vite build",
     "start": "vite build && vite preview --port 3000",
     "prebuild": "tsc --noEmit",
-    "eslint": "eslint .",
+    "eslint": "eslint . && tsc --noEmit",
     "eslint-fix": "eslint . --fix"
   },
   "engines": {

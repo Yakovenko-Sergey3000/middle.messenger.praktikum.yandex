@@ -20,7 +20,7 @@ class ViewInformation extends Component {
       fields: USER_SETTING_FIELDS.map((filed) =>
         SettingsField({
           leftContent: filed.label,
-          rightContent: props.user[filed.key],
+          rightContent: props.user[filed.name],
         }),
       ),
       actions: [
