@@ -25,7 +25,13 @@
     "import/no-extraneous-dependencies" : "off",
     "import/prefer-default-export": "off",
     "camelcase": 1,
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "default-param-last": "off",
+    "class-methods-use-this": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
+    "react/no-unused-class-component-methods": "off",
+    "react/prop-types": "off"
   }
 }
 

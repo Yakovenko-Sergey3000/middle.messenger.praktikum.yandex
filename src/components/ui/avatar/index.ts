@@ -1,1 +1,1 @@
-export { default as uiCircleAvatar } from "./avatar.js";
+export { default as UiAvatar } from "./script.js";

@@ -1,1 +1,1 @@
-export { default as layoutNotFoundPage } from "./_404-500.js";
+export { default as LayoutErrorPage } from "./script.js";

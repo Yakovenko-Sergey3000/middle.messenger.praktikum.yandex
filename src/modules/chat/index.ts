@@ -1,1 +1,1 @@
-export { default as moduleChat } from "./chat.js";
+export { default as ModuleChat } from "./chat.js";

@@ -1,2 +1,2 @@
-export { default as moduleSignIn } from "./sign-in/sign-in.js";
-export { default as moduleSignOut } from "./sign-out/sign-out.js";
+export { default as ModuleSignIn } from "./sign-in/script.js";
+export { default as ModuleSignOut } from "./sign-out/script.js";

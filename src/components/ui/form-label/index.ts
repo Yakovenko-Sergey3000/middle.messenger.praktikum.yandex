@@ -1,1 +1,1 @@
-export { default as uiFormLabel } from "./form-label.js";
+export { default as UiFormLabel } from "./script.js";

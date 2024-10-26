@@ -1,1 +1,2 @@
-export { default as uiChatItem } from "./chat-item.js";
+export type { UiChatItemType } from "@ui/chat-item/script.js";
+export { default as UiChatItem } from "./script.js";

@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.8",
+    "@types/uuid4": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
     "autoprefixer": "^10.4.20",
@@ -32,6 +33,7 @@
     "vite-plugin-handlebars": "^2.0.0"
   },
   "dependencies": {
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "uuid4": "^2.0.3"
   }
 }

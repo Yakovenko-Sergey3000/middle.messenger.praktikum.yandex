@@ -1,0 +1,19 @@
+.setting-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  &__error-text{
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ya-error);
+  }
+}
+
+.left-text {
+  font-weight: 600;
+}
+
+.right-text {
+  color: var(--ya-gray-500) ;
+}

@@ -1,60 +1,70 @@
 import "./style.css";
-import { layoutNotFoundPage } from "@layouts/_404-500/index.js";
+import { ModuleSignIn, ModuleSignOut } from "@modules/auth/index.js";
+import { ModuleChat } from "@modules/chat/index.js";
 import {
-  moduleChangeUserInformation,
-  moduleChangeUserPassword,
-  moduleViewUserSetting,
+  ModuleChangeUserInformation,
+  ModuleChangeUserPassword,
+  ModuleViewUserSetting,
 } from "@modules/user/index.js";
-import { moduleChat } from "@modules/chat/index.js";
-import { moduleSignIn, moduleSignOut } from "@modules/auth/index.js";
+import { LayoutErrorPage } from "@layouts/_404-500/index.js";
+import { UiButton } from "@ui/buttons/index.js";
+import { renderComponent } from "./utils/rende-component.js";
+import { PagesPath } from "./pages-path.js";
 
-const app = document.querySelector("#app");
-const renderPage = (el: string) => {
-  app.innerHTML = el;
-};
+document.addEventListener("DOMContentLoaded", () => {
+  const path = window.location.pathname;
 
-const path = window.location.pathname;
+  if (path.includes("404")) {
+    renderComponent(
+      "#app",
+      LayoutErrorPage({
+        title: "404",
+        subtitle: "Не туда попали",
+        linkBackButton: UiButton({
+          variant: "link",
+          label: "Назад к чатам",
+          onClick: () => window.location.replace(PagesPath.HOME),
+        }),
+      }),
+    );
+  }
 
-if (path.includes("404")) {
-  renderPage(
-    layoutNotFoundPage({
-      title: "404",
-      subtitle: "Не туда попали",
-      href: "/",
-    }),
-  );
-}
+  if (path.includes("500")) {
+    renderComponent(
+      "#app",
+      LayoutErrorPage({
+        title: "500",
+        subtitle: "Мы уже фиксим",
+        linkBackButton: UiButton({
+          variant: "link",
+          label: "Назад к чатам",
+          onClick: () => window.location.replace(PagesPath.HOME),
+        }),
+      }),
+    );
+  }
 
-if (path.includes("500")) {
-  renderPage(
-    layoutNotFoundPage({
-      title: "500",
-      subtitle: "Мы уже фиксим",
-      href: "/",
-    }),
-  );
-}
+  if (path.includes("change-user-information")) {
+    renderComponent("#app", ModuleChangeUserInformation());
+  }
 
-if (path.includes("change-user-information")) {
-  renderPage(moduleChangeUserInformation());
-}
+  if (path.includes("change-user-password")) {
+    renderComponent("#app", ModuleChangeUserPassword());
+  }
 
-if (path.includes("change-user-password")) {
-  renderPage(moduleChangeUserPassword());
-}
+  if (path.includes("chat")) {
+    renderComponent("#app", ModuleChat());
+  }
 
-if (path.includes("chat")) {
-  renderPage(moduleChat());
-}
+  if (path.includes("sign-in-page")) {
+    renderComponent("#app", ModuleSignIn());
+  }
 
-if (path.includes("sign-in-page")) {
-  renderPage(moduleSignIn());
-}
+  if (path.includes("sign-out-page")) {
+    renderComponent("#app", ModuleSignOut());
+  }
 
-if (path.includes("sign-out-page")) {
-  renderPage(moduleSignOut());
-}
-
-if (path.includes("view-user-settings")) {
-  renderPage(moduleViewUserSetting());
-}
+  if (path.includes("view-user-settings")) {
+    renderComponent("#app", ModuleViewUserSetting());
+  }
+});

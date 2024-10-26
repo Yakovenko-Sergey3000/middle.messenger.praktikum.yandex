@@ -1,0 +1,25 @@
+.footer-form {
+  padding: 10px 0;
+  margin: 0 20px;
+  border-top: 1px solid var(--ya-gray-150);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__add-file {
+    flex: 0 0 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    height: 32px;
+    border-radius: 30px;
+  }
+
+  &__button {
+    width: 28px;
+    height: 28px;
+  }
+}
