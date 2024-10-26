@@ -12,6 +12,7 @@
   --ya-gray-100: #FBFBFB;
   --ya-gray-150: #EAEAEA;
   --ya-gray-200: #EFEFEF;
+  --ya-gray-250: #F8F8F8;
   --ya-gray-500: #999999;
   --ya-red-500: #FF0000;
   --ya-error: #FF2F2F;
@@ -59,7 +60,7 @@ a {
 
 .center-content {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

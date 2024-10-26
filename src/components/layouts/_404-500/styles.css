@@ -1,0 +1,11 @@
+._400-500-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+._400-500-link-button {
+  margin-top: 69px;
+}

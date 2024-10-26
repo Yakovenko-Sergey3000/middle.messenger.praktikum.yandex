@@ -1,0 +1,15 @@
+.form-label {
+  width: 100%;
+
+
+  &__label {
+    color: var(--ya-gray-500);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__error {
+    margin-top: 8px;
+    color: var(--ya-error);
+  }
+}
