@@ -7,7 +7,7 @@ export interface IComponent {
   id: string;
   props: Record<string, unknown>;
   children: Record<string, IComponent>;
-  events: Record<string, (e: Any) => void>;
+  events: Record<string, (e: Event) => void>;
   listChildren: Record<string, IComponent[]>;
   attributes: Record<string, string>;
   componentDidMount(): void;
