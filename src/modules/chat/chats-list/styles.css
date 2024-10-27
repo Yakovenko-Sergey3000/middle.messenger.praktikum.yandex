@@ -1,30 +1,30 @@
 .chat-list {
-    padding: 21px 0;
-    height: 100%;
-    overflow-y: auto;
+  padding: 21px 0;
+  height: 100%;
+  overflow-y: auto;
 
-    & __header {
-        padding: 0 10px;
-        color: var(--ya-gray-500);
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        gap: 8px;
-    }
+  &__header {
+    padding: 0 10px;
+    color: var(--ya-gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+  }
 
-    & __search-input {
-        height: 32px;
-        margin: 23px 10px;
-        display: flex;
-        align-items: center;
-        background-color: var(--ya-gray-200);
-        border-radius: 5px;
-        position: relative;
-    }
+  &__search-input {
+    height: 32px;
+    margin: 23px 10px;
+    display: flex;
+    align-items: center;
+    background-color: var(--ya-gray-200);
+    border-radius: 5px;
+    position: relative;
+  }
 
-    & __dialogs_list {
-        margin-top: 14px;
-    }
+  &__dialogs_list {
+    margin-top: 14px;
+  }
 }
 
 .search-input__icon {

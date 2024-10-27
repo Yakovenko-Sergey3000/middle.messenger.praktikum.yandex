@@ -5,49 +5,49 @@
   flex-direction: column;
   align-items: center;
 
-  & __user_avatar {
+  &__user_avatar {
     width: 130px;
     height: 130px;
   }
 
-  & __user-name {
+  &__user-name {
     margin-top: 21px;
     font-size: 16px;
   }
 
-  & __user-name__title {
+  &__user-name__title {
     font-size: 16px;
   }
 
-  & __user-fields-info {
+  &__user-fields-info {
     width: 100%;
     margin-top: 60px;
   }
 
-  & __user-fields-info > div {
+  &__user-fields-info > div {
     padding: 10px 0;
     border-bottom: 1px solid var(--ya-gray-150);
   }
 
-  & __user-fields-info > div:last-child {
+  &__user-fields-info > div:last-child {
     border: none;
   }
 
-  & __user-actions {
+  &__user-actions {
     width: 100%;
     margin-top: 60px;
   }
 
-  & __user-actions > div {
+  &__user-actions > div {
     padding: 10px 0;
     border-bottom: 1px solid var(--ya-gray-150);
   }
 
-  & __user-actions > div:last-child {
+  &__user-actions > div:last-child {
     border: none;
   }
 
-  & __save_button {
+  &__save_button {
     width: 280px;
     margin: 60px auto;
   }

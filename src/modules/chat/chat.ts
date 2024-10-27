@@ -20,8 +20,3 @@ class Chat extends Component {
 }
 
 export default () => new Chat();
-
-// {
-//   chatListContent: moduleChatList(),
-//     chatDialogContent: moduleDialog(),
-// }

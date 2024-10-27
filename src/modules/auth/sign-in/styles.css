@@ -1,26 +1,26 @@
 .sign-in-form {
-    width: 310px;
-    height: 100%;
+  width: 310px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__inputs {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 16px;
+  }
 
-    & __inputs {
-        margin-top: 40px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    & __btns {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        align-items: center;
-    }
+  &__btns {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
 }
 
 .sign-in-wrapper {
-    height: 450px;
+  height: 450px;
 }

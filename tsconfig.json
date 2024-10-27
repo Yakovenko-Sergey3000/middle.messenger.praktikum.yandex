@@ -3,7 +3,10 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "NodeNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "moduleResolution": "node16",
     "strict": true,
     "resolveJsonModule": true,
@@ -20,12 +23,24 @@
     "noImplicitAny": true,
     "allowImportingTsExtensions": true,
     "paths": {
-      "*": ["node_modules/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@global-style": ["./src/style.css"],
-      "@layouts/*": ["./src/components/layouts/*"],
-      "@icons/*": ["./src/static/icons/*"]
+      "*": [
+        "node_modules/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@ui/*": [
+        "./src/components/ui/*"
+      ],
+      "@global-style": [
+        "./src/style.css"
+      ],
+      "@layouts/*": [
+        "./src/components/layouts/*"
+      ],
+      "@icons/*": [
+        "./src/static/icons/*"
+      ]
     }
   }
 }

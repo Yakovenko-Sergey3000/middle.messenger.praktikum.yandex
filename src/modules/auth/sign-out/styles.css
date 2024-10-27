@@ -5,14 +5,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    & __inputs {
+    &__inputs {
         margin-top: 40px;
         display: flex;
         flex-direction: column;
         gap: 16px;
     }
 
-    & __btns {
+    &__btns {
         margin-top: 30px;
         display: flex;
         flex-direction: column;
