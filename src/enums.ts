@@ -1,4 +1,4 @@
-import { UserType } from "./utils/global-types/index.js";
+import { UserType } from "./utils/global-types/index.ts";
 
 export const USERS: UserType[] = [
   {

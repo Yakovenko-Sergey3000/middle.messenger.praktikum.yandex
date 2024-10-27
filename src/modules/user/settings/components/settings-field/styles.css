@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
 
-  &__error-text{
+  &__error-text {
     font-size: 12px;
     font-weight: 300;
     color: var(--ya-error);
@@ -15,5 +15,5 @@
 }
 
 .right-text {
-  color: var(--ya-gray-500) ;
+  color: var(--ya-gray-500);
 }

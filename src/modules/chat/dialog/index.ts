@@ -1,1 +1,1 @@
-export { default as ModuleDialog } from "./script.js";
+export { default as ModuleDialog } from "./script.ts";

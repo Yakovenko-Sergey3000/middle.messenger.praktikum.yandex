@@ -1,16 +1,16 @@
-import { UiForm } from "@ui/form/index.js";
+import { UiForm } from "@ui/form/index.ts";
 import {
   SettingLayout,
   SettingsField,
   SettingsWrapper,
-} from "@modules/user/settings/components/index.js";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-password-fields.js";
-import { UserType } from "../../../../utils/global-types/index.js";
-import Component, { IComponent } from "../../../../utils/component.js";
-import { USERS } from "../../../../enums.js";
-import ChatValidator, { IChatValidator } from "../../../../utils/validation/chat-validator.js";
+} from "@modules/user/settings/components/index.ts";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-password-fields.ts";
+import { UserType } from "../../../../utils/global-types/index.ts";
+import Component, { IComponent } from "../../../../utils/component.ts";
+import { USERS } from "../../../../enums.ts";
+import ChatValidator, { IChatValidator } from "../../../../utils/validation/chat-validator.ts";
 
 class ChangePassword extends Component {
   formFields: Record<string, IComponent> = {};

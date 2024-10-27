@@ -1,1 +1,1 @@
-export { default as LayoutErrorPage } from "./script.js";
+export { default as LayoutErrorPage } from "./script.ts";

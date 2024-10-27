@@ -1,1 +1,1 @@
-export { default as UiForm } from "./script.js";
+export { default as UiForm } from "./script.ts";

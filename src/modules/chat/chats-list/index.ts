@@ -1,1 +1,1 @@
-export { default as ModuleChatList } from "./script.js";
+export { default as ModuleChatList } from "./script.ts";

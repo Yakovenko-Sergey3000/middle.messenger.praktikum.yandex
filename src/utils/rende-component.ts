@@ -1,4 +1,4 @@
-import { IComponent } from "./component.js";
+import { IComponent } from "./component.ts";
 
 export const renderComponent = (selector: string, block: IComponent): void => {
   const element: HTMLElement | null = document.querySelector(selector);

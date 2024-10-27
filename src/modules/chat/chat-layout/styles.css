@@ -1,5 +1,6 @@
 .chat {
   display: flex;
+
   &__list {
     width: 310px;
     height: 100vh;

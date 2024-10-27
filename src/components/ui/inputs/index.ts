@@ -1,1 +1,1 @@
-export { default as UiInput } from "./script.js";
+export { default as UiInput } from "./script.ts";

@@ -28,44 +28,44 @@
 }
 
 .search-input__icon {
-  width: 20px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 5px;
+    width: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 5px;
 }
 
 .search-input {
-  border-radius: 5px;
-  padding-left: 30px;
+    border-radius: 5px;
+    padding-left: 30px;
 
-  &:focus {
-    border: 1px solid black!important;
-  }
+    &:focus {
+        border: 1px solid black !important;
+    }
 }
 
 .dialogs_list__item {
-  cursor: pointer;
-  border-bottom: 1px solid var(--ya-gray-150);
+    cursor: pointer;
+    border-bottom: 1px solid var(--ya-gray-150);
 
-  &:hover {
-    background-color: var(--ya-blue-50);
-  }
+    &:hover {
+        background-color: var(--ya-blue-50);
+    }
 
-  &:first-child {
-    border-top: 1px solid var(--ya-gray-150);
-  }
+    &:first-child {
+        border-top: 1px solid var(--ya-gray-150);
+    }
 }
 
 .list_empty {
-  text-align: center;
-  font-weight: 600;
-  color: var(--ya-gray-500);
+    text-align: center;
+    font-weight: 600;
+    color: var(--ya-gray-500);
 }
 
 .open-settings {
-  color: var(--ya-gray-500);
+    color: var(--ya-gray-500);
 }

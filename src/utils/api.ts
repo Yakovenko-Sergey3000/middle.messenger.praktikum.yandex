@@ -1,13 +1,17 @@
-import { Any } from "./global-types/index.js";
+import { Any } from "./global-types/index.ts";
 
 type ApiPropsType = {
   headers?: Record<string, string>;
   data?: Record<string, Any>;
 };
+
 interface IApi {
   get(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
+
   post(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
+
   put(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
+
   delete(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
 }
 

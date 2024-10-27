@@ -1,1 +1,1 @@
-export { default as UiButton } from "./script.js";
+export { default as UiButton } from "./script.ts";

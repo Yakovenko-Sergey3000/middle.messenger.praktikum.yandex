@@ -1,11 +1,12 @@
 import "./style.css";
-import Component from "../../../../../utils/component.js";
-import { ComponentType } from "../../../../../utils/global-types/index.js";
-import ConcatClasses from "../../../../../utils/concat-classes.js";
+import Component from "../../../../../utils/component.ts";
+import { ComponentType } from "../../../../../utils/global-types/index.ts";
+import ConcatClasses from "../../../../../utils/concat-classes.ts";
 
 type MessageItemType = ComponentType & {
   message: string;
 };
+
 class MessageItem extends Component {
   render(): DocumentFragment {
     return this.compile("{{{ message }}}", this.props);

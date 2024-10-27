@@ -2,8 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "Node16",
-    "lib": ["ESNext", "DOM"],
+    "module": "NodeNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "moduleResolution": "node16",
     "strict": true,
     "resolveJsonModule": true,
@@ -15,17 +18,29 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@global-style": ["./src/style.css"],
-      "@layouts/*": ["./src/components/layouts/*"],
-      "@icons/*": ["./src/static/icons/*"]
-    },
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
-  },
-  "include": ["src"]
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@ui/*": [
+        "./src/components/ui/*"
+      ],
+      "@global-style": [
+        "./src/style.css"
+      ],
+      "@layouts/*": [
+        "./src/components/layouts/*"
+      ],
+      "@icons/*": [
+        "./src/static/icons/*"
+      ]
+    }
+  }
 }

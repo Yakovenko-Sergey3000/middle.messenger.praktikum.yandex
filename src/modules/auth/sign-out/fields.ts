@@ -1,4 +1,4 @@
-import { AuthFieldType } from "@modules/auth/types.js";
+import { AuthFieldType } from "@modules/auth/types.ts";
 
 export const FIELDS: AuthFieldType[] = [
   {
