@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
+import eslintPlugin from "vite-plugin-eslint";
 
 export default defineConfig({
   logLevel: "info",
@@ -22,7 +23,7 @@ export default defineConfig({
   css: {
     postcss: "./postcss.config.cjs",
   },
-  plugins: [handlebars()],
+  plugins: [handlebars(), eslintPlugin()],
   resolve: {
     alias: {
       "@layouts": resolve(__dirname, "./src/components/layouts"),
