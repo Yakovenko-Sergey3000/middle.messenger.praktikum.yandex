@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
 
-  &__left-bar {
+  & __left-bar {
     flex: 0 0 64px;
     height: 100%;
     background-color: var(--ya-gray-200);
@@ -11,7 +11,8 @@
     justify-content: center;
     align-items: center;
   }
-  &__right-bar {
+
+  & __right-bar {
     flex: 1 1 auto;
     height: 100%;
   }

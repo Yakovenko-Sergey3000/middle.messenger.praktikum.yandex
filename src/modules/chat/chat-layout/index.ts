@@ -1,1 +1,1 @@
-export { default as LayoutChat } from "./script.js";
+export { default as LayoutChat } from "./script.ts";

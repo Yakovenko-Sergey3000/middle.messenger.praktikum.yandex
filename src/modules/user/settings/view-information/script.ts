@@ -3,13 +3,13 @@ import {
   SettingLayout,
   SettingsField,
   SettingsWrapper,
-} from "@modules/user/settings/components/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.js";
-import Component from "../../../../utils/component.js";
-import { USERS } from "../../../../enums.js";
-import { UserType } from "../../../../utils/global-types/index.js";
-import { PagesPath } from "../../../../pages-path.js";
+} from "@modules/user/settings/components/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.ts";
+import Component from "../../../../utils/component.ts";
+import { USERS } from "../../../../enums.ts";
+import { UserType } from "../../../../utils/global-types/index.ts";
+import { PagesPath } from "../../../../pages-path.ts";
 
 class ViewInformation extends Component {
   constructor(props: { user: UserType }) {

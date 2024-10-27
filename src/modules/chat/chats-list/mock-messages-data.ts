@@ -1,5 +1,5 @@
-import { UiChatItemType } from "@ui/chat-item/index.js";
-import { USERS } from "../../../enums.js";
+import { UiChatItemType } from "@ui/chat-item/index.ts";
+import { USERS } from "../../../enums.ts";
 
 export const chatsList: UiChatItemType[] = [
   {

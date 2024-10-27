@@ -1,13 +1,13 @@
 import "./styles.css";
 import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
-import { chatsList as mockChatsList } from "@modules/chat/chats-list/mock-messages-data.js";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import { UiChatItem } from "@ui/chat-item/index.js";
-import template from "./template.hbs.js";
-import Component from "../../../utils/component.js";
-import { PagesPath } from "../../../pages-path.js";
+import { chatsList as mockChatsList } from "@modules/chat/chats-list/mock-messages-data.ts";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import { UiChatItem } from "@ui/chat-item/index.ts";
+import template from "./template.hbs.ts";
+import Component from "../../../utils/component.ts";
+import { PagesPath } from "../../../pages-path.ts";
 
 class ChatsList extends Component {
   constructor() {

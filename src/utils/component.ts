@@ -1,7 +1,7 @@
 import uuid from "uuid4";
 import Handlebars from "handlebars";
-import EventBus from "./event-bus.js";
-import { Any } from "./global-types/index.js";
+import EventBus from "./event-bus.ts";
+import { Any } from "./global-types/index.ts";
 
 export interface IComponent {
   id: string;
@@ -10,14 +10,23 @@ export interface IComponent {
   events: Record<string, (e: Event) => void>;
   listChildren: Record<string, IComponent[]>;
   attributes: Record<string, string>;
+
   componentDidMount(): void;
+
   componentDidReRender(): void;
+
   componentDidUpdate(oldState: IComponent, newState: IComponent): boolean;
+
   dispatchComponentDidMount(): void;
+
   init(): void;
+
   compile(template: string, options: IComponent): DocumentFragment;
+
   setProps(newProps: Any): void;
+
   getContent(): HTMLElement;
+
   render(): DocumentFragment;
 }
 

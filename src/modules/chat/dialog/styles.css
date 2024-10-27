@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
 
-  &__header {
+  & __header {
     flex: 0 0 54px;
     display: flex;
     justify-content: space-between;
@@ -13,18 +13,18 @@
     border-bottom: 1px solid var(--ya-gray-150);
   }
 
-  &__header__user-info {
+  & __header__user-info {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  &__header__avatar {
+  & __header__avatar {
     width: 54px;
     height: 54px;
   }
 
-  &__header__menu {
+  & __header__menu {
     width: 25px;
     height: 25px;
     cursor: pointer;
@@ -41,7 +41,7 @@
     }
   }
 
-  &__messages {
+  & __messages {
     flex: 1 1 auto;
     margin-bottom: 20px;
     display: flex;
@@ -51,7 +51,7 @@
     gap: 20px;
   }
 
-  &__ribbon {
+  & __ribbon {
     width: 100%;
     height: 100%;
     display: flex;
@@ -61,7 +61,7 @@
     color: var(--ya-gray-500);
   }
 
-  &__footer {
+  & __footer {
     flex: 0 0 54px;
   }
 }

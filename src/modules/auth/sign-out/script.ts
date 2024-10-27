@@ -1,14 +1,14 @@
 import "./styles.css";
-import { UiFormLabel } from "@ui/form-label/index.js";
-import { FIELDS } from "@modules/auth/sign-out/fields.js";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import { AuthFieldType } from "@modules/auth/types.js";
-import template from "./template.hbs.js";
-import Component from "../../../utils/component.js";
-import AuthFormLayout from "../auth-form-layout/script.js";
-import { PagesPath } from "../../../pages-path.js";
-import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.js";
+import { UiFormLabel } from "@ui/form-label/index.ts";
+import { FIELDS } from "@modules/auth/sign-out/fields.ts";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import { AuthFieldType } from "@modules/auth/types.ts";
+import template from "./template.hbs.ts";
+import Component from "../../../utils/component.ts";
+import AuthFormLayout from "../auth-form-layout/script.ts";
+import { PagesPath } from "../../../pages-path.ts";
+import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.ts";
 
 class SignOut extends Component {
   validator: IChatValidator;

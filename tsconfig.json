@@ -1,5 +1,4 @@
 {
-  "include": ["src"],
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -19,6 +18,7 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
+    "allowImportingTsExtensions": true,
     "paths": {
       "*": ["node_modules/*"],
       "@modules/*": ["./src/modules/*"],

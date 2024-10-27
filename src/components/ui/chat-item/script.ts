@@ -1,10 +1,10 @@
 import "./styles.css";
-import { UiAvatar } from "@ui/avatar/index.js";
-import template from "./template.hbs.js";
-import { ComponentType, UserType } from "../../../utils/global-types/index.js";
-import Component from "../../../utils/component.js";
-import ConcatClasses from "../../../utils/concat-classes.js";
-import longText from "../../../utils/long-text.js";
+import { UiAvatar } from "@ui/avatar/index.ts";
+import template from "./template.hbs.ts";
+import { ComponentType, UserType } from "../../../utils/global-types/index.ts";
+import Component from "../../../utils/component.ts";
+import ConcatClasses from "../../../utils/concat-classes.ts";
+import longText from "../../../utils/long-text.ts";
 
 export type UiChatItemType = {
   id: number;
@@ -40,4 +40,5 @@ class UiChatItem extends Component {
     return this.compile(template, this.props);
   }
 }
+
 export default (props: UiChatItemType & ComponentType) => new UiChatItem(props);

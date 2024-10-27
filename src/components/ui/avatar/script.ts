@@ -1,8 +1,8 @@
 import "./styles.css";
-import avatar from "./template.hbs.js";
-import Component from "../../../utils/component.js";
-import { ComponentType } from "../../../utils/global-types/index.js";
-import ConcatClasses from "../../../utils/concat-classes.js";
+import avatar from "./template.hbs.ts";
+import Component from "../../../utils/component.ts";
+import { ComponentType } from "../../../utils/global-types/index.ts";
+import ConcatClasses from "../../../utils/concat-classes.ts";
 
 type UiAvatarType = ComponentType & {
   width: string;
@@ -11,11 +11,13 @@ type UiAvatarType = ComponentType & {
   alt: string;
   variant?: "circle";
 };
+
 class UiAvatar extends Component {
   render(): DocumentFragment {
     return this.compile(avatar, this.props);
   }
 }
+
 export default (props: UiAvatarType) =>
   new UiAvatar("div", {
     ...props,

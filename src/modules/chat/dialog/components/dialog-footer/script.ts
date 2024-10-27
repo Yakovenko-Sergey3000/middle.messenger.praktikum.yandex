@@ -1,15 +1,16 @@
 import "./styles.css";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiButton } from "@ui/buttons/index.js";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
 import sctFileIcon from "@icons/add-file-icon.svg";
-import template from "./tamplate.hbs.js";
-import Component from "../../../../../utils/component.js";
-import { ComponentType } from "../../../../../utils/global-types/index.js";
-import ConcatClasses from "../../../../../utils/concat-classes.js";
+import template from "./tamplate.hbs.ts";
+import Component from "../../../../../utils/component.ts";
+import { ComponentType } from "../../../../../utils/global-types/index.ts";
+import ConcatClasses from "../../../../../utils/concat-classes.ts";
 
 type DialogFooterType = ComponentType & {
   onSubmit?: (e: Event) => void;
 };
+
 class DialogFooter extends Component {
   constructor(props: DialogFooterType) {
     super("form", {

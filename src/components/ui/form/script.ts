@@ -1,9 +1,10 @@
-import Component, { IComponent } from "../../../utils/component.js";
+import Component, { IComponent } from "../../../utils/component.ts";
 
 type UiFormType = {
   content: IComponent;
   onSubmit: (e: Event) => void;
 };
+
 class UiForm extends Component {
   render(): DocumentFragment {
     return this.compile("{{{ content }}}", this.props);

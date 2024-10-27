@@ -1,11 +1,12 @@
 import "./styles.css";
-import { UiButton } from "@ui/buttons/index.js";
-import template from "./template.hbs.js";
-import Component, { IComponent } from "../../../../../utils/component.js";
+import { UiButton } from "@ui/buttons/index.ts";
+import template from "./template.hbs.ts";
+import Component, { IComponent } from "../../../../../utils/component.ts";
 
 type SettingLayoutType = {
   content: IComponent;
 };
+
 class SettingLayout extends Component {
   constructor(props: SettingLayoutType) {
     super("div", { ...props, attributes: { class: "user-settings" } });

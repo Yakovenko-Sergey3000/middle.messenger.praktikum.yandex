@@ -6,19 +6,19 @@
   align-items: center;
   gap: 10px;
 
-  &__add-file {
+  & __add-file {
     flex: 0 0 32px;
     height: 32px;
     cursor: pointer;
   }
 
-  &__input {
+  & __input {
     flex: 1 1 auto;
     height: 32px;
     border-radius: 30px;
   }
 
-  &__button {
+  & __button {
     width: 28px;
     height: 28px;
   }

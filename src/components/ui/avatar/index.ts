@@ -1,1 +1,1 @@
-export { default as UiAvatar } from "./script.js";
+export { default as UiAvatar } from "./script.ts";

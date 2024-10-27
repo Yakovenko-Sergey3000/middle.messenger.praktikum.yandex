@@ -1,9 +1,9 @@
 import "./styles.css";
-import { UiAvatar } from "@ui/avatar/index.js";
-import template from "./template.hbs.js";
-import Component from "../../../utils/component.js";
-import DialogFooter from "./components/dialog-footer/script.js";
-import MessageItem from "./components/message-item/script.js";
+import { UiAvatar } from "@ui/avatar/index.ts";
+import template from "./template.hbs.ts";
+import Component from "../../../utils/component.ts";
+import DialogFooter from "./components/dialog-footer/script.ts";
+import MessageItem from "./components/message-item/script.ts";
 
 const MOCK_TEXT = `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в 
 какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все 

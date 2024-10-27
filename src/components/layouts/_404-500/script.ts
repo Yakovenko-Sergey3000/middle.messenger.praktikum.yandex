@@ -1,13 +1,14 @@
 import "./styles.css";
 
-import template from "./template.hbs.js";
-import Component, { IComponent } from "../../../utils/component.js";
+import template from "./template.hbs.ts";
+import Component, { IComponent } from "../../../utils/component.ts";
 
 type ErrorPageType = {
   title: string;
   subtitle: string;
   linkBackButton: IComponent;
 };
+
 class ErrorPage extends Component {
   render(): DocumentFragment {
     return this.compile(template, this.props);

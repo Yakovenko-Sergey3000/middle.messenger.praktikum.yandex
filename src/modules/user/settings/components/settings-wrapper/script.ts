@@ -1,8 +1,8 @@
 import "./styles.css";
-import { UiAvatar } from "@ui/avatar/index.js";
-import Component, { IComponent } from "../../../../../utils/component.js";
-import template from "./template.hbs.js";
-import { UserType } from "../../../../../utils/global-types/index.js";
+import { UiAvatar } from "@ui/avatar/index.ts";
+import Component, { IComponent } from "../../../../../utils/component.ts";
+import template from "./template.hbs.ts";
+import { UserType } from "../../../../../utils/global-types/index.ts";
 
 type SettingsWrapperType = {
   user: UserType;
@@ -10,6 +10,7 @@ type SettingsWrapperType = {
   actions?: IComponent[];
   saveButton?: IComponent;
 };
+
 class SettingsWrapper extends Component {
   constructor(props: SettingsWrapperType) {
     super("div", { ...props, attributes: { class: "setting-wrapper" } });

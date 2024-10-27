@@ -1,15 +1,15 @@
 import "./style.css";
-import { ModuleSignIn, ModuleSignOut } from "@modules/auth/index.js";
-import { ModuleChat } from "@modules/chat/index.js";
+import { ModuleSignIn, ModuleSignOut } from "@modules/auth/index.ts";
+import { ModuleChat } from "@modules/chat/index.ts";
 import {
   ModuleChangeUserInformation,
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
-} from "@modules/user/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import { LayoutErrorPage } from "@layouts/_404-500/index.js";
-import { renderComponent } from "./utils/rende-component.js";
-import { PagesPath } from "./pages-path.js";
+} from "@modules/user/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import { LayoutErrorPage } from "@layouts/_404-500/index.ts";
+import { renderComponent } from "./utils/rende-component.ts";
+import { PagesPath } from "./pages-path.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
