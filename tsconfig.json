@@ -26,6 +26,6 @@
       "@global-style": ["./src/style.css"],
       "@layouts/*": ["./src/components/layouts/*"],
       "@icons/*": ["./src/static/icons/*"]
-    }
+    },
   }
 }
