@@ -6,8 +6,8 @@ import {
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.js";
-import { LayoutErrorPage } from "@layouts/_404-500/index.js";
 import { UiButton } from "@ui/buttons/index.js";
+import { LayoutErrorPage } from "@layouts/_404-500/index.js";
 import { renderComponent } from "./utils/rende-component.js";
 import { PagesPath } from "./pages-path.js";
 
