@@ -16,6 +16,9 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
     "paths": {
       "*": ["node_modules/*"],
       "@modules/*": ["./src/modules/*"],
@@ -23,9 +26,6 @@
       "@global-style": ["./src/style.css"],
       "@layouts/*": ["./src/components/layouts/*"],
       "@icons/*": ["./src/static/icons/*"]
-    },
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "noImplicitAny": true,
-  },
+    }
+  }
 }
