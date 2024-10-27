@@ -1,6 +1,7 @@
 {
   "extends": [
-    "airbnb-base"
+    "airbnb-base",
+    "airbnb-typescript/base"
   ],
   "settings": {
     "react": {
@@ -63,7 +64,14 @@
     "function-paren-newline": "off",
     "react/no-unused-class-component-methods": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/quotes": [0, "double"],
+    "@typescript-eslint/default-param-last": "off",
+    "import/extensions": [2, "always", {
+      "ts": "ignorePackages"
+    }]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }
 

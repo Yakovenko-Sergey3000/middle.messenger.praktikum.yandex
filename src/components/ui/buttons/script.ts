@@ -4,11 +4,11 @@ import { ComponentEventsType, ComponentType } from "../../../utils/global-types/
 import ConcatClasses from "../../../utils/concat-classes.ts";
 
 type UiButtonType = ComponentType &
-  ComponentEventsType & {
-    label: string;
-    className?: string;
-    variant?: "main" | "link" | "circle";
-  };
+ComponentEventsType & {
+  label: string;
+  className?: string;
+  variant?: "main" | "link" | "circle";
+};
 
 class UiButton extends Component {
   render(): DocumentFragment {
