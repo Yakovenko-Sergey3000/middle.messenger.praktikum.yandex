@@ -3,16 +3,16 @@ import { Any } from "./global-types/index.ts";
 type ApiPropsType = {
   headers?: Record<string, string>;
   data?: Record<string, Any>;
+  timeout?: number;
 };
 
+type HTTPMethod = (url: string, options: ApiPropsType) => Promise<XMLHttpRequest>;
+
 interface IApi {
-  get(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
-
-  post(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
-
-  put(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
-
-  delete(url: string, data: ApiPropsType): Promise<XMLHttpRequest>;
+  get: HTTPMethod;
+  post: HTTPMethod;
+  put: HTTPMethod;
+  delete: HTTPMethod;
 }
 
 class Api implements IApi {
@@ -80,21 +80,17 @@ class Api implements IApi {
     });
   };
 
-  async get(url: string, { headers, data }: ApiPropsType = {}): Promise<XMLHttpRequest> {
-    return this.#request(url, { method: Api.METHODS.GET, headers, data });
-  }
+  get: HTTPMethod = async (url, options) =>
+    this.#request(url, { ...options, method: Api.METHODS.GET });
 
-  async post(url: string, { headers, data }: ApiPropsType = {}): Promise<XMLHttpRequest> {
-    return this.#request(url, { method: Api.METHODS.POST, headers, data });
-  }
+  post: HTTPMethod = async (url, options) =>
+    this.#request(url, { ...options, method: Api.METHODS.POST });
 
-  async put(url: string, { headers, data }: ApiPropsType = {}): Promise<XMLHttpRequest> {
-    return this.#request(url, { method: Api.METHODS.PUT, headers, data });
-  }
+  put: HTTPMethod = async (url, options) =>
+    this.#request(url, { ...options, method: Api.METHODS.PUT });
 
-  async delete(url: string, { headers, data }: ApiPropsType = {}): Promise<XMLHttpRequest> {
-    return this.#request(url, { method: Api.METHODS.DELETE, headers, data });
-  }
+  delete: HTTPMethod = async (url, options) =>
+    this.#request(url, { ...options, method: Api.METHODS.DELETE });
 }
 
 export default new Api();
