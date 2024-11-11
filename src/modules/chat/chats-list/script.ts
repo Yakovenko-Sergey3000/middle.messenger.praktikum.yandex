@@ -8,6 +8,7 @@ import { UiChatItem } from "@ui/chat-item/index.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
+import Router from "../../../utils/router/index.js";
 
 class ChatsList extends Component {
   constructor() {
@@ -39,7 +40,7 @@ class ChatsList extends Component {
           ...data,
           className: "dialogs_list__item",
           onClick: (chatId) => {
-            console.log(chatId);
+            new Router().go(`/chat/${chatId}`);
           },
         }),
       ),

@@ -28,6 +28,8 @@ export interface IComponent {
   getContent(): HTMLElement;
 
   render(): DocumentFragment;
+  show(): void;
+  hide(): void;
 }
 
 type ChildrenType = Record<string, IComponent>;
@@ -318,5 +320,13 @@ export default class Component<Props extends Record<string, unknown> = Record<st
 
   render(): DocumentFragment {
     return this.compile("");
+  }
+
+  hide(): void {
+    this.#element.style.display = "none";
+  }
+
+  show(): void {
+    this.#element.style.display = "block";
   }
 }

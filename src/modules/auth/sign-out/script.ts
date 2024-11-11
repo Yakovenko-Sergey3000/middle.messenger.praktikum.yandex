@@ -9,6 +9,7 @@ import Component from "../../../utils/component.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.ts";
+import Router from "../../../utils/router/index.js";
 
 class SignOut extends Component {
   validator: IChatValidator;
@@ -24,9 +25,7 @@ class SignOut extends Component {
       variant: "link",
       label: "Войти",
       attributes: { type: "button" },
-      onClick: () => {
-        window.location.replace(PagesPath.SIGN_IN);
-      },
+      onClick: () => new Router().go(PagesPath.SIGN_IN),
     });
 
     this.validator = new ChatValidator();
