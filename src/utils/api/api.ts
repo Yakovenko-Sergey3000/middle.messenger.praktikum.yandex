@@ -1,4 +1,4 @@
-import { Any } from "./global-types/index.ts";
+import { Any } from "../global-types/index.ts";
 
 type ApiPropsType = {
   headers?: Record<string, string>;
