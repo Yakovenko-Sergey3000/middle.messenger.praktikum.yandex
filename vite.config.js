@@ -30,6 +30,7 @@ export default defineConfig({
       "@global-style": resolve(__dirname, "./src/style.css"),
       "@modules": resolve(__dirname, "./src/modules"),
       "@icons": resolve(__dirname, "./src/static/icons"),
+      "@utils": resolve(__dirname, "./src/utils"),
     },
   },
 });
