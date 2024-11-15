@@ -66,6 +66,7 @@
     "react/prop-types": "off",
     "@typescript-eslint/quotes": [0, "double"],
     "@typescript-eslint/default-param-last": "off",
+    "@typescript-eslint/indent": "off",
     "import/extensions": [2, "always", {
       "ts": "ignorePackages"
     }]

@@ -1,15 +1,21 @@
-import { set } from "./utils.js";
-import EventBus from "./event-bus.js";
+import { set } from "../utils.js";
+import EventBus from "../event-bus.js";
 
 export enum StoreEvent {
   Update = "update",
 }
 
-type StateType = {
-  [key: string]: unknown;
-};
+type StateType = Record<string, unknown>;
 class Store extends EventBus<StateType> {
   private state: StateType = {};
+
+  constructor() {
+    super();
+
+    this.state = {
+      user: null,
+    };
+  }
 
   getState(): StateType {
     return this.state;
