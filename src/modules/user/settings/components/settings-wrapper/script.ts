@@ -1,8 +1,8 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
-import Component, { IComponent } from "../../../../../utils/component.ts";
+import { UserType } from "@utils/global-types/index.js";
+import Component, { IComponent } from "@utils/component.ts";
 import template from "./template.hbs.ts";
-import { UserType } from "../../../../../utils/global-types/index.ts";
 
 type SettingsWrapperType = {
   user: UserType;
@@ -17,7 +17,7 @@ class SettingsWrapper extends Component {
     this.children.avatar = UiAvatar({
       width: "130px",
       height: "130px",
-      src: props.user.avatar,
+      src: props.user.avatar || "",
       alt: "Avatar",
       className: "user_avatar",
     });

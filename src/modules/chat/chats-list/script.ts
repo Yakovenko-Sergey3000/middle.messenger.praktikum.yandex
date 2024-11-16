@@ -4,16 +4,20 @@ import rightArrow from "@icons/right-arrow_v1.svg";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import ChatsListActions from "@modules/chat/chats-list/actions.js";
-import { UiChatItem } from "@ui/chat-item/index.js";
+import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import Router from "../../../utils/router/index.js";
 import { Connect } from "../../../store/connect.js";
 
+type ChatsListType = {
+  chatsList: UiChatItemType[];
+};
 class ChatsList extends Component {
-  constructor() {
+  constructor(props: ChatsListType) {
     super("div", {
+      ...props,
       srcArrowHead: rightArrow,
       srcSearchIcon: searchIcon,
     });

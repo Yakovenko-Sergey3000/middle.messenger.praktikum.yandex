@@ -7,6 +7,8 @@ import {
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-password-fields.ts";
+import UserActions from "@modules/user/actions.js";
+import { ChangePasswordType } from "@modules/user/types.js";
 import { UserType } from "../../../../utils/global-types/index.ts";
 import Component, { IComponent } from "../../../../utils/component.ts";
 import { USERS } from "../../../../enums.ts";
@@ -37,6 +39,7 @@ class ChangePassword extends Component {
 
   onSubmit(e: Event) {
     e.preventDefault();
+    const userActions = new UserActions();
     const target = e.target as HTMLFormElement;
     const fd: FormData = new FormData(target);
     const data: Record<string, FormDataEntryValue> = {};
@@ -56,8 +59,7 @@ class ChangePassword extends Component {
     if (!isValid) {
       return;
     }
-    console.log(data);
-    target.reset();
+    userActions.changePassword(data as ChangePasswordType, () => target.reset());
   }
 
   #setPasswordsFromFields() {

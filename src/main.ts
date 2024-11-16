@@ -10,7 +10,6 @@ import AuthActions from "@modules/auth/actions.js";
 import { NotFound } from "@utils/router/NotFound.js";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
-import { USERS } from "./enums.js";
 import store, { StoreEvent } from "./store/store.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (authAction.isAuth()) {
       router
         .use(PagesPath.HOME, new ModuleChat())
-        .use(PagesPath.USER_SETTING, ModuleViewUserSetting({ user: USERS[0] }))
+        .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
         .notFound(
