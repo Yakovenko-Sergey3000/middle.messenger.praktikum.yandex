@@ -9,7 +9,6 @@ class Route {
     private block: IComponent,
     private props: {
       rootQuery: string;
-      middleware?: ((route: Route) => void)[];
       [ket: string]: unknown;
     },
   ) {
@@ -17,28 +16,12 @@ class Route {
   }
 
   match(pathname: string) {
-    const urlPath = pathname.split("/");
-    const componentPath = this.pathname.split("/");
-    let isTrue = true;
-
-    componentPath.forEach((key, idx) => {
-      if (key !== urlPath[idx] && !key.startsWith(":")) {
-        isTrue = false;
-      }
-    });
-
-    return isTrue;
+    return pathname === this.pathname;
   }
 
   leave() {
     if (this.component) {
       this.component.hide();
-    }
-  }
-
-  runMiddleware() {
-    if (this.props.middleware && Array.isArray(this.props.middleware)) {
-      this.props.middleware.forEach((fn) => fn.bind(this));
     }
   }
 

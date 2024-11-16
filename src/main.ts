@@ -1,16 +1,17 @@
 import "./style.css";
-import { LogOutBtn, ModuleSignIn, ModuleSignOut } from "@modules/auth/index.ts";
+import { ModuleSignIn, ModuleSignOut } from "@modules/auth/index.ts";
 import { ModuleChat } from "@modules/chat/index.ts";
 import {
   ModuleChangeUserInformation,
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.ts";
-import { ModuleDialog } from "@modules/chat/dialog/index.js";
+import AuthActions from "@modules/auth/actions.js";
+import { NotFound } from "@utils/router/NotFound.js";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
-import { isUserAuth, isUserNotAuth } from "./middleware/UserAuth.js";
 import { USERS } from "./enums.js";
+import store, { StoreEvent } from "./store/store.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // if (path.includes("500")) {
@@ -28,21 +29,31 @@ document.addEventListener("DOMContentLoaded", () => {
   //   );
   // }
 
-  new Router()
-    .use(PagesPath.SIGN_IN, ModuleSignIn(), { middleware: [isUserAuth()] })
-    .use(PagesPath.SING_OUT, ModuleSignOut(), { middleware: [isUserAuth()] })
-    .use(PagesPath.HOME, new ModuleChat(), { middleware: [isUserNotAuth()] })
-    .use(PagesPath.USER_SETTING, ModuleViewUserSetting({ user: USERS[0], logOut: LogOutBtn }), {
-      middleware: [isUserNotAuth()],
-    })
-    .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation(), {
-      middleware: [isUserNotAuth()],
-    })
-    .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword(), {
-      middleware: [isUserNotAuth()],
-    })
-    .use(`${PagesPath.CHAT}/:id`, new ModuleChat(ModuleDialog), {
-      middleware: [isUserNotAuth()],
-    })
-    .start();
+  const authAction = new AuthActions();
+  const init = () => {
+    const router = new Router();
+    if (authAction.isAuth()) {
+      router
+        .use(PagesPath.HOME, new ModuleChat())
+        .use(PagesPath.USER_SETTING, ModuleViewUserSetting({ user: USERS[0] }))
+        .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
+        .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
+        .notFound(
+          NotFound(() => {
+            router.go(PagesPath.HOME);
+          }),
+        );
+    } else {
+      router
+        .use(PagesPath.SIGN_IN, ModuleSignIn())
+        .use(PagesPath.SING_OUT, ModuleSignOut())
+        .notFound(() => router.go(PagesPath.SIGN_IN));
+    }
+
+    router.start();
+    store.off(StoreEvent.Update, init);
+  };
+
+  authAction.getUser();
+  store.on(StoreEvent.Update, init);
 });

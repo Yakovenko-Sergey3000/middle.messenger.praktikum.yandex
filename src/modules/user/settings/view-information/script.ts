@@ -6,13 +6,13 @@ import {
 } from "@modules/user/settings/components/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.ts";
-import Component, { IComponent } from "../../../../utils/component.ts";
-import { UserType } from "../../../../utils/global-types/index.ts";
+import { UserType } from "@utils/global-types/index.js";
+import { LogOutBtn } from "@modules/auth/index.js";
+import Component from "../../../../utils/component.ts";
 import { PagesPath } from "../../../../pages-path.ts";
 
 type ViewInformationTypeProps = {
   user: UserType;
-  logOut: IComponent;
 };
 class ViewInformation extends Component {
   constructor(props: ViewInformationTypeProps) {
@@ -34,6 +34,7 @@ class ViewInformation extends Component {
             onClick: () => window.location.replace(PagesPath.CHANGE_USER_SETTING),
           }),
         }),
+
         SettingsField({
           leftContent: UiButton({
             label: "Изменить пароль",
@@ -41,8 +42,9 @@ class ViewInformation extends Component {
             onClick: () => window.location.replace(PagesPath.CHANGE_USER_PASSWORD),
           }),
         }),
+
         SettingsField({
-          leftContent: props.logOut,
+          leftContent: LogOutBtn(),
         }),
       ],
     });

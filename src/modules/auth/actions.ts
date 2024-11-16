@@ -2,6 +2,7 @@ import ApiAuth from "@modules/auth/api.js";
 import { SignInType, SignUpType } from "@modules/auth/types.js";
 import { ApiResponceActionType } from "@utils/global-types/index.js";
 import store from "../../store/store.js";
+import { PagesPath } from "../../pages-path.js";
 
 class AuthActions {
   api: ApiAuth;
@@ -10,17 +11,19 @@ class AuthActions {
     this.api = new ApiAuth();
   }
 
+  getUser() {
+    this.api.request({
+      onSuccess: (res) => {
+        store.setState({ user: res });
+      },
+      onError: () => {
+        store.setState({ user: null });
+      },
+    });
+  }
+
   isAuth() {
     const { user } = store.getState();
-
-    if (!user) {
-      this.api.request({
-        onSuccess: (res) => {
-          store.setState({ user: res });
-        },
-        onError: () => {},
-      });
-    }
 
     return !!user;
   }
@@ -28,8 +31,8 @@ class AuthActions {
   signUp(params: SignUpType, { onSuccess, onError }: ApiResponceActionType) {
     this.api.signUp(params, {
       onSuccess: () => {
-        this.isAuth();
         onSuccess();
+        window.location.replace(PagesPath.HOME);
       },
       onError: (errorMessage) => onError(errorMessage),
     });
@@ -38,8 +41,8 @@ class AuthActions {
   signIn(params: SignInType, { onSuccess, onError }: ApiResponceActionType) {
     this.api.signIn(params, {
       onSuccess: () => {
-        this.isAuth();
         onSuccess();
+        window.location.replace(PagesPath.HOME);
       },
       onError: (errorMessage) => onError(errorMessage),
     });
@@ -48,7 +51,7 @@ class AuthActions {
   logOut() {
     this.api.delete({
       onSuccess: () => {
-        store.setState({ user: null });
+        window.location.reload();
       },
       onError: () => {},
     });

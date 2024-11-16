@@ -1,6 +1,5 @@
 import { IComponent } from "../component.ts";
 import Route from "./route.ts";
-import { NotFound } from "./NotFound.ts";
 
 class Router {
   static instance: Router;
@@ -13,11 +12,14 @@ class Router {
 
   #rootQuery: string;
 
+  #notFound: (() => void) | IComponent | null;
+
   constructor() {
     this.#routes = [];
     this.#history = window.history;
     this.#currentRoute = null;
     this.#rootQuery = "#app";
+    this.#notFound = null;
 
     if (Router.instance) {
       // eslint-disable-next-line no-constructor-return
@@ -38,6 +40,11 @@ class Router {
     return this;
   }
 
+  notFound(params: IComponent | (() => void)) {
+    this.#notFound = params;
+    return this;
+  }
+
   start() {
     window.addEventListener("popstate", (event) => {
       const target = event.currentTarget as Window;
@@ -51,18 +58,24 @@ class Router {
     let route = this.#getRoute(pathname);
 
     if (!route) {
-      route = new Route(
-        pathname,
-        NotFound(() => this.back()),
-        { rootQuery: this.#rootQuery },
-      );
+      if (this.#notFound === null) {
+        return;
+      }
+
+      if (typeof this.#notFound === "function") {
+        this.#notFound();
+      }
+
+      if (typeof this.#notFound === "object") {
+        route = new Route(pathname, this.#notFound, { rootQuery: this.#rootQuery });
+      } else {
+        return;
+      }
     }
 
     if (this.#currentRoute) {
       this.#currentRoute.leave();
     }
-
-    route.runMiddleware();
 
     this.#currentRoute = route;
     route.render();
