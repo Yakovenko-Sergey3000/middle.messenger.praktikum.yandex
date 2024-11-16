@@ -4,7 +4,7 @@ import Component, { IComponent } from "../../../utils/component.ts";
 
 type LayoutChatType = {
   chatsList: IComponent;
-  chatDialog: IComponent;
+  chatDialog: IComponent | undefined;
 };
 
 class LayoutChat extends Component {

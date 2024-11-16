@@ -6,6 +6,7 @@ import {
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.ts";
+import { ModuleDialog } from "@modules/chat/dialog/index.js";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
 import { isUserAuth, isUserNotAuth } from "./middleware/UserAuth.js";
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new Router()
     .use(PagesPath.SIGN_IN, ModuleSignIn(), { middleware: [isUserAuth()] })
     .use(PagesPath.SING_OUT, ModuleSignOut(), { middleware: [isUserAuth()] })
-    .use(PagesPath.HOME, ModuleChat(), { middleware: [isUserNotAuth()] })
+    .use(PagesPath.HOME, new ModuleChat(), { middleware: [isUserNotAuth()] })
     .use(PagesPath.USER_SETTING, ModuleViewUserSetting({ user: USERS[0], logOut: LogOutBtn }), {
       middleware: [isUserNotAuth()],
     })
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword(), {
       middleware: [isUserNotAuth()],
     })
-    .use(`${PagesPath.CHAT}/:id`, ModuleChat(), {
+    .use(`${PagesPath.CHAT}/:id`, new ModuleChat(ModuleDialog), {
       middleware: [isUserNotAuth()],
     })
     .start();

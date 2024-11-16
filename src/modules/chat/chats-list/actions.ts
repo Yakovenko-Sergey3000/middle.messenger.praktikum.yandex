@@ -25,6 +25,10 @@ class ChatsListActions {
       onError: () => {},
     });
   }
+
+  setDialogId(token: string) {
+    store.setState({ dialogToken: token });
+  }
 }
 
 export default ChatsListActions;

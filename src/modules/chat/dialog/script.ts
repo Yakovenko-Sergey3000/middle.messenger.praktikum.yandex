@@ -64,4 +64,4 @@ class Dialog extends Component {
   }
 }
 
-export default () => new Dialog();
+export default Dialog;

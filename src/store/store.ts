@@ -9,6 +9,7 @@ export enum StoreEvent {
 export type StoreStateType = {
   user: UserType | null;
   chatsList: UiChatItemType[];
+  dialogToken: string | null;
   [key: string]: unknown;
 };
 class Store extends EventBus<StoreStateType> {
@@ -20,6 +21,7 @@ class Store extends EventBus<StoreStateType> {
     this.state = {
       user: null,
       chatsList: [],
+      dialogToken: null,
     };
   }
 

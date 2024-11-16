@@ -51,7 +51,8 @@ export default Connect(ChatsList, (state) => ({
         onClick: (chatId) => {
           const chatsListAction = new ChatsListActions();
           chatsListAction.getChatToken(chatId, (token) => {
-            new Router().go(`${PagesPath.CHAT}/${token}`);
+            chatsListAction.setDialogId(token);
+            new Router().go(`${PagesPath.CHAT}/${chatId}`);
           });
         },
       }),
