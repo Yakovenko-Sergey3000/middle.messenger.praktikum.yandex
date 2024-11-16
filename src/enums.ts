@@ -24,3 +24,8 @@ export const USERS: UserType[] = [
     phone: "9393-3032-3",
   },
 ];
+
+export const HTTPS_STATUS = {
+  OK: 200,
+  CREATED: 201,
+};

@@ -6,13 +6,16 @@ import {
 } from "@modules/user/settings/components/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.ts";
-import Component from "../../../../utils/component.ts";
-import { USERS } from "../../../../enums.ts";
+import Component, { IComponent } from "../../../../utils/component.ts";
 import { UserType } from "../../../../utils/global-types/index.ts";
 import { PagesPath } from "../../../../pages-path.ts";
 
+type ViewInformationTypeProps = {
+  user: UserType;
+  logOut: IComponent;
+};
 class ViewInformation extends Component {
-  constructor(props: { user: UserType }) {
+  constructor(props: ViewInformationTypeProps) {
     super("div", props);
 
     this.children.wrapper = SettingsWrapper({
@@ -20,7 +23,7 @@ class ViewInformation extends Component {
       fields: USER_SETTING_FIELDS.map((filed) =>
         SettingsField({
           leftContent: filed.label,
-          rightContent: props.user[filed.name],
+          rightContent: props.user[filed.name] || "",
         }),
       ),
       actions: [
@@ -39,12 +42,7 @@ class ViewInformation extends Component {
           }),
         }),
         SettingsField({
-          leftContent: UiButton({
-            label: "Выйти",
-            variant: "link",
-            className: "exit-button",
-            onClick: () => window.location.replace(PagesPath.HOME),
-          }),
+          leftContent: props.logOut,
         }),
       ],
     });
@@ -55,9 +53,7 @@ class ViewInformation extends Component {
   }
 }
 
-export default () =>
+export default (props: ViewInformationTypeProps) =>
   SettingLayout({
-    content: new ViewInformation({
-      user: USERS[0],
-    }),
+    content: new ViewInformation(props),
   });

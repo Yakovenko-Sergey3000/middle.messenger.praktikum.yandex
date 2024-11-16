@@ -9,7 +9,7 @@ class Chat extends Component {
     super("div", {});
 
     this.children.chat = LayoutChat({
-      chatsList: ModuleChatList(),
+      chatsList: new ModuleChatList({}),
       chatDialog: ModuleDialog(),
     });
   }

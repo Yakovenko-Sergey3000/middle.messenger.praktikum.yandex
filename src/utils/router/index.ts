@@ -27,8 +27,12 @@ class Router {
     Router.instance = this;
   }
 
-  use(pathname: string, component: IComponent): this {
-    const route = new Route(pathname, component, { rootQuery: this.#rootQuery });
+  use(
+    pathname: string,
+    component: IComponent,
+    { middleware }: { middleware?: ((props?: Route) => void)[]; [key: string]: unknown } = {},
+  ): this {
+    const route = new Route(pathname, component, { rootQuery: this.#rootQuery, middleware });
     this.#routes.push(route);
 
     return this;
@@ -57,6 +61,8 @@ class Router {
     if (this.#currentRoute) {
       this.#currentRoute.leave();
     }
+
+    route.runMiddleware();
 
     this.#currentRoute = route;
     route.render();

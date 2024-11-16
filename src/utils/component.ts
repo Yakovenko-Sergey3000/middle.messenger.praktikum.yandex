@@ -328,5 +328,6 @@ export default class Component<Props extends Record<string, unknown> = Record<st
 
   show(): void {
     this.#element.style.display = "block";
+    this.#eventBus().emit(Component.EVENTS.CDU);
   }
 }

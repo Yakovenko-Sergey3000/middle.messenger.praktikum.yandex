@@ -25,6 +25,10 @@
           [
             "@icons",
             "./src/static/icons"
+          ],
+          [
+            "@middleware",
+            "./src/middleware"
           ]
         ],
         "extensions": [
@@ -67,6 +71,7 @@
     "@typescript-eslint/quotes": [0, "double"],
     "@typescript-eslint/default-param-last": "off",
     "@typescript-eslint/indent": "off",
+    "max-params": "off",
     "import/extensions": [2, "always", {
       "ts": "ignorePackages"
     }]

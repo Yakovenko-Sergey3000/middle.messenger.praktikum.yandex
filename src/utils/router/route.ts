@@ -9,6 +9,7 @@ class Route {
     private block: IComponent,
     private props: {
       rootQuery: string;
+      middleware?: ((route: Route) => void)[];
       [ket: string]: unknown;
     },
   ) {
@@ -35,9 +36,16 @@ class Route {
     }
   }
 
+  runMiddleware() {
+    if (this.props.middleware && Array.isArray(this.props.middleware)) {
+      this.props.middleware.forEach((fn) => fn.bind(this));
+    }
+  }
+
   render() {
     if (!this.component) {
       this.component = this.block;
+
       renderComponent(this.props.rootQuery, this.component);
 
       return;

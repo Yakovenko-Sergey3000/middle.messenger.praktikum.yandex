@@ -41,3 +41,25 @@ export const set = (obj: Indexed, path: string, value: unknown): Indexed => {
 
   return merge(obj, result);
 };
+
+export type ApiResponceType = {
+  status: number;
+  response: string;
+};
+
+type ApiResponseAfterParse = {
+  status: number;
+  response: Record<string, unknown>;
+};
+export const parseErrorToJson = (error: ApiResponceType): string => {
+  if (error.response) {
+    return JSON.parse(error.response).reason;
+  }
+
+  return "Что то пошло не так!";
+};
+
+export const parseApiResponceToJson = (response: ApiResponceType): ApiResponseAfterParse => ({
+  ...response,
+  response: JSON.parse(response.response),
+});

@@ -31,6 +31,7 @@ export default defineConfig({
       "@modules": resolve(__dirname, "./src/modules"),
       "@icons": resolve(__dirname, "./src/static/icons"),
       "@utils": resolve(__dirname, "./src/utils"),
+      "@middleware": resolve(__dirname, "./src/middleware"),
     },
   },
 });

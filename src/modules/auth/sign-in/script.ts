@@ -3,7 +3,8 @@ import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { UiFormLabel } from "@ui/form-label/index.ts";
 import { FIELDS } from "@modules/auth/sign-in/fields.ts";
-import { AuthFieldType } from "@modules/auth/types.ts";
+import { AuthFieldType, SignInType } from "@modules/auth/types.ts";
+import AuthActions from "@modules/auth/actions.js";
 import template from "./template.hbs.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
 import Component from "../../../utils/component.ts";
@@ -74,6 +75,8 @@ class SignIn extends Component {
 
 export default () => {
   const signInForm = new SignIn();
+  const authAction = new AuthActions();
+
   return AuthFormLayout({
     title: "Вход",
     content: signInForm,
@@ -100,8 +103,10 @@ export default () => {
         return;
       }
 
-      console.log(data);
-      target.reset();
+      authAction.signIn(data as SignInType, {
+        onSuccess: () => target.reset(),
+        onError: () => {},
+      });
     },
   });
 };

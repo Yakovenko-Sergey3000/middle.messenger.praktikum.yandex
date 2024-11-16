@@ -23,6 +23,12 @@ class Api implements IApi {
     DELETE: "DELETE",
   };
 
+  #base_url: string;
+
+  constructor(url: string) {
+    this.#base_url = `https://ya-praktikum.tech/api/v2${url}`;
+  }
+
   #queryStringify(url: string, data: Record<string, Any>): string {
     const newUrl = new URL(url);
     Object.entries(data).forEach(([key, val]) => newUrl.searchParams.set(key, val));
@@ -33,7 +39,7 @@ class Api implements IApi {
   #request = (
     url: string,
     options: { headers?: Record<string, string>; method: string; data?: Record<string, Any> },
-    timeout: number = 5000,
+    timeout: number = 15000,
   ): Promise<XMLHttpRequest> => {
     const { headers = {}, method, data } = options;
 
@@ -50,6 +56,7 @@ class Api implements IApi {
       xhr.open(method, preparedUrl);
 
       xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.withCredentials = true;
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
@@ -57,11 +64,11 @@ class Api implements IApi {
       xhr.onload = () => {
         const responce: { status: number; response: Any } = {
           status: xhr.status,
-          response: xhr.response ? JSON.parse(xhr.response) : {},
+          response: xhr.response,
         };
 
         if (xhr.status >= 400) {
-          reject(new Error(JSON.stringify(responce)));
+          reject(responce);
         }
 
         resolve(responce as XMLHttpRequest);
@@ -81,16 +88,16 @@ class Api implements IApi {
   };
 
   get: HTTPMethod = async (url, options) =>
-    this.#request(url, { ...options, method: Api.METHODS.GET });
+    this.#request(this.#base_url + url, { ...options, method: Api.METHODS.GET });
 
   post: HTTPMethod = async (url, options) =>
-    this.#request(url, { ...options, method: Api.METHODS.POST });
+    this.#request(this.#base_url + url, { ...options, method: Api.METHODS.POST });
 
   put: HTTPMethod = async (url, options) =>
-    this.#request(url, { ...options, method: Api.METHODS.PUT });
+    this.#request(this.#base_url + url, { ...options, method: Api.METHODS.PUT });
 
   delete: HTTPMethod = async (url, options) =>
-    this.#request(url, { ...options, method: Api.METHODS.DELETE });
+    this.#request(this.#base_url + url, { ...options, method: Api.METHODS.DELETE });
 }
 
-export default new Api();
+export default Api;

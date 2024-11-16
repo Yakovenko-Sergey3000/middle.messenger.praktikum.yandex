@@ -1,9 +1,9 @@
-import store, { StoreEvent } from "@utils/store/store.js";
 import IComponent from "@utils/component.js";
+import store, { StoreEvent, StoreStateType } from "./store.js";
 
-export const Connect = <T extends Record<string, unknown>>(
+export const Connect = <T extends StoreStateType>(
   Component: new (props: T) => IComponent,
-  mapStateToProps: (state: Record<string, unknown>) => Record<string, unknown> | {},
+  mapStateToProps: (state: StoreStateType) => T | {},
 ) =>
   class Test extends Component {
     constructor(props: T) {

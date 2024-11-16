@@ -1,14 +1,15 @@
 import "./styles.css";
 import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
-import { chatsList as mockChatsList } from "@modules/chat/chats-list/mock-messages-data.ts";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
-import { UiChatItem } from "@ui/chat-item/index.ts";
+import ChatsListActions from "@modules/chat/chats-list/actions.js";
+import { UiChatItem } from "@ui/chat-item/index.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import Router from "../../../utils/router/index.js";
+import { Connect } from "../../../store/connect.js";
 
 class ChatsList extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class ChatsList extends Component {
       label: "Профиль",
       variant: "link",
       onClick: () => {
-        window.location.replace(PagesPath.USER_SETTING);
+        new Router().go(PagesPath.USER_SETTING);
       },
     });
 
@@ -33,18 +34,7 @@ class ChatsList extends Component {
   }
 
   componentDidMount() {
-    const list = mockChatsList;
-    this.setProps({
-      chatsList: list.map((data) =>
-        UiChatItem({
-          ...data,
-          className: "dialogs_list__item",
-          onClick: (chatId) => {
-            new Router().go(`/chat/${chatId}`);
-          },
-        }),
-      ),
-    });
+    new ChatsListActions().getChatsList();
   }
 
   render(): DocumentFragment {
@@ -52,4 +42,18 @@ class ChatsList extends Component {
   }
 }
 
-export default () => new ChatsList();
+export default Connect(ChatsList, (state) => ({
+  chatsList: state.chatsList.map(
+    (data) =>
+      new UiChatItem({
+        ...data,
+        className: "dialogs_list__item",
+        onClick: (chatId) => {
+          const chatsListAction = new ChatsListActions();
+          chatsListAction.getChatToken(chatId, (token) => {
+            new Router().go(`${PagesPath.CHAT}/${token}`);
+          });
+        },
+      }),
+  ),
+}));

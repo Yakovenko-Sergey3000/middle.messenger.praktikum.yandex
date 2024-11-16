@@ -1,18 +1,19 @@
+type BaseApiParams = unknown;
 class BaseApi {
-  request() {
-    throw new Error("Not implemented");
+  async request(params?: BaseApiParams): Promise<unknown> {
+    throw new Error(`Not implemented, ${params}`);
   }
 
-  create() {
-    throw new Error("Not implemented");
+  async create(params?: BaseApiParams): Promise<unknown> {
+    throw new Error(`Not implemented, ${params}`);
   }
 
-  update() {
-    throw new Error("Not implemented");
+  async update(params?: BaseApiParams): Promise<unknown> {
+    throw new Error(`Not implemented, ${params}`);
   }
 
-  delete() {
-    throw new Error("Not implemented");
+  async delete(params?: BaseApiParams): Promise<unknown> {
+    throw new Error(`Not implemented, ${params}`);
   }
 }
 

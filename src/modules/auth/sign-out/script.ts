@@ -3,7 +3,8 @@ import { UiFormLabel } from "@ui/form-label/index.ts";
 import { FIELDS } from "@modules/auth/sign-out/fields.ts";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
-import { AuthFieldType } from "@modules/auth/types.ts";
+import { AuthFieldType, SignUpType } from "@modules/auth/types.ts";
+import { AuthAction } from "@modules/auth/index.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
@@ -73,6 +74,7 @@ class SignOut extends Component {
 
 export default () => {
   const signOutForm = new SignOut();
+  const action = new AuthAction();
 
   return AuthFormLayout({
     title: "Регистрация",
@@ -100,9 +102,7 @@ export default () => {
         return;
       }
 
-      console.log(data);
-
-      target.reset();
+      action.signUp(data as SignUpType, { onSuccess: () => target.reset(), onError: () => {} });
     },
   });
 };
