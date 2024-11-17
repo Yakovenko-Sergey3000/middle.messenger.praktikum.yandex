@@ -18,4 +18,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default () => new Chat();

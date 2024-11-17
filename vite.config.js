@@ -8,14 +8,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
-        "sign-in": resolve(__dirname, "./src/pages/sign-in-page.html"),
-        "sign-out": resolve(__dirname, "./src/pages/sign-out-page.html"),
-        500: resolve(__dirname, "./src/pages/500.html"),
-        404: resolve(__dirname, "./src/pages/404.html"),
-        chat: resolve(__dirname, "./src/pages/chat.html"),
-        "view-user-settings": resolve(__dirname, "./src/pages/view-user-settings.html"),
-        "change-user-information": resolve(__dirname, "./src/pages/change-user-information.html"),
-        "change-user-password": resolve(__dirname, "./src/pages/change-user-password.html"),
       },
     },
   },

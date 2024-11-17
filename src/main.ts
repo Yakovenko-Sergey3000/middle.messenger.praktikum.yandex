@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const router = new Router();
     if (authAction.isAuth()) {
       router
-        .use(PagesPath.HOME, new ModuleChat())
+        .use(PagesPath.HOME, ModuleChat())
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
