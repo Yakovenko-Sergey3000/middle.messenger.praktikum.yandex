@@ -1,4 +1,5 @@
 import { Any } from "../global-types/index.ts";
+import { YA_ENDPOINTS } from "../../enums.js";
 
 type ApiPropsType = {
   headers?: Record<string, string>;
@@ -26,7 +27,7 @@ class Api implements IApi {
   #base_url: string;
 
   constructor(url: string) {
-    this.#base_url = `https://ya-praktikum.tech/api/v2${url}`;
+    this.#base_url = `${YA_ENDPOINTS.api}${url}`;
   }
 
   #queryStringify(url: string, data: Record<string, Any>): string {
@@ -54,9 +55,8 @@ class Api implements IApi {
       const preparedUrl: string = isGet ? this.#queryStringify(url, data || {}) : url;
 
       xhr.open(method, preparedUrl);
-
-      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.withCredentials = true;
+
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
@@ -81,7 +81,10 @@ class Api implements IApi {
 
       if (isGet || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));
       }
     });

@@ -19,9 +19,7 @@ class UserActions {
         store.setState({ user: newUserData });
         this.router.back();
       },
-      onError: (err) => {
-        console.log(err);
-      },
+      onError: () => {},
     });
   }
 
@@ -30,6 +28,18 @@ class UserActions {
       onSuccess: () => {
         onSuccess();
         this.router.back();
+      },
+      onError: () => {},
+    });
+  }
+
+  changeAvatar(file: File) {
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    this.api.changeAvatar(formData, {
+      onSuccess: (newUserData) => {
+        store.setState({ user: newUserData });
       },
       onError: () => {},
     });

@@ -12,6 +12,7 @@ class SettingLayout extends Component {
   constructor(props: SettingLayoutType) {
     super("div", props);
     this.children.returnBackButton = UiButton({
+      attributes: { type: "button" },
       label: "←",
       variant: "circle",
       onClick: () => new Router().back(),

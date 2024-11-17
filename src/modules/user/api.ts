@@ -33,6 +33,20 @@ class UserApi extends BaseApi {
       }
     }
   }
+
+  async changeAvatar(formData: FormData, { onSuccess, onError }: ApiResponceActionType) {
+    try {
+      const res = await api.put("/profile/avatar", {
+        data: formData,
+      });
+
+      onSuccess(parseApiResponceToJson(res).response);
+    } catch (err) {
+      if (typeof err === "object" && err !== null) {
+        onError(parseErrorToJson(err as ApiResponceType));
+      }
+    }
+  }
 }
 
 export default UserApi;

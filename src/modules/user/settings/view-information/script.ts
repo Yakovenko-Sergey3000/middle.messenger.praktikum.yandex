@@ -8,10 +8,11 @@ import { UiButton } from "@ui/buttons/index.ts";
 import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.ts";
 import { LogOutBtn } from "@modules/auth/index.js";
 import Router from "@utils/router/index.js";
-import { SettingsUserType } from "@modules/user/types.js";
+import { SettingsUserType } from "@modules/user/types.ts";
+import UserAvatar from "../components/user-avatar/script.ts";
 import Component from "../../../../utils/component.ts";
 import { PagesPath } from "../../../../pages-path.ts";
-import { Connect } from "../../../../store/connect.js";
+import { Connect } from "../../../../store/connect.ts";
 
 class ViewInformation extends Component {
   constructor(props: SettingsUserType) {
@@ -27,7 +28,7 @@ export default () => {
   const ViewInformationWithStore = Connect(ViewInformation, (state) => ({
     user: state.user,
     wrapper: SettingsWrapper({
-      user: state.user,
+      avatar: UserAvatar(state.user.avatar),
       fields: USER_SETTING_FIELDS.map((filed) =>
         SettingsField({
           leftContent: filed.label,
