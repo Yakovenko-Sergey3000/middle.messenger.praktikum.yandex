@@ -47,6 +47,23 @@ class UserApi extends BaseApi {
       }
     }
   }
+
+  async findUser(login: string, { onSuccess, onError }: ApiResponceActionType) {
+    try {
+      const res = await api.post("/search", {
+        data: {
+          login,
+        },
+      });
+      const preparedData = parseApiResponceToJson(res).response;
+
+      onSuccess(preparedData);
+    } catch (err) {
+      if (typeof err === "object" && err !== null) {
+        onError(parseErrorToJson(err as ApiResponceType));
+      }
+    }
+  }
 }
 
 export default UserApi;

@@ -17,6 +17,20 @@ class ChatsApi extends BaseApi {
     }
   }
 
+  async create(title: string, { onSuccess, onError }: ApiResponceActionType) {
+    try {
+      const res = await api.post("/", {
+        data: { title },
+      });
+
+      onSuccess(parseApiResponceToJson(res).response.id as number);
+    } catch (err) {
+      if (typeof err === "object" && err !== null) {
+        onError(parseErrorToJson(err as ApiResponceType));
+      }
+    }
+  }
+
   async getChatToken(chatId: number, { onSuccess, onError }: ApiResponceActionType) {
     try {
       const res = await api.post(`/token/${chatId}`, {});
@@ -27,6 +41,20 @@ class ChatsApi extends BaseApi {
       if (typeof err === "object" && err !== null) {
         onError(parseErrorToJson(err as ApiResponceType));
       }
+    }
+  }
+
+  async addUserToChat(chatId: number, users: number[], onSuccess: () => void) {
+    try {
+      await api.put("/users", {
+        data: {
+          chatId,
+          users,
+        },
+      });
+      onSuccess();
+    } catch (err) {
+      /* empty */
     }
   }
 }

@@ -25,6 +25,11 @@
   &__dialogs_list {
     margin-top: 14px;
   }
+
+  &__add-chat {
+    margin-top: 32px;
+    padding: 0 10px;
+  }
 }
 
 .search-input__icon {

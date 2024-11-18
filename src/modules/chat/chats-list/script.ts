@@ -10,6 +10,7 @@ import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import Router from "../../../utils/router/index.js";
 import { Connect } from "../../../store/connect.js";
+import AddChat from "./components/add-chat/script.ts";
 
 type ChatsListType = {
   chatsList: UiChatItemType[];
@@ -30,6 +31,8 @@ class ChatsList extends Component {
         new Router().go(PagesPath.USER_SETTING);
       },
     });
+
+    this.children.addChat = AddChat();
 
     this.children.searchInput = UiInput({
       attributes: { placeholder: "Поиск" },

@@ -1,0 +1,11 @@
+.add-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & > input {
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+}
