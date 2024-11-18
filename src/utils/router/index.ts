@@ -54,6 +54,10 @@ class Router {
     this.#onRoute(window.location.pathname);
   }
 
+  get atPath() {
+    return window.location.pathname;
+  }
+
   #onRoute(pathname: string) {
     let route = this.#getRoute(pathname);
 

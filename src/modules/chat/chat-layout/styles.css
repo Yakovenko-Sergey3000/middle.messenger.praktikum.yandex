@@ -10,5 +10,11 @@
   &__dialog {
     width: 100%;
     height: 100vh;
+
+    &__without-dialog {
+      margin-top: calc(100vh / 2);
+      text-align: center;
+
+    }
   }
 }

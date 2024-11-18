@@ -1,15 +1,14 @@
 import { ModuleChatList } from "@modules/chat/chats-list/index.ts";
-
 import { LayoutChat } from "./chat-layout/index.ts";
 import Component, { IComponent } from "../../utils/component.ts";
 
 class Chat extends Component {
-  constructor(Dialog?: new () => IComponent) {
+  constructor(Dialog?: IComponent) {
     super("div", {});
 
     this.children.chat = LayoutChat({
-      chatsList: new ModuleChatList(),
-      chatDialog: Dialog !== undefined ? new Dialog() : Dialog,
+      chatsList: ModuleChatList(),
+      chatDialog: Dialog && Dialog,
     });
   }
 
@@ -18,4 +17,4 @@ class Chat extends Component {
   }
 }
 
-export default () => new Chat();
+export default (props?: IComponent) => new Chat(props);

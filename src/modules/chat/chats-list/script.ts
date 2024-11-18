@@ -3,7 +3,7 @@ import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
-import ChatsListActions from "@modules/chat/chats-list/actions.js";
+import ChatsActions from "@modules/chat/actions.js";
 import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
@@ -38,7 +38,7 @@ class ChatsList extends Component {
   }
 
   componentDidMount() {
-    new ChatsListActions().getChatsList();
+    new ChatsActions().getChatsList();
   }
 
   render(): DocumentFragment {
@@ -46,19 +46,19 @@ class ChatsList extends Component {
   }
 }
 
-export default Connect(ChatsList, (state) => ({
-  chatsList: state.chatsList.map(
-    (data) =>
-      new UiChatItem({
-        ...data,
-        className: "dialogs_list__item",
-        onClick: (chatId) => {
-          const chatsListAction = new ChatsListActions();
-          chatsListAction.getChatToken(chatId, (token) => {
-            chatsListAction.setDialogId(token);
-            new Router().go(`${PagesPath.CHAT}/${chatId}`);
-          });
-        },
-      }),
-  ),
-}));
+export default () => {
+  const chatsActions = new ChatsActions();
+
+  const ChatsListWithState = Connect(ChatsList, (state) => ({
+    chatsList: state.chatsList.map(
+      (data) =>
+        new UiChatItem({
+          ...data,
+          className: "dialogs_list__item",
+          onClick: (chatId) => chatsActions.openChat(chatId),
+        }),
+    ),
+  }));
+
+  return new ChatsListWithState();
+};

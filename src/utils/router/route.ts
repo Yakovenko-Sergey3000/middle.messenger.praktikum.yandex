@@ -16,13 +16,18 @@ class Route {
   }
 
   match(pathname: string) {
-    return pathname === this.pathname;
+    const dynamicRouteRegex = new RegExp(`^${this.pathname.replace(/\/:[^\/]+/, "/[^/]+")}$`);
+    return dynamicRouteRegex.test(pathname);
   }
 
   leave() {
     if (this.component) {
       this.component.hide();
     }
+  }
+
+  getPath() {
+    return this.pathname;
   }
 
   render() {

@@ -1,9 +1,12 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
+import Router from "@utils/router/index.js";
+import ChatsListActions from "@modules/chat/actions.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import DialogFooter from "./components/dialog-footer/script.ts";
 import MessageItem from "./components/message-item/script.ts";
+import { Connect } from "../../../store/connect.js";
 
 const MOCK_TEXT = `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в 
 какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все 
@@ -17,46 +20,15 @@ class Dialog extends Component {
   constructor() {
     super("div", {
       attributes: { class: "dialog" },
-      userName: "Вадим",
-      messages: [MessageItem({ message: MOCK_TEXT })],
     });
+  }
 
-    this.children.dialogAvatar = UiAvatar({
-      width: "54px",
-      height: "54px",
-      alt: "Avatar",
-      src: "https://gp.by/upload/dcf/dcf54a64c040dae4be0f65c1b77e918a.jpg",
-      className: "dialog-avatar",
-    });
+  componentDidMount() {
+    const action = new ChatsListActions();
+    const splitPath = new Router().atPath.split("/");
+    const currentChatId = splitPath[splitPath.length - 1];
 
-    this.children.footer = DialogFooter({
-      className: "footer",
-      onSubmit: (e: Event) => {
-        e.preventDefault();
-        const target = e.target as HTMLFormElement;
-        const fd: FormData = new FormData(target);
-        const data: Record<string, FormDataEntryValue> = {};
-
-        fd.forEach((val, key) => {
-          data[key] = val;
-        });
-
-        if (!data.message) {
-          console.log("Сообщение не оправлено!");
-          return;
-        }
-        this.setProps({
-          messages: [
-            ...this.listChildren.messages,
-            MessageItem({ message: data.message as string, className: "left" }),
-          ],
-        });
-
-        console.log(data);
-
-        target.reset();
-      },
-    });
+    action.openChat(Number(currentChatId));
   }
 
   render(): DocumentFragment {
@@ -64,4 +36,43 @@ class Dialog extends Component {
   }
 }
 
-export default Dialog;
+export default () => {
+  const DialogWithState = Connect(Dialog, (state) => {
+    console.log(state);
+    return {
+      dialogAvatar: UiAvatar({
+        width: "54px",
+        height: "54px",
+        alt: "Avatar",
+        src: "",
+        className: "dialog-avatar",
+      }),
+      userName: "Вадим",
+      messages: [MessageItem({ message: MOCK_TEXT })],
+      footer: DialogFooter({
+        className: "footer",
+        onSubmit: (e: Event) => {
+          e.preventDefault();
+          const target = e.target as HTMLFormElement;
+          const fd: FormData = new FormData(target);
+          const data: Record<string, FormDataEntryValue> = {};
+
+          fd.forEach((val, key) => {
+            data[key] = val;
+          });
+
+          if (!data.message) {
+            console.log("Сообщение не оправлено!");
+            return;
+          }
+
+          console.log(data);
+
+          target.reset();
+        },
+      }),
+    };
+  });
+
+  return new DialogWithState();
+};

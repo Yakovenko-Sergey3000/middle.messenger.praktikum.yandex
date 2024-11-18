@@ -4,7 +4,7 @@ import { ApiResponceActionType } from "@utils/global-types/index.js";
 import { ApiResponceType, parseApiResponceToJson, parseErrorToJson } from "@utils/utils.js";
 
 const api = new Api("/chats");
-class ChatsListApi extends BaseApi {
+class ChatsApi extends BaseApi {
   async request({ onSuccess, onError }: ApiResponceActionType) {
     try {
       const res = await api.get("/", {});
@@ -31,4 +31,4 @@ class ChatsListApi extends BaseApi {
   }
 }
 
-export default ChatsListApi;
+export default ChatsApi;

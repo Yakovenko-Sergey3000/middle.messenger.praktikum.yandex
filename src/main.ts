@@ -8,6 +8,7 @@ import {
 } from "@modules/user/index.ts";
 import AuthActions from "@modules/auth/actions.js";
 import { NotFound } from "@utils/router/NotFound.js";
+import { ModuleDialog } from "@modules/chat/dialog/index.js";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
 import store, { StoreEvent } from "./store/store.js";
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
+        .use(`${PagesPath.CHAT}/:id`, ModuleChat(ModuleDialog()))
         .notFound(
           NotFound(() => {
             router.go(PagesPath.HOME);
