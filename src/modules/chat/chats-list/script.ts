@@ -40,19 +40,15 @@ class ChatsList extends Component {
     });
   }
 
-  componentDidMount() {
-    new ChatsActions().getChatsList();
-  }
-
   render(): DocumentFragment {
     return this.compile(template, this.props);
   }
 }
 
-export default () => {
-  const chatsActions = new ChatsActions();
+export default (chatsActions: ChatsActions) => {
+  chatsActions.getChatsList();
 
-  const ChatsListWithState = Connect(ChatsList, (state) => ({
+  return new (Connect(ChatsList, (state) => ({
     chatsList: state.chatsList.map(
       (data) =>
         new UiChatItem({
@@ -61,7 +57,5 @@ export default () => {
           onClick: (chatId) => chatsActions.openChat(chatId),
         }),
     ),
-  }));
-
-  return new ChatsListWithState();
+  })))();
 };

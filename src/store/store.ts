@@ -1,6 +1,7 @@
 import EventBus from "@utils/event-bus.js";
 import { UserType } from "@utils/global-types/index.js";
 import { UiChatItemType } from "@ui/chat-item/index.js";
+import { DialogType } from "@modules/chat/dialog/script.js";
 
 export enum StoreEvent {
   Update = "update",
@@ -9,7 +10,8 @@ export enum StoreEvent {
 export type StoreStateType = {
   user: UserType | null;
   chatsList: UiChatItemType[];
-  dialogData: { [key: string]: unknown } | null;
+  dialogData: DialogType | null;
+  messages: [];
 };
 class Store extends EventBus<StoreStateType> {
   private state: StoreStateType;
@@ -21,6 +23,7 @@ class Store extends EventBus<StoreStateType> {
       user: null,
       chatsList: [],
       dialogData: null,
+      messages: [],
     };
   }
 

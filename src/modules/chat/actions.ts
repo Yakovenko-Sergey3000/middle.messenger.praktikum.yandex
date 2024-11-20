@@ -1,9 +1,11 @@
 import ChatsApi from "@modules/chat/api.js";
 import Router from "@utils/router/index.js";
 import { UserApi } from "@modules/user/index.js";
-import { UserType } from "@utils/global-types/index.js";
+import { Any, UserType } from "@utils/global-types/index.js";
+import WS, { WSEvents } from "@utils/web-socket.js";
 import store from "../../store/store.js";
 import { PagesPath } from "../../pages-path.js";
+import { YA_ENDPOINTS } from "../../enums.js";
 
 class ChatsActions {
   api: ChatsApi;
@@ -22,6 +24,7 @@ class ChatsActions {
     this.api.request({
       onSuccess: (list) => {
         store.setState({ chatsList: list });
+        this.#scrollToBottom();
       },
       onError: () => {},
     });
@@ -54,22 +57,72 @@ class ChatsActions {
     );
   }
 
-  getChatToken(chatId: number, onSuccess: (token: string) => void) {
-    this.api.getChatToken(chatId, {
-      onSuccess: (token) => {
-        onSuccess(token as string);
-      },
-      onError: () => {
-        this.router.go(PagesPath.HOME);
-      },
-    });
+  async openChat(chatId: number) {
+    if (this.router.atPath !== `${PagesPath.CHAT}/${chatId}`) {
+      this.router.go(`${PagesPath.CHAT}/${chatId}`);
+    }
+
+    const { user, dialogData } = store.getState();
+
+    if (dialogData !== null && dialogData.ws) {
+      dialogData.ws.close();
+    }
+
+    try {
+      const commonChat = await this.api.getCommonChat(chatId);
+      store.setState({ dialogData: { ...dialogData, loading: true } });
+
+      const params = {
+        id: chatId,
+        title: commonChat[0].title,
+        avatar: commonChat[0].avatar,
+        loading: true,
+        ws: null,
+      };
+
+      store.setState({
+        dialogData: params,
+      });
+
+      const chatToken = await this.api.getChatToken(chatId);
+
+      if (chatToken.token) {
+        const ws = new WS(`${YA_ENDPOINTS.ws}${user?.id}/${chatId}/${chatToken.token}`);
+        ws.on(WSEvents.MESSAGE, this.#setMessages.bind(this));
+        ws.connect().then(() => {
+          ws.send({ content: "0", type: "get old" });
+          store.setState({ dialogData: { ...params, ws } });
+        });
+      }
+    } catch (e) {
+      /* empty */
+    }
   }
 
-  openChat(chatId: number) {
-    this.router.go(`${PagesPath.CHAT}/${chatId}`);
-    this.getChatToken(chatId, (chatToken) => {
-      store.setState({ dialogData: { chatToken, chatId } });
-    });
+  #scrollToBottom() {
+    const divMessage = document.querySelector(".dialog__messages");
+    if (divMessage !== null) {
+      divMessage.scrollTop = divMessage.scrollHeight;
+    }
+  }
+
+  #setMessages(data: Any) {
+    const { messages, dialogData } = store.getState();
+    if (Array.isArray(data)) {
+      store.setState({
+        messages: [...data.reverse()],
+        dialogData: { ...dialogData, loading: false },
+      });
+      this.#scrollToBottom();
+    }
+
+    if (data.type === WSEvents.MESSAGE) {
+      const copyMessages: object[] = [...messages];
+      copyMessages.push(data);
+      store.setState({ messages: copyMessages });
+      this.#scrollToBottom();
+      setTimeout(() => this.getChatsList(), 1000);
+    }
   }
 }
 

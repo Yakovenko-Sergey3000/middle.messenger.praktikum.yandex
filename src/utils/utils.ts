@@ -47,9 +47,9 @@ export type ApiResponceType = {
   response: string;
 };
 
-type ApiResponseAfterParse = {
+export type ApiResponseAfterParse = {
   status: number;
-  response: Record<string, unknown>;
+  response: Record<string, unknown> | unknown[];
 };
 export const parseErrorToJson = (error: ApiResponceType): string => {
   if (error.response) {
@@ -59,7 +59,8 @@ export const parseErrorToJson = (error: ApiResponceType): string => {
   return "Что то пошло не так!";
 };
 
-export const parseApiResponceToJson = (response: ApiResponceType): ApiResponseAfterParse => ({
-  ...response,
-  response: JSON.parse(response.response),
-});
+export const parseApiResponceToJson = <T>(props: ApiResponceType): T =>
+  ({
+    ...props,
+    response: JSON.parse(props.response),
+  }) as T;

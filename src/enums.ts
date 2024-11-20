@@ -33,4 +33,5 @@ export const HTTPS_STATUS = {
 export const YA_ENDPOINTS = {
   api: "https://ya-praktikum.tech/api/v2",
   resources: "https://ya-praktikum.tech/api/v2/resources",
+  ws: "wss://ya-praktikum.tech/ws/chats/",
 };

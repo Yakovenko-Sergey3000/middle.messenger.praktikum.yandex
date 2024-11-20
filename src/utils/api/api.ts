@@ -4,10 +4,11 @@ import { YA_ENDPOINTS } from "../../enums.js";
 type ApiPropsType = {
   headers?: Record<string, string>;
   data?: Record<string, Any>;
+  method: string;
   timeout?: number;
 };
 
-type HTTPMethod = (url: string, options: ApiPropsType) => Promise<XMLHttpRequest>;
+type HTTPMethod = <T>(url: string, options?: ApiPropsType, timeout?: number) => Promise<T>;
 
 interface IApi {
   get: HTTPMethod;
@@ -37,11 +38,7 @@ class Api implements IApi {
     return newUrl.toString();
   }
 
-  #request = (
-    url: string,
-    options: { headers?: Record<string, string>; method: string; data?: Record<string, Any> },
-    timeout: number = 15000,
-  ): Promise<XMLHttpRequest> => {
+  #request: HTTPMethod = (url, options = { method: Api.METHODS.GET }, timeout = 15000) => {
     const { headers = {}, method, data } = options;
 
     return new Promise((resolve, reject) => {
@@ -71,7 +68,7 @@ class Api implements IApi {
           reject(responce);
         }
 
-        resolve(responce as XMLHttpRequest);
+        resolve(responce as Any);
       };
       xhr.onabort = reject;
       xhr.onerror = reject;

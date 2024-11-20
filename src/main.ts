@@ -38,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
-        .use(`${PagesPath.CHAT}/:id`, ModuleChat(ModuleDialog()))
+        .use(
+          `${PagesPath.CHAT}/:id`,
+          ModuleChat((props) => ModuleDialog(props)),
+        )
         .notFound(
           NotFound(() => {
             router.go(PagesPath.HOME);

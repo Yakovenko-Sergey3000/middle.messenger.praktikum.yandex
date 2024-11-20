@@ -1,7 +1,13 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
 import { ApiResponceActionType } from "@utils/global-types/index.js";
-import { ApiResponceType, parseApiResponceToJson, parseErrorToJson } from "@utils/utils.js";
+import {
+  ApiResponceType,
+  ApiResponseAfterParse,
+  parseApiResponceToJson,
+  parseErrorToJson,
+} from "@utils/utils.js";
+import { ChatTokenType, CommonChatType } from "@modules/chat/types.js";
 
 const api = new Api("/chats");
 class ChatsApi extends BaseApi {
@@ -31,17 +37,12 @@ class ChatsApi extends BaseApi {
     }
   }
 
-  async getChatToken(chatId: number, { onSuccess, onError }: ApiResponceActionType) {
-    try {
-      const res = await api.post(`/token/${chatId}`, {});
-      const preparedData = parseApiResponceToJson(res).response;
-
-      onSuccess(preparedData.token);
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+  async getChatToken(chatId: number): Promise<ChatTokenType> {
+    return api
+      .post<ApiResponceType>(`/token/${chatId}`)
+      .then(
+        (res) => parseApiResponceToJson<{ status: number; response: ChatTokenType }>(res).response,
+      );
   }
 
   async addUserToChat(chatId: number, users: number[], onSuccess: () => void) {
@@ -56,6 +57,15 @@ class ChatsApi extends BaseApi {
     } catch (err) {
       /* empty */
     }
+  }
+
+  async getCommonChat(chatId: number): Promise<CommonChatType[]> {
+    return api
+      .get<ApiResponceType>(`/${chatId}/common`)
+      .then(
+        (res) =>
+          parseApiResponceToJson<{ status: number; response: CommonChatType[] }>(res).response,
+      );
   }
 }
 

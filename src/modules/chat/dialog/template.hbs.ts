@@ -11,12 +11,17 @@ export default `
       </button>
     </div>
     <div class="dialog__messages">
-    {{#unless messages.length}}
+    {{#if isLoading}}
+      <div class="dialog__loading">Загрузка...</div>
+    {{else}}
+      {{#unless messages.length}}
       <div class="dialog__ribbon">
         <p>У вас пока что нет сообщений</p>
       </div>
-    {{/unless }}
-    {{{ messages }}}
+      {{ else }}
+         {{{ messages }}}
+      {{/unless }}
+    {{/if}}
     </div>
     {{{ footer }}}
 `;

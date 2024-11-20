@@ -1,7 +1,7 @@
 import "./style.css";
-import Component from "../../../../../utils/component.ts";
-import { ComponentType } from "../../../../../utils/global-types/index.ts";
-import ConcatClasses from "../../../../../utils/concat-classes.ts";
+import Component from "@utils/component.ts";
+import { ComponentType } from "@utils/global-types/index.js";
+import ConcatClasses from "@utils/concat-classes.ts";
 
 type MessageItemType = ComponentType & {
   message: string;
