@@ -1,11 +1,13 @@
 import { Any } from "./utils/global-types/index.ts";
 
 export const ERROR_STATUSES: Any = {
-  SING_IN: {
-    "Login or password is incorrect": "Неверный логин или пароль",
-  },
-  SING_UP: {
-    "Login already exists": "Пользователь с таким логином уже существует",
+  AUTH: {
+    SING_IN: {
+      "Login or password is incorrect": "Неверный логин или пароль",
+    },
+    SING_UP: {
+      "Login already exists": "Пользователь с таким логином уже существует",
+    },
   },
   CHANGE_USER: {
     "Password is incorrect": {

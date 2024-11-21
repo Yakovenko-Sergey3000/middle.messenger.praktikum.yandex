@@ -16,25 +16,26 @@ class AuthActions {
     return this.api.getUser();
   }
 
-  signUp(params: SignUpType, { onSuccess, onError }: ActionForComponent) {
+  signUp(
+    params: SignUpType,
+    { onSuccess = () => {}, onError = () => {} }: ActionForComponent<string>,
+  ) {
     this.api
       .signUp(params)
       .then(() => {
-        if (onSuccess) {
-          onSuccess();
-        }
+        onSuccess();
         window.location.replace(PagesPath.HOME);
       })
       .catch((err) => {
-        const msg: string | undefined = ERROR_STATUSES.SING_UP[parseErrorToJson(err)];
+        const msg: string | undefined = ERROR_STATUSES.AUTH.SING_UP[parseErrorToJson(err)];
 
-        if (msg !== undefined && onError) {
+        if (msg !== undefined) {
           onError(msg);
         }
       });
   }
 
-  signIn(params: SignInType, { onSuccess, onError }: ActionForComponent) {
+  signIn(params: SignInType, { onSuccess, onError }: ActionForComponent<string>) {
     this.api
       .signIn(params)
       .then(() => {
@@ -44,7 +45,7 @@ class AuthActions {
         window.location.replace(PagesPath.HOME);
       })
       .catch((err) => {
-        const msg: string | undefined = ERROR_STATUSES.SING_IN[parseErrorToJson(err)];
+        const msg: string | undefined = ERROR_STATUSES.AUTH.SING_IN[parseErrorToJson(err)];
 
         if (msg !== undefined && onError) {
           onError(msg);

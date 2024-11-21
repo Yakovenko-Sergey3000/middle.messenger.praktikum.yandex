@@ -7,7 +7,7 @@ import { AuthFieldType, SignInType } from "@modules/auth/types.ts";
 import AuthActions from "@modules/auth/actions.js";
 import template from "./template.hbs.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
-import Component from "../../../utils/component.ts";
+import Component, { IComponent } from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.ts";
 import Router from "../../../utils/router/index.js";
@@ -15,15 +15,10 @@ import Router from "../../../utils/router/index.js";
 class SignIn extends Component {
   validator: IChatValidator;
 
-  constructor() {
-    super("div", { attributes: { class: "sign-in-form" } });
+  constructor(props: { submitButton: IComponent }) {
+    super("div", { ...props, attributes: { class: "sign-in-form" } });
     this.validator = new ChatValidator();
     this.#registrationFields(FIELDS);
-
-    this.children.submitButton = UiButton({
-      label: "Авторизоваться",
-      attributes: { type: "submit" },
-    });
 
     this.children.linkButton = UiButton({
       label: "Нет аккаунта",
@@ -74,7 +69,12 @@ class SignIn extends Component {
 }
 
 export default () => {
-  const signInForm = new SignIn();
+  const button = UiButton({
+    label: "Авторизоваться",
+    attributes: { type: "submit" },
+  });
+
+  const signInForm = new SignIn({ submitButton: button });
   const authAction = new AuthActions();
 
   return AuthFormLayout({
@@ -103,11 +103,16 @@ export default () => {
         return;
       }
 
+      button.setProps({ isLoading: true });
+
       authAction.signIn(data as SignInType, {
         onSuccess: () => {
           target.reset();
         },
-        onError: (msg) => signInForm.setProps({ error: msg }),
+        onError: (msg) => {
+          button.setProps({ isLoading: false });
+          signInForm.setProps({ error: msg });
+        },
       });
     },
   });
