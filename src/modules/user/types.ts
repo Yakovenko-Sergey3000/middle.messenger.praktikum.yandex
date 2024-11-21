@@ -12,8 +12,3 @@ export type ChangeUserProfileType = {
   email: string;
   phone: string;
 };
-
-export type ChangePasswordType = {
-  oldPassword: string;
-  newPassword: string;
-};

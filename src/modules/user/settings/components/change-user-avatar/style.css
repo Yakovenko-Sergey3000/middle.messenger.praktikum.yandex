@@ -33,6 +33,11 @@
   }
 }
 
+.change-avatar-loading {
+  margin-top: 10px;
+  text-align: center;
+}
+
 .change-wrapper-overlay {
   width: inherit;
   height: inherit;

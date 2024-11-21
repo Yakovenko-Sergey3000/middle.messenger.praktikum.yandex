@@ -7,6 +7,20 @@ export const ERROR_STATUSES: Any = {
   SING_UP: {
     "Login already exists": "Пользователь с таким логином уже существует",
   },
+  CHANGE_USER: {
+    "Password is incorrect": {
+      key: "oldPassword",
+      msg: "Неверный пароль",
+    },
+    "Login already exists": {
+      key: "login",
+      msg: "Пользователь с таким логином уже существует",
+    },
+    "Email already exists": {
+      key: "email",
+      msg: "Пользователь с таким email уже существует",
+    },
+  },
 };
 
 export const YA_ENDPOINTS = {

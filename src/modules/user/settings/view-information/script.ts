@@ -24,42 +24,39 @@ class ViewInformation extends Component {
   }
 }
 
-export default () => {
-  const ViewInformationWithStore = Connect(ViewInformation, (state) => ({
-    user: state.user,
-    wrapper: SettingsWrapper({
-      avatar: UserAvatar(state.user.avatar),
-      fields: USER_SETTING_FIELDS.map((filed) =>
-        SettingsField({
-          leftContent: filed.label,
-          rightContent: state.user[filed.name] || "",
-        }),
-      ),
-      actions: [
-        SettingsField({
-          leftContent: UiButton({
-            label: "Изменить данные",
-            variant: "link",
-            onClick: () => new Router().go(PagesPath.CHANGE_USER_SETTING),
+export default () =>
+  SettingLayout({
+    content: new (Connect(ViewInformation, (state) => ({
+      user: state.user,
+      wrapper: SettingsWrapper({
+        avatar: UserAvatar(state.user && state.user.avatar),
+        fields: USER_SETTING_FIELDS.map((filed) =>
+          SettingsField({
+            leftContent: filed.label,
+            rightContent: (state.user && state.user[filed.name]) || "",
           }),
-        }),
-
-        SettingsField({
-          leftContent: UiButton({
-            label: "Изменить пароль",
-            variant: "link",
-            onClick: () => new Router().go(PagesPath.CHANGE_USER_PASSWORD),
+        ),
+        actions: [
+          SettingsField({
+            leftContent: UiButton({
+              label: "Изменить данные",
+              variant: "link",
+              onClick: () => new Router().go(PagesPath.CHANGE_USER_SETTING),
+            }),
           }),
-        }),
 
-        SettingsField({
-          leftContent: LogOutBtn(),
-        }),
-      ],
-    }),
-  }));
+          SettingsField({
+            leftContent: UiButton({
+              label: "Изменить пароль",
+              variant: "link",
+              onClick: () => new Router().go(PagesPath.CHANGE_USER_PASSWORD),
+            }),
+          }),
 
-  return SettingLayout({
-    content: new ViewInformationWithStore(),
+          SettingsField({
+            leftContent: LogOutBtn(),
+          }),
+        ],
+      }),
+    })))(),
   });
-};

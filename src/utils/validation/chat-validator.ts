@@ -1,4 +1,4 @@
-import { SignInType } from "@modules/auth/types.js";
+import { ChangePasswordType, SignInType } from "@modules/auth/types.js";
 import Validator from "./validator.ts";
 
 export type SignOutValidationType = {
@@ -55,6 +55,51 @@ class ChatValidator extends Validator implements IChatValidator {
             result.errors.push({
               key,
               message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        default:
+      }
+    });
+
+    if (result.errors.length) {
+      result.isValid = false;
+    }
+
+    return result;
+  }
+
+  changePassword(obj: ChangePasswordType): ValidationResponceType {
+    const result: ValidationResponceType = {
+      isValid: true,
+      errors: [],
+    };
+
+    Object.entries(obj).forEach(([key, value]) => {
+      switch (key) {
+        case "oldPassword":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        case "newPassword":
+          if (!this.isCorrectPassword(value)) {
+            result.errors.push({
+              key,
+              message: "Пароль должен быть от 8 до 40 символов и хотя бы одной заглавной буквы",
+            });
+          } else {
+            this.savedPassword = value;
+          }
+          break;
+        case "confirmPassword":
+          if (this.savedPassword !== value) {
+            result.errors.push({
+              key,
+              message: "Пароли не совпадают",
             });
           }
           break;

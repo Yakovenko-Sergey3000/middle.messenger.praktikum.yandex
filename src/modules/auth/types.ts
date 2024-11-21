@@ -20,6 +20,12 @@ export type SignInType = {
   password: string;
 };
 
+export type ChangePasswordType = {
+  newPassword: string;
+  oldPassword: string;
+  confirmPassword: string;
+};
+
 export type ApiAuthResponce = {
   status: number;
   response: string;

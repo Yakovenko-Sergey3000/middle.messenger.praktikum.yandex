@@ -30,8 +30,12 @@ class ChangeUserAvatar extends Component {
       onInput: (e) => {
         const target = e.target as HTMLInputElement;
 
+        this.setProps({ isLoading: true });
+
         if (target.files && target.files.length) {
-          userActions.changeAvatar(target.files[0]);
+          userActions.changeAvatar(target.files[0], {
+            onSuccess: () => this.setProps({ isLoading: false }),
+          });
         }
       },
     });

@@ -24,13 +24,18 @@ class ChangeInformation extends Component {
   }
 }
 
-export default () => {
-  const ChangeInformationWithStore = Connect(ChangeInformation, (state) => {
+export default () =>
+  new (Connect(ChangeInformation, (state) => {
     const userActions = new UserActions();
     const validator = new ChatValidator();
     const fields: Record<string, IComponent> = {};
 
-    function onBlue(e: Event) {
+    const savaBtn = UiButton({
+      label: "Сохранить",
+      attributes: { type: "submit" },
+    });
+
+    const onBlue = (e: Event) => {
       const target = e.target as HTMLInputElement;
       const { isValid, errors } = validator.userInformation({ [target.name]: target.value });
 
@@ -44,9 +49,9 @@ export default () => {
           error: "",
         });
       }
-    }
+    };
 
-    function onSubmit(e: Event) {
+    const onSubmit = (e: Event) => {
       e.preventDefault();
       const target = e.target as HTMLFormElement;
       const fd: FormData = new FormData(target);
@@ -67,21 +72,34 @@ export default () => {
         return;
       }
 
-      userActions.updateUser(data as ChangeUserProfileType);
-    }
+      savaBtn.setProps({ isLoading: true });
+
+      userActions.updateUser(data as ChangeUserProfileType, {
+        onError: (err) => {
+          savaBtn.setProps({ isLoading: false });
+
+          if (err) {
+            fields[err.key].setProps({ error: err.msg });
+          }
+        },
+      });
+    };
 
     return {
       user: state.user,
       form: UiForm({
         content: SettingLayout({
           content: SettingsWrapper({
-            avatar: ChangeUserAvatar({ src: state.user.avatar }),
+            avatar: ChangeUserAvatar({ src: state.user?.avatar || "" }),
             fields: USER_SETTING_FIELDS.map((filed) => {
               const settingField = SettingsField({
                 leftContent: filed.label,
                 rightContent: UiInput({
                   className: "input-begin-right",
-                  attributes: { name: [filed.name], value: state.user[filed.name] || "" },
+                  attributes: {
+                    name: [filed.name],
+                    value: state.user ? state.user[filed.name] : "",
+                  },
                   variant: "un-styled",
                   onBlur: onBlue.bind(this),
                 }),
@@ -90,16 +108,10 @@ export default () => {
               fields[filed.name] = settingField;
               return settingField;
             }),
-            saveButton: UiButton({
-              label: "Сохранить",
-              attributes: { type: "submit" },
-            }),
+            saveButton: savaBtn,
           }),
         }),
         onSubmit: onSubmit.bind(this),
       }),
     };
-  });
-
-  return new ChangeInformationWithStore();
-};
+  }))();

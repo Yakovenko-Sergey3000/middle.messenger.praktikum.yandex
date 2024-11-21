@@ -1,51 +1,31 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
-import { ApiResponceActionType } from "@utils/global-types/index.js";
+import { ApiResponceActionType, UserType } from "@utils/global-types/index.js";
 import { ChangePasswordType, ChangeUserProfileType } from "@modules/user/types.js";
 import { ApiResponceType, parseApiResponceToJson, parseErrorToJson } from "@utils/utils.js";
 
 const api = new Api("/user");
 class UserApi extends BaseApi {
-  async update(params: ChangeUserProfileType, { onSuccess, onError }: ApiResponceActionType) {
-    try {
-      const res = await api.put("/profile", {
+  async update(params: ChangeUserProfileType) {
+    return api
+      .put<ApiResponceType>("/profile", {
         data: params,
-      });
-
-      onSuccess(parseApiResponceToJson(res).response);
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+      })
+      .then((res) => parseApiResponceToJson<{ status: number; response: UserType }>(res).response);
   }
 
-  async changePassword(params: ChangePasswordType, { onSuccess, onError }: ApiResponceActionType) {
-    try {
-      await api.put("/password", {
-        data: params,
-      });
-
-      onSuccess();
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+  async changePassword(params: ChangePasswordType) {
+    return api.put("/password", {
+      data: params,
+    });
   }
 
-  async changeAvatar(formData: FormData, { onSuccess, onError }: ApiResponceActionType) {
-    try {
-      const res = await api.put("/profile/avatar", {
+  async changeAvatar(formData: FormData) {
+    return api
+      .put<ApiResponceType>("/profile/avatar", {
         data: formData,
-      });
-
-      onSuccess(parseApiResponceToJson(res).response);
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+      })
+      .then((res) => parseApiResponceToJson<{ status: number; response: UserType }>(res).response);
   }
 
   async findUser(login: string, { onSuccess, onError }: ApiResponceActionType) {

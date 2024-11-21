@@ -4,6 +4,9 @@ export default `
     <div class="change-wrapper-overlay"></div>
     <p>{{{ wrapperText }}}</p>
   </label>
+  {{#if isLoading}}
+    <p class="change-avatar-loading">Загрузка картинки...</p>
+  {{/if}}
   <div class="change-avatar-input-file">
     {{{ input }}}
   </div>

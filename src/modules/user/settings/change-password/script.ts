@@ -8,8 +8,8 @@ import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-password-fields.ts";
 import UserActions from "@modules/user/actions.js";
-import { ChangePasswordType } from "@modules/user/types.js";
 import { UserType } from "@utils/global-types/index.js";
+import { ChangePasswordType } from "@modules/auth/types.js";
 import UserAvatar from "../components/user-avatar/script.ts";
 import Component, { IComponent } from "../../../../utils/component.ts";
 import ChatValidator from "../../../../utils/validation/chat-validator.ts";
@@ -25,11 +25,16 @@ class ChangePassword extends Component {
   }
 }
 
-export default () => {
-  const ChangePasswordWithState = Connect(ChangePassword, (state) => {
+export default () =>
+  new (Connect(ChangePassword, (state) => {
     const formFields: Record<string, IComponent> = {};
     const validator = new ChatValidator();
-    const setPasswordsFromFields = () =>
+
+    const saveBtn = UiButton({
+      label: "Сохранить",
+      attributes: { type: "submit" },
+    });
+    const fields = () =>
       USER_PASSWORD_FIELDS.map((data) => {
         const field = SettingsField({
           leftContent: data.label,
@@ -42,6 +47,23 @@ export default () => {
               placeholder: "Введите пароль",
             },
             variant: "un-styled",
+            onBlur: (e) => {
+              const target = e.target as HTMLInputElement;
+              const { isValid, errors } = validator.changePassword({
+                [target.name]: target.value,
+              } as ChangePasswordType);
+
+              if (!isValid) {
+                const error = errors[0];
+                formFields[error.key].setProps({
+                  error: error.message,
+                });
+              } else {
+                formFields[target.name].setProps({
+                  error: "",
+                });
+              }
+            },
           }),
         });
 
@@ -60,7 +82,7 @@ export default () => {
         data[key] = val;
       });
 
-      const { isValid, errors } = validator.userInformation(data);
+      const { isValid, errors } = validator.changePassword(data as ChangePasswordType);
 
       errors.forEach((error) => {
         formFields[error.key].setProps({
@@ -71,25 +93,31 @@ export default () => {
       if (!isValid) {
         return;
       }
-      userActions.changePassword(data as ChangePasswordType, () => target.reset());
+
+      saveBtn.setProps({ isLoading: true });
+
+      userActions.changePassword(data as ChangePasswordType, {
+        onSuccess: () => {
+          target.reset();
+          saveBtn.setProps({ isLoading: false });
+        },
+        onError: (msg = "") => {
+          formFields.oldPassword.setProps({ error: msg });
+          saveBtn.setProps({ isLoading: false });
+        },
+      });
     };
 
     return {
       wrapper: SettingLayout({
         content: UiForm({
           content: SettingsWrapper({
-            avatar: UserAvatar(state.user.avatar),
-            fields: setPasswordsFromFields(),
-            saveButton: UiButton({
-              label: "Сохранить",
-              attributes: { type: "submit" },
-            }),
+            avatar: UserAvatar(state.user?.avatar),
+            fields: fields(),
+            saveButton: saveBtn,
           }),
           onSubmit: onSubmit.bind(this),
         }),
       }),
     };
-  });
-
-  return new ChangePasswordWithState();
-};
+  }))();
