@@ -1,3 +1,4 @@
+import { SignInType } from "@modules/auth/types.js";
 import Validator from "./validator.ts";
 
 export type SignOutValidationType = {
@@ -9,13 +10,19 @@ export type SignOutValidationType = {
   phone?: string;
 };
 
-export type SignOutValidationResponceType = {
+export type SignInValidationType = {
+  login?: string;
+  password?: string;
+};
+
+export type ValidationResponceType = {
   isValid: boolean;
   errors: { key: string; message: string }[];
 };
 
 export interface IChatValidator {
-  userInformation(obj: SignOutValidationType): SignOutValidationResponceType;
+  userInformation(obj: SignOutValidationType): ValidationResponceType;
+  signIn(obj: SignInValidationType): ValidationResponceType;
 }
 
 class ChatValidator extends Validator implements IChatValidator {
@@ -27,12 +34,46 @@ class ChatValidator extends Validator implements IChatValidator {
     this.savedPassword = "";
   }
 
-  userInformation(obj: SignOutValidationType): SignOutValidationResponceType {
-    const result: SignOutValidationResponceType = {
+  signIn(obj: SignInType): ValidationResponceType {
+    const result: ValidationResponceType = {
       isValid: true,
       errors: [],
     };
 
+    Object.entries(obj).forEach(([key, value]) => {
+      switch (key) {
+        case "login":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        case "password":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        default:
+      }
+    });
+
+    if (result.errors.length) {
+      result.isValid = false;
+    }
+
+    return result;
+  }
+
+  userInformation(obj: SignOutValidationType): ValidationResponceType {
+    const result: ValidationResponceType = {
+      isValid: true,
+      errors: [],
+    };
     Object.entries(obj).forEach(([key, value]) => {
       switch (key) {
         case "first_name":

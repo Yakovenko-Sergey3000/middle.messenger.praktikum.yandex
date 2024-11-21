@@ -18,4 +18,8 @@
         gap: 14px;
         align-items: center;
     }
+
+    &__error {
+      color: var(--ya-error);
+    }
 }

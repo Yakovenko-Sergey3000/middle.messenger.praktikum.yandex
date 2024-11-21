@@ -1,8 +1,9 @@
 import ApiAuth from "@modules/auth/api.js";
 import { SignInType, SignUpType } from "@modules/auth/types.js";
-import { ApiResponceActionType } from "@utils/global-types/index.js";
-import store from "../../store/store.js";
+import { ActionForComponent } from "@utils/global-types/index.js";
+import { parseErrorToJson } from "@utils/utils.js";
 import { PagesPath } from "../../pages-path.js";
+import { ERROR_STATUSES } from "../../enums.js";
 
 class AuthActions {
   api: ApiAuth;
@@ -11,50 +12,48 @@ class AuthActions {
     this.api = new ApiAuth();
   }
 
-  getUser() {
-    this.api.request({
-      onSuccess: (res) => {
-        store.setState({ user: res });
-      },
-      onError: () => {
-        store.setState({ user: null });
-      },
-    });
+  async getUser() {
+    return this.api.getUser();
   }
 
-  isAuth() {
-    const { user } = store.getState();
-
-    return !!user;
-  }
-
-  signUp(params: SignUpType, { onSuccess, onError }: ApiResponceActionType) {
-    this.api.signUp(params, {
-      onSuccess: () => {
-        onSuccess();
+  signUp(params: SignUpType, { onSuccess, onError }: ActionForComponent) {
+    this.api
+      .signUp(params)
+      .then(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
         window.location.replace(PagesPath.HOME);
-      },
-      onError: (errorMessage) => onError(errorMessage),
-    });
+      })
+      .catch((err) => {
+        const msg: string | undefined = ERROR_STATUSES.SING_UP[parseErrorToJson(err)];
+
+        if (msg !== undefined && onError) {
+          onError(msg);
+        }
+      });
   }
 
-  signIn(params: SignInType, { onSuccess, onError }: ApiResponceActionType) {
-    this.api.signIn(params, {
-      onSuccess: () => {
-        onSuccess();
+  signIn(params: SignInType, { onSuccess, onError }: ActionForComponent) {
+    this.api
+      .signIn(params)
+      .then(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
         window.location.replace(PagesPath.HOME);
-      },
-      onError: (errorMessage) => onError(errorMessage),
-    });
+      })
+      .catch((err) => {
+        const msg: string | undefined = ERROR_STATUSES.SING_IN[parseErrorToJson(err)];
+
+        if (msg !== undefined && onError) {
+          onError(msg);
+        }
+      });
   }
 
   logOut() {
-    this.api.delete({
-      onSuccess: () => {
-        window.location.reload();
-      },
-      onError: () => {},
-    });
+    this.api.logOut().then(() => window.location.reload());
   }
 }
 export default AuthActions;

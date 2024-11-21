@@ -11,7 +11,7 @@ import { NotFound } from "@utils/router/NotFound.js";
 import { ModuleDialog } from "@modules/chat/dialog/index.js";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
-import store, { StoreEvent } from "./store/store.js";
+import store from "./store/store.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // if (path.includes("500")) {
@@ -28,11 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //     }),
   //   );
   // }
-
+  const router = new Router();
   const authAction = new AuthActions();
-  const init = () => {
-    const router = new Router();
-    if (authAction.isAuth()) {
+
+  authAction
+    .getUser()
+    .then((user) => {
       router
         .use(PagesPath.HOME, ModuleChat())
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
@@ -47,17 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
             router.go(PagesPath.HOME);
           }),
         );
-    } else {
+      store.setState({ user });
+    })
+    .catch(() => {
       router
         .use(PagesPath.SIGN_IN, ModuleSignIn())
         .use(PagesPath.SING_OUT, ModuleSignOut())
         .notFound(() => router.go(PagesPath.SIGN_IN));
-    }
-
-    router.start();
-    store.off(StoreEvent.Update, init);
-  };
-
-  authAction.getUser();
-  store.on(StoreEvent.Update, init);
+    })
+    .finally(() => router.start());
 });

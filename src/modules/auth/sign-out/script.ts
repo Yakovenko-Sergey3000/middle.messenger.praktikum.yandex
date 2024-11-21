@@ -102,7 +102,10 @@ export default () => {
         return;
       }
 
-      action.signUp(data as SignUpType, { onSuccess: () => target.reset(), onError: () => {} });
+      action.signUp(data as SignUpType, {
+        onSuccess: () => target.reset(),
+        onError: (msg) => signOutForm.setProps({ error: msg }),
+      });
     },
   });
 };

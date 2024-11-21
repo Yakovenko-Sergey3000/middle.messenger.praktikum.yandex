@@ -27,3 +27,8 @@ export type ApiResponceActionType = {
   onSuccess: (params?: unknown) => void;
   onError: (params?: unknown) => void;
 };
+
+export type ActionForComponent = {
+  onSuccess?: (params?: unknown) => void;
+  onError?: (params?: unknown) => void;
+};

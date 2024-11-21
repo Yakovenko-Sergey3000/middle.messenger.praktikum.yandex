@@ -4,7 +4,7 @@ import { YA_ENDPOINTS } from "../../enums.js";
 type ApiPropsType = {
   headers?: Record<string, string>;
   data?: Record<string, Any>;
-  method: string;
+  method?: string;
   timeout?: number;
 };
 

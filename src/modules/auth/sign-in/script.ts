@@ -35,7 +35,7 @@ class SignIn extends Component {
 
   onBlur(e: Event) {
     const target = e.target as HTMLInputElement;
-    const { isValid, errors } = this.validator.userInformation({ [target.name]: target.value });
+    const { isValid, errors } = this.validator.signIn({ [target.name]: target.value });
 
     if (!isValid) {
       const field = errors[0];
@@ -91,7 +91,7 @@ export default () => {
         data[key] = val;
       });
 
-      const { isValid, errors } = validator.userInformation(data);
+      const { isValid, errors } = validator.signIn(data);
 
       errors.forEach((error) =>
         signInForm.children[error.key].setProps({
@@ -104,8 +104,10 @@ export default () => {
       }
 
       authAction.signIn(data as SignInType, {
-        onSuccess: () => target.reset(),
-        onError: () => {},
+        onSuccess: () => {
+          target.reset();
+        },
+        onError: (msg) => signInForm.setProps({ error: msg }),
       });
     },
   });

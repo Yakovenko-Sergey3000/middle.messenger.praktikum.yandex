@@ -18,6 +18,10 @@
     gap: 14px;
     align-items: center;
   }
+
+  &__error {
+    color: var(--ya-error);
+  }
 }
 
 .sign-in-wrapper {

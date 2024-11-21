@@ -9,6 +9,7 @@ export default `
       {{{ confirm_password }}}
     </div>
     <div class="sign-out-form__btns">
+      <p class="sign-out-form__error">{{{error}}}</p>
       {{{ submitButton }}}
       {{{ linkButton }}}
     </div>
