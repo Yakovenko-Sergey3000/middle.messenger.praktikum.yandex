@@ -13,9 +13,9 @@ import { PagesPath } from "../../../pages-path.js";
 export type DialogType = {
   id: number;
   title: string;
-  messages: [];
   ws: WS<number | string | object> | null;
   loading: boolean;
+  avatar: string | null;
 };
 class Dialog extends Component {
   constructor() {
@@ -39,17 +39,18 @@ export default (chatActions: ChatsActions) => {
 
   return new (Connect(Dialog, (state) => {
     console.log(state);
+
     if (state.dialogData) {
       return {
         dialogAvatar: UiAvatar({
           width: "54px",
           height: "54px",
           alt: "Avatar",
-          src: "",
+          src: state.dialogData.avatar,
           className: "dialog-avatar",
         }),
         isLoading: state.dialogData.loading,
-        userName: state.dialogData.id,
+        userName: state.dialogData.title,
         messages: state.messages.map(({ content, user_id }) => {
           const isOwner = state.user && state.user.id === user_id;
 

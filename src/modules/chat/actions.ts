@@ -5,7 +5,6 @@ import { Any, UserType } from "@utils/global-types/index.js";
 import WS, { WSEvents } from "@utils/web-socket.js";
 import store from "../../store/store.js";
 import { PagesPath } from "../../pages-path.js";
-import { YA_ENDPOINTS } from "../../enums.js";
 
 class ChatsActions {
   api: ChatsApi;
@@ -21,12 +20,9 @@ class ChatsActions {
   }
 
   getChatsList() {
-    this.api.request({
-      onSuccess: (list) => {
-        store.setState({ chatsList: list });
-        this.#scrollToBottom();
-      },
-      onError: () => {},
+    this.api.request().then((list) => {
+      store.setState({ chatsList: list });
+      this.#scrollToBottom();
     });
   }
 
@@ -69,13 +65,12 @@ class ChatsActions {
     }
 
     try {
-      const commonChat = await this.api.getCommonChat(chatId);
-      store.setState({ dialogData: { ...dialogData, loading: true } });
+      const usersInChat = await this.api.getCommonChat(chatId);
 
       const params = {
         id: chatId,
-        title: commonChat[0].title,
-        avatar: commonChat[0].avatar,
+        title: usersInChat[0].id,
+        avatar: usersInChat[0].avatar,
         loading: true,
         ws: null,
       };
@@ -87,7 +82,7 @@ class ChatsActions {
       const chatToken = await this.api.getChatToken(chatId);
 
       if (chatToken.token) {
-        const ws = new WS(`${YA_ENDPOINTS.ws}${user?.id}/${chatId}/${chatToken.token}`);
+        const ws = new WS(`/${user?.id}/${chatId}/${chatToken.token}`);
         ws.on(WSEvents.MESSAGE, this.#setMessages.bind(this));
         ws.connect().then(() => {
           ws.send({ content: "0", type: "get old" });

@@ -1,4 +1,5 @@
 import EventBus from "@utils/event-bus.js";
+import { YA_ENDPOINTS } from "../enums.js";
 
 export const WSEvents = {
   CONNECTED: "connected",
@@ -17,7 +18,7 @@ class WS<Message> extends EventBus<Message> {
 
   constructor(url: string) {
     super();
-    this.#url = url;
+    this.#url = YA_ENDPOINTS.ws + url;
   }
 
   connect(): Promise<void> {

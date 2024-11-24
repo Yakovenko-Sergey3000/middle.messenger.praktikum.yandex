@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             router.go(PagesPath.HOME);
           }),
         );
+
       store.setState({ user });
     })
     .catch(() => {

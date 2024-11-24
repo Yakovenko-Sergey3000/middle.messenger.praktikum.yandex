@@ -1,26 +1,19 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
-import { ApiResponceActionType } from "@utils/global-types/index.js";
-import {
-  ApiResponceType,
-  ApiResponseAfterParse,
-  parseApiResponceToJson,
-  parseErrorToJson,
-} from "@utils/utils.js";
+import { ApiResponceActionType, UserType } from "@utils/global-types/index.js";
+import { ApiResponceType, parseApiResponceToJson, parseErrorToJson } from "@utils/utils.js";
 import { ChatTokenType, CommonChatType } from "@modules/chat/types.js";
+import { UiChatItemType } from "@ui/chat-item/index.js";
 
 const api = new Api("/chats");
 class ChatsApi extends BaseApi {
-  async request({ onSuccess, onError }: ApiResponceActionType) {
-    try {
-      const res = await api.get("/", {});
-
-      onSuccess(parseApiResponceToJson(res).response);
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+  async request() {
+    return api
+      .get<ApiResponceType>("/")
+      .then(
+        (res) =>
+          parseApiResponceToJson<{ status: number; response: UiChatItemType[] }>(res).response,
+      );
   }
 
   async create(title: string, { onSuccess, onError }: ApiResponceActionType) {
@@ -37,7 +30,7 @@ class ChatsApi extends BaseApi {
     }
   }
 
-  async getChatToken(chatId: number): Promise<ChatTokenType> {
+  async getChatToken(chatId: number) {
     return api
       .post<ApiResponceType>(`/token/${chatId}`)
       .then(
