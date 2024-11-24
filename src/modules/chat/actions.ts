@@ -69,8 +69,8 @@ class ChatsActions {
 
       const params = {
         id: chatId,
-        title: usersInChat[0].id,
-        avatar: usersInChat[0].avatar,
+        // title: usersInChat[0].id,
+        // avatar: usersInChat[0].avatar,
         loading: true,
         ws: null,
       };
