@@ -1,7 +1,7 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
 import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
-import { ChatTokenType, CommonChatType } from "@modules/chat/types.js";
+import { ChatTokenType, ChatUsersType } from "@modules/chat/types.js";
 import { UiChatItemType } from "@ui/chat-item/index.js";
 
 const api = new Api("/chats");
@@ -42,12 +42,12 @@ class ChatsApi extends BaseApi {
     });
   }
 
-  async getCommonChat(chatId: number): Promise<CommonChatType[]> {
+  async getUserIntoChat(chatId: number): Promise<ChatUsersType[]> {
     return api
-      .get<ApiResponceType>(`/${chatId}/common`)
+      .get<ApiResponceType>(`/${chatId}/users`)
       .then(
         (res) =>
-          parseApiResponceToJson<{ status: number; response: CommonChatType[] }>(res).response,
+          parseApiResponceToJson<{ status: number; response: ChatUsersType[] }>(res).response,
       );
   }
 }

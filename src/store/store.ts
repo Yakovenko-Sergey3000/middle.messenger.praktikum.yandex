@@ -28,6 +28,8 @@ class Store extends EventBus<StoreStateType> {
       messages: [],
       searchUserList: [],
     };
+
+    this.on(StoreEvent.Update, () => {});
   }
 
   getState(): StoreStateType {

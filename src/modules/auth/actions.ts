@@ -1,9 +1,10 @@
 import ApiAuth from "@modules/auth/api.js";
 import { SignInType, SignUpType } from "@modules/auth/types.js";
-import { ActionForComponent } from "@utils/global-types/index.js";
+import { ActionForComponent, UserType } from "@utils/global-types/index.js";
 import { parseErrorToJson } from "@utils/utils.js";
 import { PagesPath } from "../../pages-path.js";
 import { ERROR_STATUSES } from "../../enums.js";
+import store from "../../store/store.js";
 
 class AuthActions {
   api: ApiAuth;
@@ -51,6 +52,10 @@ class AuthActions {
           onError(msg);
         }
       });
+  }
+
+  setUser(user: UserType) {
+    store.setState({ user });
   }
 
   logOut() {

@@ -1,8 +1,11 @@
-export type CommonChatType = {
+export type ChatUsersType = {
   id: number;
-  title: string;
-  avatar: string | null;
-  created_by: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  avatar: string;
+  role: string;
 };
 
 export type ChatTokenType = {

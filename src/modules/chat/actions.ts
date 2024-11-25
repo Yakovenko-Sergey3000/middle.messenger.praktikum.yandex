@@ -59,12 +59,13 @@ class ChatsActions {
     }
 
     try {
-      const usersInChat = await this.api.getCommonChat(chatId);
+      const users = await this.api.getUserIntoChat(chatId);
+      const chatInfo = users.filter((userInfo) => userInfo.id !== user?.id);
 
       const params = {
         id: chatId,
-        // title: usersInChat[0].id,
-        // avatar: usersInChat[0].avatar,
+        title: chatInfo[0]?.display_name || chatInfo[0]?.login,
+        avatar: chatInfo[0].avatar,
         loading: true,
         ws: null,
       };
