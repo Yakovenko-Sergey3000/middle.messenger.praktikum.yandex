@@ -3,6 +3,7 @@ import Router from "@utils/router/index.js";
 import { UserApi } from "@modules/user/index.js";
 import { Any, UserType } from "@utils/global-types/index.js";
 import WS, { WSEvents } from "@utils/web-socket.js";
+import IntervalGetChats from "@modules/chat/interval-get-chats.js";
 import store from "../../store/store.js";
 import { PagesPath } from "../../pages-path.js";
 
@@ -110,13 +111,13 @@ class ChatsActions {
 
   deleteChat() {
     const { dialogData } = store.getState();
-    console.log(dialogData);
-    // if (dialogData?.id) {
-    //   this.api.delete(dialogData.id).then(() => {
-    //     this.router.go(PagesPath.HOME);
-    //     this.getChatsList();
-    //   });
-    // }
+
+    if (dialogData?.id) {
+      this.api.delete(dialogData.id).then(() => {
+        this.router.go(PagesPath.HOME);
+        this.getChatsList();
+      });
+    }
   }
 
   #scrollToBottom() {
@@ -127,7 +128,10 @@ class ChatsActions {
   }
 
   #setMessages(data: Any) {
+    IntervalGetChats.restart();
+
     const { messages, dialogData } = store.getState();
+
     if (Array.isArray(data)) {
       store.setState({
         messages: [...data.reverse()],
