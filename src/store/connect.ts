@@ -5,7 +5,7 @@ export const Connect = <T>(
   Component: new (...props: T[]) => IComponent,
   mapStateToProps: (state: StoreStateType) => T | {},
 ) =>
-  class Test extends Component {
+  class extends Component {
     constructor(props: T = {} as T) {
       super({ ...props });
 

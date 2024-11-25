@@ -1,7 +1,6 @@
 import "./styles.css";
 import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
-import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import ChatsActions from "@modules/chat/actions.js";
 import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.js";
@@ -10,7 +9,7 @@ import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import Router from "../../../utils/router/index.js";
 import { Connect } from "../../../store/connect.js";
-import AddChat from "./components/add-chat/script.ts";
+import SearchChatList from "./components/search-chat-list/script.js";
 
 type ChatsListType = {
   chatsList: UiChatItemType[];
@@ -21,6 +20,7 @@ class ChatsList extends Component {
       ...props,
       srcArrowHead: rightArrow,
       srcSearchIcon: searchIcon,
+      isSearch: false,
     });
 
     this.children.openSettings = UiButton({
@@ -32,12 +32,40 @@ class ChatsList extends Component {
       },
     });
 
-    this.children.addChat = AddChat();
-
-    this.children.searchInput = UiInput({
-      attributes: { placeholder: "Поиск" },
-      className: "search-input",
+    const searchChatBlock = SearchChatList({
+      onClickItem: (data) => {
+        searchChatBlock.setProps({ isLoading: true });
+        new ChatsActions().addChat(data, () => {
+          this.setProps({ isSearch: false });
+          searchChatBlock.setProps({ isLoading: false });
+        });
+      },
     });
+
+    const openSearchBtn = UiButton({
+      label: "Найти пользователя",
+      variant: "link",
+      onClick: () => {
+        const chatActions = new ChatsActions();
+
+        if (!this.props.isSearch) {
+          searchChatBlock.setProps({ isLoading: true });
+          chatActions.searchUser("", () => {
+            searchChatBlock.setProps({ isLoading: false });
+          });
+        } else {
+          chatActions.clearSearchedUser();
+        }
+
+        this.setProps({ isSearch: !this.props.isSearch });
+        openSearchBtn.setProps({
+          label: this.props.isSearch ? "Назад к чатам" : "Найти пользователя",
+        });
+      },
+    });
+
+    this.children.searchUser = openSearchBtn;
+    this.children.searchChatList = searchChatBlock;
   }
 
   render(): DocumentFragment {

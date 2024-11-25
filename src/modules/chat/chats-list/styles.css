@@ -12,16 +12,6 @@
     gap: 8px;
   }
 
-  &__search-input {
-    height: 32px;
-    margin: 23px 10px;
-    display: flex;
-    align-items: center;
-    background-color: var(--ya-gray-200);
-    border-radius: 5px;
-    position: relative;
-  }
-
   &__dialogs_list {
     margin-top: 14px;
   }
@@ -41,15 +31,6 @@
     position: absolute;
     top: 0;
     left: 5px;
-}
-
-.search-input {
-    border-radius: 5px;
-    padding-left: 30px;
-
-    &:focus {
-        border: 1px solid black !important;
-    }
 }
 
 .dialogs_list__item {

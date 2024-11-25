@@ -1,8 +1,10 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
-import { ApiResponceActionType, UserType } from "@utils/global-types/index.js";
-import { ChangePasswordType, ChangeUserProfileType } from "@modules/user/types.js";
-import { ApiResponceType, parseApiResponceToJson, parseErrorToJson } from "@utils/utils.js";
+import { UserType } from "@utils/global-types/index.js";
+import { ChangeUserProfileType } from "@modules/user/types.js";
+import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
+import { ChangePasswordType } from "@modules/auth/types.js";
+import { UiUserItemType } from "@ui/user-item/script.js";
 
 const api = new Api("/user");
 class UserApi extends BaseApi {
@@ -28,21 +30,17 @@ class UserApi extends BaseApi {
       .then((res) => parseApiResponceToJson<{ status: number; response: UserType }>(res).response);
   }
 
-  async findUser(login: string, { onSuccess, onError }: ApiResponceActionType) {
-    try {
-      const res = await api.post("/search", {
+  async searchUsers(login: string = "") {
+    return api
+      .post<ApiResponceType>("/search", {
         data: {
           login,
         },
-      });
-      const preparedData = parseApiResponceToJson(res).response;
-
-      onSuccess(preparedData);
-    } catch (err) {
-      if (typeof err === "object" && err !== null) {
-        onError(parseErrorToJson(err as ApiResponceType));
-      }
-    }
+      })
+      .then(
+        (res) =>
+          parseApiResponceToJson<{ status: number; response: UiUserItemType[] }>(res).response,
+      );
   }
 }
 

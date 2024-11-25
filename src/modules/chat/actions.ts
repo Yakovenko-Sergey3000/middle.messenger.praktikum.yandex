@@ -26,31 +26,25 @@ class ChatsActions {
     });
   }
 
-  addChat(login: string, closeForm: () => void, addError: (msg?: string) => void) {
-    this.userApi.findUser(login, {
-      onSuccess: (users) => {
-        if (Array.isArray(users) && users.length) {
-          this.api.create(users[0].first_name, {
-            onSuccess: (id) => {
-              closeForm();
-              this.addUserToChat({ chatId: id as number, users });
-            },
-            onError: (msg) => addError(msg as string),
-          });
-        } else {
-          addError();
-        }
-      },
-      onError: (msg) => addError(msg as string),
+  addChat(candidate: UserType, onSuccess: () => void) {
+    const { user } = store.getState();
+    const firstUser = user?.display_name || user?.login;
+    const secondUser = candidate.display_name || candidate.login;
+    const titleChat = `${firstUser}/${secondUser}`;
+
+    this.api.create(titleChat).then((res) => {
+      this.addUserToChat({ chatId: res.id, users: [user as UserType, candidate] });
+      onSuccess();
     });
   }
 
   addUserToChat({ chatId, users }: { chatId: number; users: UserType[] }) {
-    this.api.addUserToChat(
-      chatId,
-      users.map((user) => user.id),
-      () => this.getChatsList(),
-    );
+    this.api
+      .addUserToChat(
+        chatId,
+        users.map((user) => user.id),
+      )
+      .then(() => this.getChatsList());
   }
 
   async openChat(chatId: number) {
@@ -92,6 +86,19 @@ class ChatsActions {
     } catch (e) {
       /* empty */
     }
+  }
+
+  searchUser(login: string = "", onSuccess?: () => void) {
+    this.userApi.searchUsers(login).then((res) => {
+      store.setState({ searchUserList: res });
+      if (onSuccess) {
+        onSuccess();
+      }
+    });
+  }
+
+  clearSearchedUser() {
+    store.setState({ searchUserList: [] });
   }
 
   #scrollToBottom() {
