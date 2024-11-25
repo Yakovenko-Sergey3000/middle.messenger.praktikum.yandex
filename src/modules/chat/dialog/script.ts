@@ -52,7 +52,9 @@ export default (chatActions: ChatsActions) => {
         dialogMenu: state.dialogData.role === "admin" ? null : DialogMenu(),
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,
+        // eslint-disable-next-line camelcase
         messages: state.messages.map(({ content, user_id }) => {
+          // eslint-disable-next-line camelcase
           const isOwner = state.user && state.user.id === user_id;
 
           return MessageItem({ message: content, className: isOwner ? "right" : "" });

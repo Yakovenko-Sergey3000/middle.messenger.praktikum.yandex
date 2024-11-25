@@ -16,7 +16,7 @@ class Route {
   }
 
   match(pathname: string) {
-    const dynamicRouteRegex = new RegExp(`^${this.pathname.replace(/\/:[^\/]+/, "/[^/]+")}$`);
+    const dynamicRouteRegex = new RegExp(`^${this.pathname.replace(/\/:[^/]+/, "/[^/]+")}$`);
     return dynamicRouteRegex.test(pathname);
   }
 
