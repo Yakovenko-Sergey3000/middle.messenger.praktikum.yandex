@@ -1,0 +1,30 @@
+.dialog-menu {
+  position: relative;
+  user-select: none;
+  &__btn {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 100%;
+    font-size: 20px;
+    background: 0;
+    border: 0;
+    padding: 0 2px 2px;
+  }
+
+  &__list {
+    min-width: 120px;
+    right: 0;
+    padding: 5px 10px;
+    border: 1px solid var(--ya-gray-150);
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
+  }
+
+  &__delete-btn {
+    color: var(--ya-red-500);
+    cursor: pointer;
+  }
+}

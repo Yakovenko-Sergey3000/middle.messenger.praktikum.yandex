@@ -1,61 +1,28 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
+import ChatsActions from "@modules/chat/actions.js";
+import Router from "@utils/router/index.js";
+import WS from "@utils/web-socket.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import DialogFooter from "./components/dialog-footer/script.ts";
 import MessageItem from "./components/message-item/script.ts";
+import { Connect } from "../../../store/connect.js";
+import { PagesPath } from "../../../pages-path.js";
+import DialogMenu from "./components/dialog-menu/script.js";
 
-const MOCK_TEXT = `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в 
-какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все 
-знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще
- находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
-Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так 
-никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе 
-за 45000 евро.`;
-
+export type DialogType = {
+  id: number;
+  title: string;
+  ws: WS<number | string | object> | null;
+  loading: boolean;
+  role: string;
+  avatar: string | null;
+};
 class Dialog extends Component {
   constructor() {
     super("div", {
       attributes: { class: "dialog" },
-      userName: "Вадим",
-      messages: [MessageItem({ message: MOCK_TEXT })],
-    });
-
-    this.children.dialogAvatar = UiAvatar({
-      width: "54px",
-      height: "54px",
-      alt: "Avatar",
-      src: "https://gp.by/upload/dcf/dcf54a64c040dae4be0f65c1b77e918a.jpg",
-      className: "dialog-avatar",
-    });
-
-    this.children.footer = DialogFooter({
-      className: "footer",
-      onSubmit: (e: Event) => {
-        e.preventDefault();
-        const target = e.target as HTMLFormElement;
-        const fd: FormData = new FormData(target);
-        const data: Record<string, FormDataEntryValue> = {};
-
-        fd.forEach((val, key) => {
-          data[key] = val;
-        });
-
-        if (!data.message) {
-          console.log("Сообщение не оправлено!");
-          return;
-        }
-        this.setProps({
-          messages: [
-            ...this.listChildren.messages,
-            MessageItem({ message: data.message as string, className: "left" }),
-          ],
-        });
-
-        console.log(data);
-
-        target.reset();
-      },
     });
   }
 
@@ -64,4 +31,58 @@ class Dialog extends Component {
   }
 }
 
-export default () => new Dialog();
+export default (chatActions: ChatsActions) => {
+  const splitCurrentPath = new Router().atPath.split("/");
+  const currentId = splitCurrentPath[splitCurrentPath.length - 1];
+
+  if (splitCurrentPath.includes(PagesPath.CHAT.replace("/", ""))) {
+    chatActions.openChat(Number(currentId));
+  }
+
+  return new (Connect(Dialog, (state) => {
+    if (state.dialogData) {
+      return {
+        dialogAvatar: UiAvatar({
+          width: "54px",
+          height: "54px",
+          alt: "Avatar",
+          src: state.dialogData.avatar,
+          className: "dialog-avatar",
+        }),
+        dialogMenu: state.dialogData.role === "admin" ? null : DialogMenu(),
+        isLoading: state.dialogData.loading,
+        userName: state.dialogData.title,
+        // eslint-disable-next-line camelcase
+        messages: state.messages.map(({ content, user_id }) => {
+          // eslint-disable-next-line camelcase
+          const isOwner = state.user && state.user.id === user_id;
+
+          return MessageItem({ message: content, className: isOwner ? "right" : "" });
+        }),
+        footer: DialogFooter({
+          className: "footer",
+          onSubmit: (e: Event) => {
+            e.preventDefault();
+            const target = e.target as HTMLFormElement;
+            const fd: FormData = new FormData(target);
+            const data: Record<string, FormDataEntryValue> = {};
+
+            fd.forEach((val, key) => {
+              data[key] = val;
+            });
+
+            if (!data.message) {
+              return;
+            }
+
+            if (state.dialogData !== null && state.dialogData.ws) {
+              state.dialogData.ws.send({ content: data.message, type: "message" });
+            }
+            target.reset();
+          },
+        }),
+      };
+    }
+    return {};
+  }))();
+};

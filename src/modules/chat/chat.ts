@@ -1,16 +1,19 @@
 import { ModuleChatList } from "@modules/chat/chats-list/index.ts";
-import { ModuleDialog } from "@modules/chat/dialog/index.ts";
-
+import ChatsActions from "@modules/chat/actions.js";
+import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
 import { LayoutChat } from "./chat-layout/index.ts";
-import Component from "../../utils/component.ts";
+import Component, { IComponent } from "../../utils/component.ts";
 
+type ChatDialogType = (prop: ChatsActions) => IComponent;
 class Chat extends Component {
-  constructor() {
-    super("div", {});
+  constructor(Dialog?: ChatDialogType) {
+    super("div");
+    const chatActions = new ChatsActions();
+    IntervalGetChats.init(chatActions.getChatsList.bind(chatActions));
 
     this.children.chat = LayoutChat({
-      chatsList: ModuleChatList(),
-      chatDialog: ModuleDialog(),
+      chatsList: ModuleChatList(chatActions),
+      chatDialog: Dialog && Dialog(chatActions),
     });
   }
 
@@ -19,4 +22,4 @@ class Chat extends Component {
   }
 }
 
-export default () => new Chat();
+export default (props?: ChatDialogType) => new Chat(props);

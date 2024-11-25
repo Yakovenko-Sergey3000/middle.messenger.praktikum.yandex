@@ -1,7 +1,7 @@
 {
   "extends": [
-    "airbnb",
-    "plugin:@typescript-eslint/recommended"
+    "airbnb-base",
+    "airbnb-typescript/base"
   ],
   "settings": {
     "react": {
@@ -25,6 +25,10 @@
           [
             "@icons",
             "./src/static/icons"
+          ],
+          [
+            "@middleware",
+            "./src/middleware"
           ]
         ],
         "extensions": [
@@ -64,7 +68,16 @@
     "function-paren-newline": "off",
     "react/no-unused-class-component-methods": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/quotes": [0, "double"],
+    "@typescript-eslint/default-param-last": "off",
+    "@typescript-eslint/indent": "off",
+    "max-params": "off",
+    "import/extensions": [2, "always", {
+      "ts": "ignorePackages"
+    }]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }
 

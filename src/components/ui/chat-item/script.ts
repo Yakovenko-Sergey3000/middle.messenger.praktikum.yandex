@@ -1,7 +1,7 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
+import { ComponentType, UserType } from "@utils/global-types/index.js";
 import template from "./template.hbs.ts";
-import { ComponentType, UserType } from "../../../utils/global-types/index.ts";
 import Component from "../../../utils/component.ts";
 import ConcatClasses from "../../../utils/concat-classes.ts";
 import longText from "../../../utils/long-text.ts";
@@ -9,7 +9,7 @@ import longText from "../../../utils/long-text.ts";
 export type UiChatItemType = {
   id: number;
   title: string;
-  avatar: string;
+  avatar: string | null;
   unread_count: number;
   last_message: {
     user: UserType;
@@ -28,9 +28,9 @@ class UiChatItem extends Component {
         width: "47px",
         height: "47px",
         alt: "Avatar",
-        src: props.avatar,
+        src: props.avatar || "",
       }),
-      last_message: longText(props.last_message.content, 45),
+      last_message: props.last_message ? longText(props.last_message.content, 45) : "",
       time: "ПН",
       onClick: () => props.onClick && props.onClick(props.id),
     });
@@ -41,4 +41,4 @@ class UiChatItem extends Component {
   }
 }
 
-export default (props: UiChatItemType & ComponentType) => new UiChatItem(props);
+export default UiChatItem;

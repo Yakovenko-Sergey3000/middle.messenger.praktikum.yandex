@@ -6,7 +6,7 @@
   background-color: var(--ya-gray-250);
 }
 
-.message-item.left {
+.message-item.right {
   align-self: end;
   background-color: var(--ya-blue-50);
 }

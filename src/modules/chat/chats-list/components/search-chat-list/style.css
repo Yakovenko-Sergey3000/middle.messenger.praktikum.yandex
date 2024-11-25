@@ -1,0 +1,22 @@
+.add-chat {
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & input {
+    margin-bottom: 10px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  & p {
+    text-align: center;
+  }
+
+  &__menu {
+    padding: 0 10px;
+  }
+}
