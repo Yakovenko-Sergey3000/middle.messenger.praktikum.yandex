@@ -59,13 +59,19 @@ class ChatsActions {
     }
 
     try {
-      const users = await this.api.getUserIntoChat(chatId);
+      const users = await this.api.getUserIntoChat(chatId).catch(() => {
+        this.router.go(PagesPath.HOME);
+
+        return [];
+      });
+
       const chatInfo = users.filter((userInfo) => userInfo.id !== user?.id);
 
       const params = {
         id: chatId,
         title: chatInfo[0]?.display_name || chatInfo[0]?.login,
         avatar: chatInfo[0].avatar,
+        role: chatInfo[0].role,
         loading: true,
         ws: null,
       };
@@ -100,6 +106,17 @@ class ChatsActions {
 
   clearSearchedUser() {
     store.setState({ searchUserList: [] });
+  }
+
+  deleteChat() {
+    const { dialogData } = store.getState();
+    console.log(dialogData);
+    // if (dialogData?.id) {
+    //   this.api.delete(dialogData.id).then(() => {
+    //     this.router.go(PagesPath.HOME);
+    //     this.getChatsList();
+    //   });
+    // }
   }
 
   #scrollToBottom() {

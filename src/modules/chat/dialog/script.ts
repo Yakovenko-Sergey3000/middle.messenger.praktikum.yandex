@@ -9,12 +9,14 @@ import DialogFooter from "./components/dialog-footer/script.ts";
 import MessageItem from "./components/message-item/script.ts";
 import { Connect } from "../../../store/connect.js";
 import { PagesPath } from "../../../pages-path.js";
+import DialogMenu from "./components/dialog-menu/script.js";
 
 export type DialogType = {
   id: number;
   title: string;
   ws: WS<number | string | object> | null;
   loading: boolean;
+  role: string;
   avatar: string | null;
 };
 class Dialog extends Component {
@@ -47,6 +49,7 @@ export default (chatActions: ChatsActions) => {
           src: state.dialogData.avatar,
           className: "dialog-avatar",
         }),
+        dialogMenu: state.dialogData.role === "admin" ? null : DialogMenu(),
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,
         messages: state.messages.map(({ content, user_id }) => {

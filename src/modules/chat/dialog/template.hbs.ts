@@ -6,9 +6,7 @@ export default `
         </div>
         <h4>{{{ userName }}}</h4>
       </div>
-      <button class="dialog__header__menu">
-        ︙
-      </button>
+      {{{ dialogMenu }}}
     </div>
     <div class="dialog__messages">
     {{#if isLoading}}

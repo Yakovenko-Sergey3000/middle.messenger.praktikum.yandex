@@ -1,7 +1,7 @@
 import BaseApi from "@utils/api/base-api.js";
 import Api from "@utils/api/api.js";
 import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
-import { ChatTokenType, ChatUsersType } from "@modules/chat/types.js";
+import { ChatTokenType, ChatUsersType, DeleteChatType } from "@modules/chat/types.js";
 import { UiChatItemType } from "@ui/chat-item/index.js";
 
 const api = new Api("/chats");
@@ -48,6 +48,18 @@ class ChatsApi extends BaseApi {
       .then(
         (res) =>
           parseApiResponceToJson<{ status: number; response: ChatUsersType[] }>(res).response,
+      );
+  }
+
+  async delete(chatId: number): Promise<DeleteChatType> {
+    return api
+      .delete<ApiResponceType>("/", {
+        data: {
+          chatId,
+        },
+      })
+      .then(
+        (res) => parseApiResponceToJson<{ status: number; response: DeleteChatType }>(res).response,
       );
   }
 }
