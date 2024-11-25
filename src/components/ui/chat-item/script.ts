@@ -28,7 +28,7 @@ class UiChatItem extends Component {
         width: "47px",
         height: "47px",
         alt: "Avatar",
-        src: "",
+        src: props.avatar || "",
       }),
       last_message: props.last_message ? longText(props.last_message.content, 45) : "",
       time: "ПН",
