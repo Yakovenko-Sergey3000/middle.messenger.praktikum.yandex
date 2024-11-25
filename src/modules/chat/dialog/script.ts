@@ -38,8 +38,6 @@ export default (chatActions: ChatsActions) => {
   }
 
   return new (Connect(Dialog, (state) => {
-    console.log(state);
-
     if (state.dialogData) {
       return {
         dialogAvatar: UiAvatar({

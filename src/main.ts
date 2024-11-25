@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }),
         );
     })
-    .catch((e) => {
-      console.log(e);
+    .catch(() => {
       router
         .use(PagesPath.SIGN_IN, ModuleSignIn())
         .use(PagesPath.SING_OUT, ModuleSignOut())
