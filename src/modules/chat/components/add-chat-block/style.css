@@ -1,0 +1,16 @@
+.add-chat {
+  padding: 20px;
+  width: 350px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__elements {
+    margin-top: 30px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

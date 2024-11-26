@@ -3,15 +3,12 @@ export default `
     <div class="chat-list__header">
     {{{ openSettings }}}      
     </div>
-    <div class="chat-list__add-chat">
-        {{{ searchUser }}}
+    <div class="chat-list__create-chat">
+        {{{ createChatBtn }}}
     </div>
-    {{#if isSearch }}
-       {{{ searchChatList }}}
-    {{else}}
-      <div class="chat-list__dialogs_list">
-         {{{ chatsList }}}
-      </div>
-    {{/if}}
+    <div class="chat-list__dialogs_list">
+       {{{ chatsList }}}
+    </div>
+    {{{ modal }}}
   </div>
 `;

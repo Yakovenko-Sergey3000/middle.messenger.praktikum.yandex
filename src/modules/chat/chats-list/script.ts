@@ -4,12 +4,13 @@ import rightArrow from "@icons/right-arrow_v1.svg";
 import { UiButton } from "@ui/buttons/index.ts";
 import ChatsActions from "@modules/chat/actions.js";
 import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.js";
+import { UiModal } from "@ui/modal/index.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import Router from "../../../utils/router/index.js";
 import { Connect } from "../../../store/connect.js";
-import SearchChatList from "./components/search-chat-list/script.js";
+import AddChatBlock from "../components/add-chat-block/script.js";
 
 type ChatsListType = {
   chatsList: UiChatItemType[];
@@ -32,40 +33,17 @@ class ChatsList extends Component {
       },
     });
 
-    const searchChatBlock = SearchChatList({
-      onClickItem: (data) => {
-        searchChatBlock.setProps({ isLoading: true });
-        new ChatsActions().addChat(data, () => {
-          this.setProps({ isSearch: false });
-          searchChatBlock.setProps({ isLoading: false });
-        });
-      },
+    const modal = UiModal({
+      content: AddChatBlock({
+        closeModal: () => modal.onClose(),
+      }),
     });
 
-    const openSearchBtn = UiButton({
-      label: "Найти пользователя",
-      variant: "link",
-      onClick: () => {
-        const chatActions = new ChatsActions();
-
-        if (!this.props.isSearch) {
-          searchChatBlock.setProps({ isLoading: true });
-          chatActions.searchUser("", () => {
-            searchChatBlock.setProps({ isLoading: false });
-          });
-        } else {
-          chatActions.clearSearchedUser();
-        }
-
-        this.setProps({ isSearch: !this.props.isSearch });
-        openSearchBtn.setProps({
-          label: this.props.isSearch ? "Назад к чатам" : "Найти пользователя",
-        });
-      },
+    this.children.modal = modal;
+    this.children.createChatBtn = UiButton({
+      label: "Создать чат",
+      onClick: () => modal.onOpen(),
     });
-
-    this.children.searchUser = openSearchBtn;
-    this.children.searchChatList = searchChatBlock;
   }
 
   render(): DocumentFragment {

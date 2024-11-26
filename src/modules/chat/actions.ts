@@ -27,25 +27,24 @@ class ChatsActions {
     });
   }
 
-  addChat(candidate: UserType, onSuccess: () => void) {
-    const { user } = store.getState();
-    const firstUser = user?.display_name || user?.login;
-    const secondUser = candidate.display_name || candidate.login;
-    const titleChat = `${firstUser}/${secondUser}`;
-
-    this.api.create(titleChat).then((res) => {
-      this.addUserToChat({ chatId: res.id, users: [user as UserType, candidate] });
+  createChat(title: string, onSuccess: () => void) {
+    this.api.create(title).then(() => {
+      this.getChatsList();
       onSuccess();
     });
   }
 
-  addUserToChat({ chatId, users }: { chatId: number; users: UserType[] }) {
-    this.api
-      .addUserToChat(
-        chatId,
-        users.map((user) => user.id),
-      )
-      .then(() => this.getChatsList());
+  addUserToChat({ users }: { users: UserType[] }) {
+    const { dialogData } = store.getState();
+
+    if (dialogData !== null) {
+      this.api
+        .addUserToChat(
+          dialogData.id,
+          users.map((user) => user.id),
+        )
+        .then(() => this.openChat(dialogData.id));
+    }
   }
 
   async openChat(chatId: number) {
@@ -70,9 +69,11 @@ class ChatsActions {
 
       const params = {
         id: chatId,
-        title: chatInfo[0]?.display_name || chatInfo[0]?.login,
-        avatar: chatInfo[0].avatar,
-        role: chatInfo[0].role,
+        title: [...chatInfo, user]
+          .map((userParams) => userParams?.display_name || userParams?.login)
+          .join(", "),
+        avatar: chatInfo[0]?.avatar,
+        role: chatInfo[0]?.role,
         loading: true,
         messages: [],
         ws: null,

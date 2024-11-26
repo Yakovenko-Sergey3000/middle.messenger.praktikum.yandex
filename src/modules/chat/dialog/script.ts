@@ -3,6 +3,8 @@ import { UiAvatar } from "@ui/avatar/index.ts";
 import ChatsActions from "@modules/chat/actions.js";
 import Router from "@utils/router/index.js";
 import WS from "@utils/web-socket.js";
+import { UiModal } from "@ui/modal/index.js";
+import SearchUserBlock from "@modules/chat/components/search-users-block/script.js";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import DialogFooter from "./components/dialog-footer/script.ts";
@@ -40,6 +42,17 @@ export default (chatActions: ChatsActions) => {
     chatActions.openChat(Number(currentId));
   }
 
+  const modal = UiModal({
+    content: SearchUserBlock({
+      onClickItem: (user) => {
+        chatActions.addUserToChat({
+          users: [user],
+        });
+        modal.onClose();
+      },
+    }),
+  });
+
   return new (Connect(Dialog, (state) => {
     if (state.dialogData) {
       return {
@@ -50,7 +63,10 @@ export default (chatActions: ChatsActions) => {
           src: state.dialogData.avatar,
           className: "dialog-avatar",
         }),
-        dialogMenu: state.dialogData.role === "admin" ? null : DialogMenu(),
+        modal,
+        dialogMenu: DialogMenu({
+          openModalAddUserToChat: () => modal.onOpen(),
+        }),
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,
         // eslint-disable-next-line camelcase

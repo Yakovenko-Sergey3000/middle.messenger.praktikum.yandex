@@ -1,6 +1,7 @@
 import "./style.css";
 import Component from "@utils/component.js";
 import { UiAvatar } from "@ui/avatar/index.js";
+import { ComponentEventsType } from "@utils/global-types/index.js";
 import template from "./template.hbs.js";
 
 export type UiUserItemType = {
@@ -34,5 +35,4 @@ class UiUserItem extends Component {
   }
 }
 
-export default (props: UiUserItemType & { onClick: (data: UiUserItemType) => void }) =>
-  new UiUserItem(props);
+export default (props: UiUserItemType & ComponentEventsType) => new UiUserItem(props);

@@ -1,3 +1,4 @@
+import "./style.css";
 import Component from "@utils/component.ts";
 import ChatsActions from "@modules/chat/actions.ts";
 import { UiButton } from "@ui/buttons/index.ts";
@@ -5,8 +6,7 @@ import { UiInput } from "@ui/inputs/index.ts";
 import { UiUserItem } from "@ui/user-item/index.js";
 import { UiUserItemType } from "@ui/user-item/script.js";
 import template from "./template.hts.ts";
-import "./style.css";
-import { Connect } from "../../../../../store/connect.js";
+import { Connect } from "../../../../store/connect.js";
 
 type SearchChatListType = {
   onClickItem: (data: UiUserItemType) => void;
@@ -14,31 +14,31 @@ type SearchChatListType = {
 
 class SearchChatList extends Component {
   constructor() {
-    super("div");
-    const chatActions = new ChatsActions();
-
-    const input = UiInput({
-      attributes: { placeholder: "Введите логин пользователя" },
-    });
-
-    const btn = UiButton({
-      label: "Найти",
-      onClick: () => {
-        const element = input.getContent() as HTMLInputElement;
-        btn.setProps({ isLoading: true });
+    super("form", {
+      onSubmit: (e: Event) => {
+        e.preventDefault();
+        this.children.btn.setProps({ isLoading: true });
         this.setProps({ isLoading: true });
-        element.disabled = true;
-        chatActions.searchUser(element.value, () => {
-          btn.setProps({ isLoading: false });
+
+        const chatActions = new ChatsActions();
+        const target = e.target as HTMLFormElement;
+        const fd: FormData = new FormData(target);
+        const login = fd.get("login") as string;
+
+        chatActions.searchUser(login, () => {
+          this.children.btn.setProps({ isLoading: false });
           this.setProps({ isLoading: false });
-          element.value = "";
-          element.disabled = false;
         });
       },
     });
 
-    this.children.input = input;
-    this.children.btn = btn;
+    this.children.input = UiInput({
+      attributes: { placeholder: "Введите логин пользователя", name: "login" },
+    });
+    this.children.btn = UiButton({
+      label: "Найти",
+      attributes: { type: "submit" },
+    });
   }
 
   render(): DocumentFragment {

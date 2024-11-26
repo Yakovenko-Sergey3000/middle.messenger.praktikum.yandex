@@ -22,4 +22,5 @@ export default `
     {{/if}}
     </div>
     {{{ footer }}}
+    {{{ modal }}}
 `;
