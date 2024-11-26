@@ -1,9 +1,8 @@
 export const PagesPath = {
-  HOME: "/",
-  SIGN_IN: "/sign-in",
+  MESSENGER: "/messenger",
+  SIGN_IN: "/",
   SING_OUT: "/sign-out",
-  USER_SETTING: "/view-user-settings",
-  CHANGE_USER_SETTING: "/change-user-information",
-  CHANGE_USER_PASSWORD: "/change-user-password",
-  CHAT: "/chat",
+  USER_SETTING: "/settings",
+  CHANGE_USER_SETTING: "/settings/change-information",
+  CHANGE_USER_PASSWORD: "/settings/change-password",
 };

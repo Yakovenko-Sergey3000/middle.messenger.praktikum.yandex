@@ -25,7 +25,7 @@ class AuthActions {
       .signUp(params)
       .then(() => {
         onSuccess();
-        window.location.replace(PagesPath.HOME);
+        window.location.replace(PagesPath.MESSENGER);
       })
       .catch((err) => {
         const msg: string | undefined = ERROR_STATUSES.AUTH.SING_UP[parseErrorToJson(err)];
@@ -43,7 +43,7 @@ class AuthActions {
         if (onSuccess) {
           onSuccess();
         }
-        window.location.replace(PagesPath.HOME);
+        window.location.replace(PagesPath.MESSENGER);
       })
       .catch((err) => {
         const msg: string | undefined = ERROR_STATUSES.AUTH.SING_IN[parseErrorToJson(err)];

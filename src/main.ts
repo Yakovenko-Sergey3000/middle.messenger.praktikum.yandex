@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //       linkBackButton: UiButton({
   //         variant: "link",
   //         label: "Назад к чатам",
-  //         onClick: () => window.location.replace(PagesPath.HOME),
+  //         onClick: () => window.location.replace(PagesPath.MESSENGER),
   //       }),
   //     }),
   //   );
@@ -37,17 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
       authAction.setUser(user);
 
       router
-        .use(PagesPath.HOME, ModuleChat())
+        .use(PagesPath.MESSENGER, ModuleChat())
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
         .use(
-          `${PagesPath.CHAT}/:id`,
+          `${PagesPath.MESSENGER}/:id`,
           ModuleChat((props) => ModuleDialog(props)),
         )
         .notFound(
           NotFound(() => {
-            router.go(PagesPath.HOME);
+            router.go(PagesPath.MESSENGER);
           }),
         );
     })

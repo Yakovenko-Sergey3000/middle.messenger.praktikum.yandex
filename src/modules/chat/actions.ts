@@ -48,8 +48,8 @@ class ChatsActions {
   }
 
   async openChat(chatId: number) {
-    if (this.router.atPath !== `${PagesPath.CHAT}/${chatId}`) {
-      this.router.go(`${PagesPath.CHAT}/${chatId}`);
+    if (this.router.atPath !== `${PagesPath.MESSENGER}/${chatId}`) {
+      this.router.go(`${PagesPath.MESSENGER}/${chatId}`);
     }
 
     const { user, dialogData } = store.getState();
@@ -60,7 +60,7 @@ class ChatsActions {
 
     try {
       const users = await this.api.getUserIntoChat(chatId).catch(() => {
-        this.router.go(PagesPath.HOME);
+        this.router.go(PagesPath.MESSENGER);
 
         return [];
       });
@@ -116,7 +116,7 @@ class ChatsActions {
 
     if (dialogData?.id) {
       this.api.delete(dialogData.id).then(() => {
-        this.router.go(PagesPath.HOME);
+        this.router.go(PagesPath.MESSENGER);
         this.getChatsList();
       });
     }

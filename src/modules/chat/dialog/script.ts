@@ -38,7 +38,7 @@ export default (chatActions: ChatsActions) => {
   const splitCurrentPath = new Router().atPath.split("/");
   const currentId = splitCurrentPath[splitCurrentPath.length - 1];
 
-  if (splitCurrentPath.includes(PagesPath.CHAT.replace("/", ""))) {
+  if (splitCurrentPath.includes(PagesPath.MESSENGER.replace("/", ""))) {
     chatActions.openChat(Number(currentId));
   }
 
