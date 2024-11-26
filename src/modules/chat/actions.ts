@@ -1,9 +1,9 @@
 import ChatsApi from "@modules/chat/api.ts";
 import Router from "@utils/router/index.ts";
-import { UserApi } from "@modules/user/index.ts";
 import { Any, UserType } from "@utils/global-types/index.ts";
 import WS, { WSEvents } from "@utils/web-socket.ts";
 import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
+import { UserApi } from "@modules/user/index.ts";
 import store from "../../store/store.ts";
 import { PagesPath } from "../../pages-path.ts";
 
