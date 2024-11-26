@@ -1,0 +1,78 @@
+{
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "settings": {
+    "react": {
+      "version": "999.999.999"
+    },
+    "import/resolver": {
+      "alias": {
+        "map": [
+          [
+            "@ui",
+            "./src/components/ui"
+          ],
+          [
+            "@modules",
+            "./src/modules"
+          ],
+          [
+            "@layouts",
+            "./src/components/layouts"
+          ],
+          [
+            "@icons",
+            "./src/static/icons"
+          ]
+        ],
+        "extensions": [
+          ".ts",
+          ".ts",
+          ".jsx",
+          ".json"
+        ]
+      }
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
+  "rules": {
+    "quotes": [
+      2,
+      "double"
+    ],
+    "max-len": [
+      2,
+      100
+    ],
+    "max-params": [
+      2,
+      3
+    ],
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "camelcase": 1,
+    "object-curly-newline": "off",
+    "default-param-last": "off",
+    "class-methods-use-this": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
+    "react/no-unused-class-component-methods": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/quotes": [0, "double"],
+    "@typescript-eslint/default-param-last": "off",
+    "import/extensions": [2, "always", {
+      "ts": "ignorePackages"
+    }]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
+
+

@@ -1,0 +1,3 @@
+/dist
+**/*.min.ts
+/node_modules

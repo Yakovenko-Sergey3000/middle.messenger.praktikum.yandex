@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
+
 export default defineConfig({
+  logLevel: "info",
   build: {
     rollupOptions: {
       input: {
@@ -11,18 +13,9 @@ export default defineConfig({
         500: resolve(__dirname, "./src/pages/500.html"),
         404: resolve(__dirname, "./src/pages/404.html"),
         chat: resolve(__dirname, "./src/pages/chat.html"),
-        "view-user-settings": resolve(
-          __dirname,
-          "./src/pages/view-user-settings.html",
-        ),
-        "change-user-information": resolve(
-          __dirname,
-          "./src/pages/change-user-information.html",
-        ),
-        "change-user-password": resolve(
-          __dirname,
-          "./src/pages/change-user-password.html",
-        ),
+        "view-user-settings": resolve(__dirname, "./src/pages/view-user-settings.html"),
+        "change-user-information": resolve(__dirname, "./src/pages/change-user-information.html"),
+        "change-user-password": resolve(__dirname, "./src/pages/change-user-password.html"),
       },
     },
   },
