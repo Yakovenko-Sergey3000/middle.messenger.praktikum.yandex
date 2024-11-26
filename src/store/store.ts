@@ -13,7 +13,6 @@ export type StoreStateType = {
   chatsList: UiChatItemType[];
   dialogData: DialogType | null;
   searchUserList: UiUserItemType[];
-  messages: [];
 };
 class Store extends EventBus<StoreStateType> {
   private state: StoreStateType;
@@ -25,7 +24,6 @@ class Store extends EventBus<StoreStateType> {
       user: null,
       chatsList: [],
       dialogData: null,
-      messages: [],
       searchUserList: [],
     };
 

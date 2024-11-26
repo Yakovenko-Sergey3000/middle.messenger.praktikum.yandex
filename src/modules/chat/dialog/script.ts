@@ -18,6 +18,7 @@ export type DialogType = {
   loading: boolean;
   role: string;
   avatar: string | null;
+  messages: [];
 };
 class Dialog extends Component {
   constructor() {
@@ -53,7 +54,7 @@ export default (chatActions: ChatsActions) => {
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,
         // eslint-disable-next-line camelcase
-        messages: state.messages.map(({ content, user_id }) => {
+        messages: state.dialogData.messages.map(({ content, user_id }) => {
           // eslint-disable-next-line camelcase
           const isOwner = state.user && state.user.id === user_id;
 

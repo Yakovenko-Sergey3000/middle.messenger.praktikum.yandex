@@ -74,6 +74,7 @@ class ChatsActions {
         avatar: chatInfo[0].avatar,
         role: chatInfo[0].role,
         loading: true,
+        messages: [],
         ws: null,
       };
 
@@ -130,20 +131,20 @@ class ChatsActions {
   #setMessages(data: Any) {
     IntervalGetChats.restart();
 
-    const { messages, dialogData } = store.getState();
+    const { dialogData } = store.getState();
 
     if (Array.isArray(data)) {
       store.setState({
-        messages: [...data.reverse()],
-        dialogData: { ...dialogData, loading: false },
+        dialogData: { ...dialogData, loading: false, messages: [...data.reverse()] },
       });
       this.#scrollToBottom();
     }
 
-    if (data.type === WSEvents.MESSAGE) {
-      const copyMessages: object[] = [...messages];
+    if (data.type === WSEvents.MESSAGE && dialogData !== null) {
+      const copyMessages: object[] = [...dialogData.messages];
       copyMessages.push(data);
-      store.setState({ messages: copyMessages });
+
+      store.setState({ dialogData: { ...dialogData, messages: copyMessages } });
       this.#scrollToBottom();
       setTimeout(() => this.getChatsList(), 1000);
     }
