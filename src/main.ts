@@ -13,21 +13,6 @@ import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // if (path.includes("500")) {
-  //   renderComponent(
-  //     "#app",
-  //     LayoutErrorPage({
-  //       title: "500",
-  //       subtitle: "Мы уже фиксим",
-  //       linkBackButton: UiButton({
-  //         variant: "link",
-  //         label: "Назад к чатам",
-  //         onClick: () => window.location.replace(PagesPath.MESSENGER),
-  //       }),
-  //     }),
-  //   );
-  // }
-
   const authAction = new AuthActions();
   const router = new Router();
 
