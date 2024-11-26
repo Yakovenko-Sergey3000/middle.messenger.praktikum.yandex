@@ -20,7 +20,7 @@ class IntervalGetChats {
   }
 
   getList() {
-    // this.getChats();
+    this.getChats();
   }
 
   restart() {
