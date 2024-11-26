@@ -12,6 +12,7 @@ import MessageItem from "./components/message-item/script.ts";
 import { Connect } from "../../../store/connect.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import DialogMenu from "./components/dialog-menu/script.ts";
+import DeleteUserFromChat from "./components/delete-user-from-chat/script.ts";
 
 export type DialogType = {
   id: number;
@@ -42,14 +43,21 @@ export default (chatActions: ChatsActions) => {
     chatActions.openChat(Number(currentId));
   }
 
-  const modal = UiModal({
+  const addUserToChatModal = UiModal({
     content: SearchUserBlock({
       onClickItem: (user) => {
         chatActions.addUserToChat({
           users: [user],
         });
-        modal.onClose();
+        addUserToChatModal.onClose();
       },
+    }),
+  });
+
+  const deleteUserFromChatModal = UiModal({
+    content: DeleteUserFromChat({
+      onClickItem: (user) =>
+        chatActions.deleteUserFromChat(user, () => deleteUserFromChatModal.onClose()),
     }),
   });
 
@@ -63,9 +71,11 @@ export default (chatActions: ChatsActions) => {
           src: state.dialogData.avatar,
           className: "dialog-avatar",
         }),
-        modal,
+        addUserToChatModal,
+        deleteUserFromChatModal,
         dialogMenu: DialogMenu({
-          openModalAddUserToChat: () => modal.onOpen(),
+          openModalAddUserToChat: () => addUserToChatModal.onOpen(),
+          openModalDeleteUserFromChat: () => deleteUserFromChatModal.onOpen(),
         }),
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,

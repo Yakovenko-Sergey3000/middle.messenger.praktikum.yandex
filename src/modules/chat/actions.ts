@@ -47,6 +47,21 @@ class ChatsActions {
     }
   }
 
+  async deleteUserFromChat(user: UserType, onSuccess: () => void) {
+    const { user: currentUser, dialogData } = store.getState();
+
+    if (dialogData !== null && currentUser !== null) {
+      this.api.deleteUserFormChat(dialogData?.id, [user.id]).then(() => {
+        this.openChat(dialogData?.id);
+        onSuccess();
+
+        if (currentUser.id === user.id) {
+          this.getChatsList();
+        }
+      });
+    }
+  }
+
   async openChat(chatId: number) {
     if (this.router.atPath !== `${PagesPath.MESSENGER}/${chatId}`) {
       this.router.go(`${PagesPath.MESSENGER}/${chatId}`);
@@ -81,6 +96,7 @@ class ChatsActions {
 
       store.setState({
         dialogData: params,
+        usersInChat: users,
       });
 
       const chatToken = await this.api.getChatToken(chatId);

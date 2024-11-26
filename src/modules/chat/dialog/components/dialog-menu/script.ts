@@ -4,7 +4,10 @@ import { UiButton } from "@ui/buttons/index.ts";
 import ChatsActions from "@modules/chat/actions.ts";
 import template from "./template.hbs.ts";
 
-type DialogMenuType = { openModalAddUserToChat: () => void };
+type DialogMenuType = {
+  openModalAddUserToChat: () => void;
+  openModalDeleteUserFromChat: () => void;
+};
 class DialogMenu extends Component {
   constructor(props: DialogMenuType) {
     super("div", {
@@ -24,6 +27,12 @@ class DialogMenu extends Component {
           chatActions.searchUser();
           props.openModalAddUserToChat();
         },
+      }),
+      UiButton({
+        label: "Удалить пользователя из чата",
+        variant: "link",
+        className: "dialog-menu__delete-btn",
+        onClick: () => props.openModalDeleteUserFromChat(),
       }),
       UiButton({
         label: "Удалить диалог",

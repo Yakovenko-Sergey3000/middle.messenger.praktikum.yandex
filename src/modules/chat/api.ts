@@ -62,6 +62,17 @@ class ChatsApi extends BaseApi {
         (res) => parseApiResponceToJson<{ status: number; response: DeleteChatType }>(res).response,
       );
   }
+
+  async deleteUserFormChat(chatId: number, users: number[]): Promise<string> {
+    return api
+      .delete<ApiResponceType>("/users", {
+        data: {
+          users,
+          chatId,
+        },
+      })
+      .then(() => "OK");
+  }
 }
 
 export default ChatsApi;

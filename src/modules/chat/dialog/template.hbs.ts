@@ -22,5 +22,6 @@ export default `
     {{/if}}
     </div>
     {{{ footer }}}
-    {{{ modal }}}
+    {{{ addUserToChatModal }}}
+    {{{ deleteUserFromChatModal }}}
 `;
