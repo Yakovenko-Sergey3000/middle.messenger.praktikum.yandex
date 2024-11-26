@@ -53,10 +53,6 @@
       2,
       100
     ],
-    "max-params": [
-      2,
-      3
-    ],
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
@@ -72,6 +68,7 @@
     "@typescript-eslint/default-param-last": "off",
     "@typescript-eslint/indent": "off",
     "max-params": "off",
+    "import/no-cycle": "off",
     "import/extensions": [2, "always", {
       "ts": "ignorePackages"
     }]
