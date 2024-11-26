@@ -1,11 +1,11 @@
-import ChatsApi from "@modules/chat/api.js";
-import Router from "@utils/router/index.js";
-import { UserApi } from "@modules/user/index.js";
-import { Any, UserType } from "@utils/global-types/index.js";
-import WS, { WSEvents } from "@utils/web-socket.js";
-import IntervalGetChats from "@modules/chat/interval-get-chats.js";
-import store from "../../store/store.js";
-import { PagesPath } from "../../pages-path.js";
+import ChatsApi from "@modules/chat/api.ts";
+import Router from "@utils/router/index.ts";
+import { Any, UserType } from "@utils/global-types/index.ts";
+import WS, { WSEvents } from "@utils/web-socket.ts";
+import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
+import { UserApi } from "@modules/user/index.ts";
+import store from "../../store/store.ts";
+import { PagesPath } from "../../pages-path.ts";
 
 class ChatsActions {
   api: ChatsApi;
@@ -27,30 +27,44 @@ class ChatsActions {
     });
   }
 
-  addChat(candidate: UserType, onSuccess: () => void) {
-    const { user } = store.getState();
-    const firstUser = user?.display_name || user?.login;
-    const secondUser = candidate.display_name || candidate.login;
-    const titleChat = `${firstUser}/${secondUser}`;
-
-    this.api.create(titleChat).then((res) => {
-      this.addUserToChat({ chatId: res.id, users: [user as UserType, candidate] });
+  createChat(title: string, onSuccess: () => void) {
+    this.api.create(title).then(() => {
+      this.getChatsList();
       onSuccess();
     });
   }
 
-  addUserToChat({ chatId, users }: { chatId: number; users: UserType[] }) {
-    this.api
-      .addUserToChat(
-        chatId,
-        users.map((user) => user.id),
-      )
-      .then(() => this.getChatsList());
+  addUserToChat({ users }: { users: UserType[] }) {
+    const { dialogData } = store.getState();
+
+    if (dialogData !== null) {
+      this.api
+        .addUserToChat(
+          dialogData.id,
+          users.map((user) => user.id),
+        )
+        .then(() => this.openChat(dialogData.id));
+    }
+  }
+
+  async deleteUserFromChat(user: UserType, onSuccess: () => void) {
+    const { user: currentUser, dialogData } = store.getState();
+
+    if (dialogData !== null && currentUser !== null) {
+      this.api.deleteUserFormChat(dialogData?.id, [user.id]).then(() => {
+        this.openChat(dialogData?.id);
+        onSuccess();
+
+        if (currentUser.id === user.id) {
+          this.getChatsList();
+        }
+      });
+    }
   }
 
   async openChat(chatId: number) {
-    if (this.router.atPath !== `${PagesPath.CHAT}/${chatId}`) {
-      this.router.go(`${PagesPath.CHAT}/${chatId}`);
+    if (this.router.atPath !== `${PagesPath.MESSENGER}/${chatId}`) {
+      this.router.go(`${PagesPath.MESSENGER}/${chatId}`);
     }
 
     const { user, dialogData } = store.getState();
@@ -61,7 +75,7 @@ class ChatsActions {
 
     try {
       const users = await this.api.getUserIntoChat(chatId).catch(() => {
-        this.router.go(PagesPath.HOME);
+        this.router.go(PagesPath.MESSENGER);
 
         return [];
       });
@@ -70,15 +84,19 @@ class ChatsActions {
 
       const params = {
         id: chatId,
-        title: chatInfo[0]?.display_name || chatInfo[0]?.login,
-        avatar: chatInfo[0].avatar,
-        role: chatInfo[0].role,
+        title: [...chatInfo, user]
+          .map((userParams) => userParams?.display_name || userParams?.login)
+          .join(", "),
+        avatar: chatInfo[0]?.avatar,
+        role: chatInfo[0]?.role,
         loading: true,
+        messages: [],
         ws: null,
       };
 
       store.setState({
         dialogData: params,
+        usersInChat: users,
       });
 
       const chatToken = await this.api.getChatToken(chatId);
@@ -114,7 +132,7 @@ class ChatsActions {
 
     if (dialogData?.id) {
       this.api.delete(dialogData.id).then(() => {
-        this.router.go(PagesPath.HOME);
+        this.router.go(PagesPath.MESSENGER);
         this.getChatsList();
       });
     }
@@ -130,20 +148,20 @@ class ChatsActions {
   #setMessages(data: Any) {
     IntervalGetChats.restart();
 
-    const { messages, dialogData } = store.getState();
+    const { dialogData } = store.getState();
 
     if (Array.isArray(data)) {
       store.setState({
-        messages: [...data.reverse()],
-        dialogData: { ...dialogData, loading: false },
+        dialogData: { ...dialogData, loading: false, messages: [...data.reverse()] },
       });
       this.#scrollToBottom();
     }
 
-    if (data.type === WSEvents.MESSAGE) {
-      const copyMessages: object[] = [...messages];
+    if (data.type === WSEvents.MESSAGE && dialogData !== null) {
+      const copyMessages: object[] = [...dialogData.messages];
       copyMessages.push(data);
-      store.setState({ messages: copyMessages });
+
+      store.setState({ dialogData: { ...dialogData, messages: copyMessages } });
       this.#scrollToBottom();
       setTimeout(() => this.getChatsList(), 1000);
     }

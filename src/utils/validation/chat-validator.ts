@@ -1,4 +1,4 @@
-import { ChangePasswordType, SignInType } from "@modules/auth/types.js";
+import { ChangePasswordType, SignInType } from "@modules/auth/types.ts";
 import Validator from "./validator.ts";
 
 export type SignOutValidationType = {

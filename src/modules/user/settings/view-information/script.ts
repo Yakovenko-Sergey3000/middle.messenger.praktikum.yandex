@@ -6,8 +6,8 @@ import {
 } from "@modules/user/settings/components/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-setting-fields.ts";
-import { LogOutBtn } from "@modules/auth/index.js";
-import Router from "@utils/router/index.js";
+import { LogOutBtn } from "@modules/auth/index.ts";
+import Router from "@utils/router/index.ts";
 import { SettingsUserType } from "@modules/user/types.ts";
 import UserAvatar from "../components/user-avatar/script.ts";
 import Component from "../../../../utils/component.ts";

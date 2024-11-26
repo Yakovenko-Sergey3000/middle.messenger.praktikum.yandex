@@ -1,8 +1,8 @@
 import "./style.css";
 import Component from "@utils/component.ts";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiAvatar } from "@ui/avatar/index.js";
-import UserActions from "@modules/user/actions.js";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiAvatar } from "@ui/avatar/index.ts";
+import UserActions from "@modules/user/actions.ts";
 import template from "./template.hbs.ts";
 
 type ChangeUserAvatarType = {

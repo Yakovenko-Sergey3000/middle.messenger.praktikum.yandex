@@ -4,13 +4,13 @@ import { FIELDS } from "@modules/auth/sign-out/fields.ts";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { AuthFieldType, SignUpType } from "@modules/auth/types.ts";
-import { AuthAction } from "@modules/auth/index.js";
+import { AuthAction } from "@modules/auth/index.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.ts";
-import Router from "../../../utils/router/index.js";
+import Router from "../../../utils/router/index.ts";
 
 class SignOut extends Component {
   validator: IChatValidator;

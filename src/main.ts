@@ -6,9 +6,9 @@ import {
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.ts";
-import AuthActions from "@modules/auth/actions.js";
-import { NotFound } from "@utils/router/NotFound.js";
-import { ModuleDialog } from "@modules/chat/dialog/index.js";
+import AuthActions from "@modules/auth/actions.ts";
+import { NotFound } from "@utils/router/NotFound.ts";
+import { ModuleDialog } from "@modules/chat/dialog/index.ts";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
 
@@ -22,17 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
       authAction.setUser(user);
 
       router
-        .use(PagesPath.HOME, ModuleChat())
+        .use(PagesPath.MESSENGER, ModuleChat())
         .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
         .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
         .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
         .use(
-          `${PagesPath.CHAT}/:id`,
+          `${PagesPath.MESSENGER}/:id`,
           ModuleChat((props) => ModuleDialog(props)),
         )
         .notFound(
           NotFound(() => {
-            router.go(PagesPath.HOME);
+            router.go(PagesPath.MESSENGER);
           }),
         );
     })

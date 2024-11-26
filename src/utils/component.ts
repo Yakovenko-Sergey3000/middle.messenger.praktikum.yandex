@@ -111,14 +111,14 @@ export default class Component<Props extends Record<string, unknown> = Record<st
         const eventKey = key.slice(2).toLowerCase();
 
         events[eventKey] = propsAndChildren[key] as () => void;
-      } else if (this.#isChildrenList(propsAndChildren[key])) {
+      } else if (Array.isArray(propsAndChildren[key])) {
+        if (listChildren[key] === undefined) {
+          listChildren[key] = [];
+        }
+
         const list = propsAndChildren[key] as [];
 
         list.forEach((child: IComponent) => {
-          if (listChildren[key] === undefined) {
-            listChildren[key] = [];
-          }
-
           listChildren[key].push(child);
         });
       } else if (key === "attributes") {
@@ -137,10 +137,6 @@ export default class Component<Props extends Record<string, unknown> = Record<st
 
   #isEventFunction(key: string, item: unknown) {
     return key.startsWith("on") && typeof item === "function";
-  }
-
-  #isChildrenList(item: unknown) {
-    return Array.isArray(item) && !!item.filter((element) => element instanceof Component).length;
   }
 
   #makeProxyProps(props: Any) {
@@ -262,7 +258,9 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     });
 
     Object.entries(this.listChildren).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id=${child[0].id}></div>`;
+      if (child.length && child[0] instanceof Component) {
+        propsAndStubs[key] = `<div data-id=${child[0].id}></div>`;
+      }
     });
 
     const fragment = document.createElement("template");
@@ -280,19 +278,21 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     });
 
     Object.values(this.listChildren).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child[0].id}"]`);
+      if (child.length && child[0] instanceof Component) {
+        const stub = fragment.content.querySelector(`[data-id="${child[0].id}"]`);
 
-      if (!stub) {
-        return;
+        if (!stub) {
+          return;
+        }
+
+        const listFragment = document.createElement("template");
+
+        child.forEach((item) => {
+          listFragment.content.append(item.getContent());
+        });
+
+        stub.replaceWith(listFragment.content);
       }
-
-      const listFragment = document.createElement("template");
-
-      child.forEach((item) => {
-        listFragment.content.append(item.getContent());
-      });
-
-      stub.replaceWith(listFragment.content);
     });
 
     return fragment.content;

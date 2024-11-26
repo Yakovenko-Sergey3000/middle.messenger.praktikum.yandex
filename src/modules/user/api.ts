@@ -1,10 +1,10 @@
-import BaseApi from "@utils/api/base-api.js";
-import Api from "@utils/api/api.js";
-import { UserType } from "@utils/global-types/index.js";
-import { ChangeUserProfileType } from "@modules/user/types.js";
-import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
-import { ChangePasswordType } from "@modules/auth/types.js";
-import { UiUserItemType } from "@ui/user-item/script.js";
+import BaseApi from "@utils/api/base-api.ts";
+import Api from "@utils/api/api.ts";
+import { UserType } from "@utils/global-types/index.ts";
+import { ChangeUserProfileType } from "@modules/user/types.ts";
+import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.ts";
+import { ChangePasswordType } from "@modules/auth/types.ts";
+import { UiUserItemType } from "@ui/user-item/script.ts";
 
 const api = new Api("/user");
 class UserApi extends BaseApi {

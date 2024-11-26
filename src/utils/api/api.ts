@@ -1,5 +1,5 @@
 import { Any } from "../global-types/index.ts";
-import { YA_ENDPOINTS } from "../../enums.js";
+import { YA_ENDPOINTS } from "../../enums.ts";
 
 type ApiPropsType = {
   headers?: Record<string, string>;

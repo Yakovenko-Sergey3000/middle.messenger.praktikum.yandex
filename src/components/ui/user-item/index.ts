@@ -1,1 +1,1 @@
-export { default as UiUserItem } from "./script.js";
+export { default as UiUserItem } from "./script.ts";

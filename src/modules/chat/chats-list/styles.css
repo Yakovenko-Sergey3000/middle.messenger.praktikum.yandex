@@ -12,13 +12,13 @@
     gap: 8px;
   }
 
-  &__dialogs_list {
-    margin-top: 14px;
+  &__create-chat {
+    margin-top: 30px;
+    padding: 0 10px;
   }
 
-  &__add-chat {
-    margin-top: 32px;
-    padding: 0 10px;
+  &__dialogs_list {
+    margin-top: 14px;
   }
 }
 

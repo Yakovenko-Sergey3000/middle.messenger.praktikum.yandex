@@ -1,15 +1,18 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
-import ChatsActions from "@modules/chat/actions.js";
-import Router from "@utils/router/index.js";
-import WS from "@utils/web-socket.js";
+import ChatsActions from "@modules/chat/actions.ts";
+import Router from "@utils/router/index.ts";
+import WS from "@utils/web-socket.ts";
+import { UiModal } from "@ui/modal/index.ts";
+import SearchUserBlock from "@modules/chat/components/search-users-block/script.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import DialogFooter from "./components/dialog-footer/script.ts";
 import MessageItem from "./components/message-item/script.ts";
-import { Connect } from "../../../store/connect.js";
-import { PagesPath } from "../../../pages-path.js";
-import DialogMenu from "./components/dialog-menu/script.js";
+import { Connect } from "../../../store/connect.ts";
+import { PagesPath } from "../../../pages-path.ts";
+import DialogMenu from "./components/dialog-menu/script.ts";
+import DeleteUserFromChat from "./components/delete-user-from-chat/script.ts";
 
 export type DialogType = {
   id: number;
@@ -18,6 +21,7 @@ export type DialogType = {
   loading: boolean;
   role: string;
   avatar: string | null;
+  messages: [];
 };
 class Dialog extends Component {
   constructor() {
@@ -35,9 +39,27 @@ export default (chatActions: ChatsActions) => {
   const splitCurrentPath = new Router().atPath.split("/");
   const currentId = splitCurrentPath[splitCurrentPath.length - 1];
 
-  if (splitCurrentPath.includes(PagesPath.CHAT.replace("/", ""))) {
+  if (splitCurrentPath.includes(PagesPath.MESSENGER.replace("/", ""))) {
     chatActions.openChat(Number(currentId));
   }
+
+  const addUserToChatModal = UiModal({
+    content: SearchUserBlock({
+      onClickItem: (user) => {
+        chatActions.addUserToChat({
+          users: [user],
+        });
+        addUserToChatModal.onClose();
+      },
+    }),
+  });
+
+  const deleteUserFromChatModal = UiModal({
+    content: DeleteUserFromChat({
+      onClickItem: (user) =>
+        chatActions.deleteUserFromChat(user, () => deleteUserFromChatModal.onClose()),
+    }),
+  });
 
   return new (Connect(Dialog, (state) => {
     if (state.dialogData) {
@@ -49,11 +71,16 @@ export default (chatActions: ChatsActions) => {
           src: state.dialogData.avatar,
           className: "dialog-avatar",
         }),
-        dialogMenu: state.dialogData.role === "admin" ? null : DialogMenu(),
+        addUserToChatModal,
+        deleteUserFromChatModal,
+        dialogMenu: DialogMenu({
+          openModalAddUserToChat: () => addUserToChatModal.onOpen(),
+          openModalDeleteUserFromChat: () => deleteUserFromChatModal.onOpen(),
+        }),
         isLoading: state.dialogData.loading,
         userName: state.dialogData.title,
         // eslint-disable-next-line camelcase
-        messages: state.messages.map(({ content, user_id }) => {
+        messages: state.dialogData.messages.map(({ content, user_id }) => {
           // eslint-disable-next-line camelcase
           const isOwner = state.user && state.user.id === user_id;
 

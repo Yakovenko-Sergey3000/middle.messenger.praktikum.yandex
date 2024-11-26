@@ -1,0 +1,12 @@
+.delete-user {
+  padding: 20px;
+  width: 400px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__list {
+    margin-top: 10px;
+  }
+}

@@ -1,4 +1,4 @@
-import { UiAvatar } from "@ui/avatar/index.js";
+import { UiAvatar } from "@ui/avatar/index.ts";
 
 export default (src?: string | null) =>
   UiAvatar({

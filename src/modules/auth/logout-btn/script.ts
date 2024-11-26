@@ -1,5 +1,5 @@
-import { UiButton } from "@ui/buttons/index.js";
-import AuthActions from "@modules/auth/actions.js";
+import { UiButton } from "@ui/buttons/index.ts";
+import AuthActions from "@modules/auth/actions.ts";
 
 export default () =>
   UiButton({

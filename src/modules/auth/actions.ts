@@ -1,10 +1,10 @@
-import ApiAuth from "@modules/auth/api.js";
-import { SignInType, SignUpType } from "@modules/auth/types.js";
-import { ActionForComponent, UserType } from "@utils/global-types/index.js";
-import { parseErrorToJson } from "@utils/utils.js";
-import { PagesPath } from "../../pages-path.js";
-import { ERROR_STATUSES } from "../../enums.js";
-import store from "../../store/store.js";
+import ApiAuth from "@modules/auth/api.ts";
+import { SignInType, SignUpType } from "@modules/auth/types.ts";
+import { ActionForComponent, UserType } from "@utils/global-types/index.ts";
+import { parseErrorToJson } from "@utils/utils.ts";
+import { PagesPath } from "../../pages-path.ts";
+import { ERROR_STATUSES } from "../../enums.ts";
+import store from "../../store/store.ts";
 
 class AuthActions {
   api: ApiAuth;
@@ -25,7 +25,7 @@ class AuthActions {
       .signUp(params)
       .then(() => {
         onSuccess();
-        window.location.replace(PagesPath.HOME);
+        window.location.replace(PagesPath.MESSENGER);
       })
       .catch((err) => {
         const msg: string | undefined = ERROR_STATUSES.AUTH.SING_UP[parseErrorToJson(err)];
@@ -43,7 +43,7 @@ class AuthActions {
         if (onSuccess) {
           onSuccess();
         }
-        window.location.replace(PagesPath.HOME);
+        window.location.replace(PagesPath.MESSENGER);
       })
       .catch((err) => {
         const msg: string | undefined = ERROR_STATUSES.AUTH.SING_IN[parseErrorToJson(err)];
