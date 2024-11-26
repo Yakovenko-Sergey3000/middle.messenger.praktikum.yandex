@@ -7,11 +7,11 @@ import { USER_SETTING_FIELDS } from "@modules/user/settings/components/user-sett
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiForm } from "@ui/form/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
-import { ChangeUserProfileType, SettingsUserType } from "@modules/user/types.js";
-import UserActions from "@modules/user/actions.js";
+import { ChangeUserProfileType, SettingsUserType } from "@modules/user/types.ts";
+import UserActions from "@modules/user/actions.ts";
 import Component, { IComponent } from "../../../../utils/component.ts";
 import ChatValidator from "../../../../utils/validation/chat-validator.ts";
-import { Connect } from "../../../../store/connect.js";
+import { Connect } from "../../../../store/connect.ts";
 import ChangeUserAvatar from "../components/change-user-avatar/script.ts";
 
 class ChangeInformation extends Component {

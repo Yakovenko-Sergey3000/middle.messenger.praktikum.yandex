@@ -7,13 +7,13 @@ import {
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { USER_PASSWORD_FIELDS } from "@modules/user/settings/components/user-password-fields.ts";
-import UserActions from "@modules/user/actions.js";
-import { UserType } from "@utils/global-types/index.js";
-import { ChangePasswordType } from "@modules/auth/types.js";
+import UserActions from "@modules/user/actions.ts";
+import { UserType } from "@utils/global-types/index.ts";
+import { ChangePasswordType } from "@modules/auth/types.ts";
 import UserAvatar from "../components/user-avatar/script.ts";
 import Component, { IComponent } from "../../../../utils/component.ts";
 import ChatValidator from "../../../../utils/validation/chat-validator.ts";
-import { Connect } from "../../../../store/connect.js";
+import { Connect } from "../../../../store/connect.ts";
 
 class ChangePassword extends Component {
   constructor(props: { user: UserType }) {

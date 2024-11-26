@@ -1,5 +1,5 @@
 import { ModuleChatList } from "@modules/chat/chats-list/index.ts";
-import ChatsActions from "@modules/chat/actions.js";
+import ChatsActions from "@modules/chat/actions.ts";
 import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
 import { LayoutChat } from "./chat-layout/index.ts";
 import Component, { IComponent } from "../../utils/component.ts";

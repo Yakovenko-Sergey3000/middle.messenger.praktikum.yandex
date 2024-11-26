@@ -1,7 +1,7 @@
-import Api from "@utils/api/api.js";
-import { SignInType, SignUpType } from "@modules/auth/types.js";
-import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
-import { UserType } from "@utils/global-types/index.js";
+import Api from "@utils/api/api.ts";
+import { SignInType, SignUpType } from "@modules/auth/types.ts";
+import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.ts";
+import { UserType } from "@utils/global-types/index.ts";
 
 const api = new Api("/auth");
 class ApiAuth {

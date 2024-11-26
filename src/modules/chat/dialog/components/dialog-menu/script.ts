@@ -1,8 +1,8 @@
 import "./sctyle.css";
-import Component from "@utils/component.js";
-import { UiButton } from "@ui/buttons/index.js";
-import ChatsActions from "@modules/chat/actions.js";
-import template from "./template.hbs.js";
+import Component from "@utils/component.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import ChatsActions from "@modules/chat/actions.ts";
+import template from "./template.hbs.ts";
 
 type DialogMenuType = { openModalAddUserToChat: () => void };
 class DialogMenu extends Component {

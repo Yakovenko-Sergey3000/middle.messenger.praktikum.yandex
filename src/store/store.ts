@@ -1,8 +1,8 @@
-import EventBus from "@utils/event-bus.js";
-import { UserType } from "@utils/global-types/index.js";
-import { UiChatItemType } from "@ui/chat-item/index.js";
-import { DialogType } from "@modules/chat/dialog/script.js";
-import { UiUserItemType } from "@ui/user-item/script.js";
+import EventBus from "@utils/event-bus.ts";
+import { UserType } from "@utils/global-types/index.ts";
+import { UiChatItemType } from "@ui/chat-item/index.ts";
+import { DialogType } from "@modules/chat/dialog/script.ts";
+import { UiUserItemType } from "@ui/user-item/script.ts";
 
 export enum StoreEvent {
   Update = "update",

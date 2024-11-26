@@ -1,17 +1,17 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
-import ChatsActions from "@modules/chat/actions.js";
-import Router from "@utils/router/index.js";
-import WS from "@utils/web-socket.js";
-import { UiModal } from "@ui/modal/index.js";
-import SearchUserBlock from "@modules/chat/components/search-users-block/script.js";
+import ChatsActions from "@modules/chat/actions.ts";
+import Router from "@utils/router/index.ts";
+import WS from "@utils/web-socket.ts";
+import { UiModal } from "@ui/modal/index.ts";
+import SearchUserBlock from "@modules/chat/components/search-users-block/script.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import DialogFooter from "./components/dialog-footer/script.ts";
 import MessageItem from "./components/message-item/script.ts";
-import { Connect } from "../../../store/connect.js";
-import { PagesPath } from "../../../pages-path.js";
-import DialogMenu from "./components/dialog-menu/script.js";
+import { Connect } from "../../../store/connect.ts";
+import { PagesPath } from "../../../pages-path.ts";
+import DialogMenu from "./components/dialog-menu/script.ts";
 
 export type DialogType = {
   id: number;

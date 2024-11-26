@@ -1,9 +1,9 @@
 import "./style.css";
-import Component from "@utils/component.js";
-import { UiInput } from "@ui/inputs/index.js";
-import { UiButton } from "@ui/buttons/index.js";
-import ChatsActions from "@modules/chat/actions.js";
-import template from "./template.hbs.js";
+import Component from "@utils/component.ts";
+import { UiInput } from "@ui/inputs/index.ts";
+import { UiButton } from "@ui/buttons/index.ts";
+import ChatsActions from "@modules/chat/actions.ts";
+import template from "./template.hbs.ts";
 
 type AddChatBlockType = {
   closeModal: () => void;

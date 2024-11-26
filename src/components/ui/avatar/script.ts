@@ -3,7 +3,7 @@ import avatar from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { ComponentType } from "../../../utils/global-types/index.ts";
 import ConcatClasses from "../../../utils/concat-classes.ts";
-import { YA_ENDPOINTS } from "../../../enums.js";
+import { YA_ENDPOINTS } from "../../../enums.ts";
 
 type UiAvatarType = ComponentType & {
   width: string;

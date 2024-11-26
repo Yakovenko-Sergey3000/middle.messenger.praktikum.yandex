@@ -1,1 +1,1 @@
-export { default as UiModal } from "./script.js";
+export { default as UiModal } from "./script.ts";

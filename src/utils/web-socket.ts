@@ -1,5 +1,5 @@
-import EventBus from "@utils/event-bus.js";
-import { YA_ENDPOINTS } from "../enums.js";
+import EventBus from "@utils/event-bus.ts";
+import { YA_ENDPOINTS } from "../enums.ts";
 
 export const WSEvents = {
   CONNECTED: "connected",

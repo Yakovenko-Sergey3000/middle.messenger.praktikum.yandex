@@ -1,11 +1,11 @@
-import UserApi from "@modules/user/api.js";
-import { ChangeUserProfileType } from "@modules/user/types.js";
-import Router from "@utils/router/index.js";
-import { ActionForComponent } from "@utils/global-types/index.js";
-import { parseErrorToJson } from "@utils/utils.js";
-import { ChangePasswordType } from "@modules/auth/types.js";
-import store from "../../store/store.js";
-import { ERROR_STATUSES } from "../../enums.js";
+import UserApi from "@modules/user/api.ts";
+import { ChangeUserProfileType } from "@modules/user/types.ts";
+import Router from "@utils/router/index.ts";
+import { ActionForComponent } from "@utils/global-types/index.ts";
+import { parseErrorToJson } from "@utils/utils.ts";
+import { ChangePasswordType } from "@modules/auth/types.ts";
+import store from "../../store/store.ts";
+import { ERROR_STATUSES } from "../../enums.ts";
 
 class UserActions {
   api: UserApi;

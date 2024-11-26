@@ -1,6 +1,6 @@
 import "./styles.css";
 import { UiButton } from "@ui/buttons/index.ts";
-import Router from "@utils/router/index.js";
+import Router from "@utils/router/index.ts";
 import template from "./template.hbs.ts";
 import Component, { IComponent } from "../../../../../utils/component.ts";
 

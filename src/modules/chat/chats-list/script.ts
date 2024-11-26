@@ -2,15 +2,15 @@ import "./styles.css";
 import searchIcon from "@icons/search-icon.svg";
 import rightArrow from "@icons/right-arrow_v1.svg";
 import { UiButton } from "@ui/buttons/index.ts";
-import ChatsActions from "@modules/chat/actions.js";
-import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.js";
-import { UiModal } from "@ui/modal/index.js";
+import ChatsActions from "@modules/chat/actions.ts";
+import { UiChatItem, UiChatItemType } from "@ui/chat-item/index.ts";
+import { UiModal } from "@ui/modal/index.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import { PagesPath } from "../../../pages-path.ts";
-import Router from "../../../utils/router/index.js";
-import { Connect } from "../../../store/connect.js";
-import AddChatBlock from "../components/add-chat-block/script.js";
+import Router from "../../../utils/router/index.ts";
+import { Connect } from "../../../store/connect.ts";
+import AddChatBlock from "../components/add-chat-block/script.ts";
 
 type ChatsListType = {
   chatsList: UiChatItemType[];

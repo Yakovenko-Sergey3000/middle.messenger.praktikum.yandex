@@ -3,10 +3,10 @@ import Component from "@utils/component.ts";
 import ChatsActions from "@modules/chat/actions.ts";
 import { UiButton } from "@ui/buttons/index.ts";
 import { UiInput } from "@ui/inputs/index.ts";
-import { UiUserItem } from "@ui/user-item/index.js";
-import { UiUserItemType } from "@ui/user-item/script.js";
+import { UiUserItem } from "@ui/user-item/index.ts";
+import { UiUserItemType } from "@ui/user-item/script.ts";
 import template from "./template.hts.ts";
-import { Connect } from "../../../../store/connect.js";
+import { Connect } from "../../../../store/connect.ts";
 
 type SearchChatListType = {
   onClickItem: (data: UiUserItemType) => void;

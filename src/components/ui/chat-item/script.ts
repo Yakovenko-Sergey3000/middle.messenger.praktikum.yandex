@@ -1,6 +1,6 @@
 import "./styles.css";
 import { UiAvatar } from "@ui/avatar/index.ts";
-import { ComponentType, UserType } from "@utils/global-types/index.js";
+import { ComponentType, UserType } from "@utils/global-types/index.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import ConcatClasses from "../../../utils/concat-classes.ts";

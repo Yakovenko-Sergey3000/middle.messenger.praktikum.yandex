@@ -1,11 +1,11 @@
-import ChatsApi from "@modules/chat/api.js";
-import Router from "@utils/router/index.js";
-import { UserApi } from "@modules/user/index.js";
-import { Any, UserType } from "@utils/global-types/index.js";
-import WS, { WSEvents } from "@utils/web-socket.js";
-import IntervalGetChats from "@modules/chat/interval-get-chats.js";
-import store from "../../store/store.js";
-import { PagesPath } from "../../pages-path.js";
+import ChatsApi from "@modules/chat/api.ts";
+import Router from "@utils/router/index.ts";
+import { UserApi } from "@modules/user/index.ts";
+import { Any, UserType } from "@utils/global-types/index.ts";
+import WS, { WSEvents } from "@utils/web-socket.ts";
+import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
+import store from "../../store/store.ts";
+import { PagesPath } from "../../pages-path.ts";
 
 class ChatsActions {
   api: ChatsApi;

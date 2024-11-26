@@ -6,9 +6,9 @@ import {
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.ts";
-import AuthActions from "@modules/auth/actions.js";
-import { NotFound } from "@utils/router/NotFound.js";
-import { ModuleDialog } from "@modules/chat/dialog/index.js";
+import AuthActions from "@modules/auth/actions.ts";
+import { NotFound } from "@utils/router/NotFound.ts";
+import { ModuleDialog } from "@modules/chat/dialog/index.ts";
 import { PagesPath } from "./pages-path.ts";
 import Router from "./utils/router/index.ts";
 

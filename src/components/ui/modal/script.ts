@@ -1,6 +1,6 @@
 import "./style.css";
-import Component, { IComponent } from "@utils/component.js";
-import template from "./template.hbs.js";
+import Component, { IComponent } from "@utils/component.ts";
+import template from "./template.hbs.ts";
 
 type UiModalType = {
   content: IComponent;

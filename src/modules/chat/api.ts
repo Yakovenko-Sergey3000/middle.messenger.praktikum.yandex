@@ -1,8 +1,8 @@
-import BaseApi from "@utils/api/base-api.js";
-import Api from "@utils/api/api.js";
-import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.js";
-import { ChatTokenType, ChatUsersType, DeleteChatType } from "@modules/chat/types.js";
-import { UiChatItemType } from "@ui/chat-item/index.js";
+import BaseApi from "@utils/api/base-api.ts";
+import Api from "@utils/api/api.ts";
+import { ApiResponceType, parseApiResponceToJson } from "@utils/utils.ts";
+import { ChatTokenType, ChatUsersType, DeleteChatType } from "@modules/chat/types.ts";
+import { UiChatItemType } from "@ui/chat-item/index.ts";
 
 const api = new Api("/chats");
 class ChatsApi extends BaseApi {

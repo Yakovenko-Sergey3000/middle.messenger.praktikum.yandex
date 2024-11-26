@@ -1,5 +1,5 @@
-import IComponent from "@utils/component.js";
-import store, { StoreEvent, StoreStateType } from "./store.js";
+import IComponent from "@utils/component.ts";
+import store, { StoreEvent, StoreStateType } from "./store.ts";
 
 export const Connect = <T>(
   Component: new (...props: T[]) => IComponent,

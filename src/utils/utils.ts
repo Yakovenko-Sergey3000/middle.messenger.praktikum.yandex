@@ -1,4 +1,4 @@
-import { Any } from "./global-types/index.js";
+import { Any } from "./global-types/index.ts";
 
 type Indexed = {
   [key: string]: unknown;
