@@ -16,7 +16,7 @@ class IntervalGetChats {
   }
 
   start() {
-    return setInterval(() => this.getList(), 20000);
+    return window.setInterval(() => this.getList(), 20000);
   }
 
   getList() {
