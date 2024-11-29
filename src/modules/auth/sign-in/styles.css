@@ -1,5 +1,4 @@
 .sign-in-form {
-  width: 310px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -18,6 +17,10 @@
     flex-direction: column;
     gap: 14px;
     align-items: center;
+  }
+
+  &__error {
+    color: var(--ya-error);
   }
 }
 

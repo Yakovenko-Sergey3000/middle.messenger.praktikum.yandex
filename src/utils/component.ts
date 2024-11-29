@@ -28,9 +28,17 @@ export interface IComponent {
   getContent(): HTMLElement;
 
   render(): DocumentFragment;
+  show(): void;
+  hide(): void;
 }
 
-export default class Component implements IComponent {
+type ChildrenType = Record<string, IComponent>;
+type ListChildrenType = Record<string, IComponent[]>;
+type EventsType = Record<string, (e: unknown) => void>;
+type AttributesType = Record<string, string>;
+type PropsType = Record<string, unknown>;
+
+export default class Component<Props extends Record<string, unknown> = Record<string, unknown>> {
   static EVENTS = {
     INIT: "init",
     CDM: "component-did-mount",
@@ -43,39 +51,36 @@ export default class Component implements IComponent {
 
   #meta: {
     tagName: string;
-    props: Record<string, IComponent>;
+    props: PropsType;
   };
 
   id: string;
 
   #eventBus: () => EventBus<IComponent>;
 
-  props: Record<string, IComponent>;
+  props: PropsType;
 
-  children: Record<string, IComponent>;
+  children: ChildrenType;
 
-  events: Record<string, (e: Any) => void>;
+  events: EventsType;
 
-  listChildren: Record<string, IComponent[]>;
+  listChildren: ListChildrenType;
 
-  attributes: Record<string, string>;
+  attributes: AttributesType;
 
-  constructor(
-    tagName: string = "div",
-    propsAndChildren: { attributes?: Record<string, string> } & Any,
-  ) {
-    const { props, children, events, listChildren } = this.#shiftProps(propsAndChildren);
+  constructor(tagName: string = "div", propsAndChildren: Props = {} as Props) {
+    const shiftedProps = this.#shiftProps(propsAndChildren);
 
     this.#meta = {
       tagName,
-      props,
+      props: shiftedProps.props,
     };
 
-    this.props = this.#makeProxyProps(props);
-    this.children = this.#makeProxyProps(children);
-    this.events = events;
-    this.listChildren = this.#makeProxyProps(listChildren);
-    this.attributes = propsAndChildren.attributes || {};
+    this.props = this.#makeProxyProps(shiftedProps.props);
+    this.children = this.#makeProxyProps(shiftedProps.children);
+    this.listChildren = this.#makeProxyProps(shiftedProps.listChildren);
+    this.events = shiftedProps.events;
+    this.attributes = shiftedProps.attributes;
     const eventBus = new EventBus<IComponent>();
 
     this.id = uuid();
@@ -86,37 +91,52 @@ export default class Component implements IComponent {
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  #shiftProps(propsAndChildren: Any): {
-    props: Record<string, IComponent>;
-    children: Record<string, IComponent>;
-    events: Record<string, (e: Any) => void>;
-    listChildren: Record<string, IComponent[]>;
+  #shiftProps(propsAndChildren: Props): {
+    props: PropsType;
+    children: ChildrenType;
+    events: EventsType;
+    listChildren: ListChildrenType;
+    attributes: AttributesType;
   } {
-    const props: Record<string, IComponent> = {};
-    const children: Record<string, IComponent> = {};
-    const events: Record<string, (e: Any) => void> = {};
-    const listChildren: Record<string, IComponent[]> = {};
+    const props: PropsType = {};
+    const children: ChildrenType = {};
+    const events: EventsType = {};
+    const listChildren: ListChildrenType = {};
+    let attributes: AttributesType = {};
 
     Object.keys(propsAndChildren).forEach((key) => {
-      if (propsAndChildren[key] instanceof Component) {
-        children[key] = propsAndChildren[key] as IComponent;
-      } else if (key.startsWith("on")) {
-        events[key.slice(2).toLowerCase()] = propsAndChildren[key];
+      if (this.#isChildComponent(propsAndChildren[key])) {
+        children[key] = propsAndChildren[key];
+      } else if (this.#isEventFunction(key, propsAndChildren[key])) {
+        const eventKey = key.slice(2).toLowerCase();
+
+        events[eventKey] = propsAndChildren[key] as () => void;
       } else if (Array.isArray(propsAndChildren[key])) {
-        propsAndChildren[key].forEach((child: IComponent) => {
-          if (!listChildren[key]) {
-            listChildren[key] = [];
-          }
-          if (child instanceof Component) {
-            listChildren[key].push(child);
-          }
+        if (listChildren[key] === undefined) {
+          listChildren[key] = [];
+        }
+
+        const list = propsAndChildren[key] as [];
+
+        list.forEach((child: IComponent) => {
+          listChildren[key].push(child);
         });
+      } else if (key === "attributes") {
+        attributes = { ...(propsAndChildren.attributes as AttributesType) };
       } else {
         props[key] = propsAndChildren[key];
       }
     });
 
-    return { props, children, events, listChildren };
+    return { props, children, events, listChildren, attributes };
+  }
+
+  #isChildComponent(item: unknown) {
+    return item instanceof Component;
+  }
+
+  #isEventFunction(key: string, item: unknown) {
+    return key.startsWith("on") && typeof item === "function";
   }
 
   #makeProxyProps(props: Any) {
@@ -238,7 +258,9 @@ export default class Component implements IComponent {
     });
 
     Object.entries(this.listChildren).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id=${child[0].id}></div>`;
+      if (child.length && child[0] instanceof Component) {
+        propsAndStubs[key] = `<div data-id=${child[0].id}></div>`;
+      }
     });
 
     const fragment = document.createElement("template");
@@ -256,19 +278,21 @@ export default class Component implements IComponent {
     });
 
     Object.values(this.listChildren).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child[0].id}"]`);
+      if (child.length && child[0] instanceof Component) {
+        const stub = fragment.content.querySelector(`[data-id="${child[0].id}"]`);
 
-      if (!stub) {
-        return;
+        if (!stub) {
+          return;
+        }
+
+        const listFragment = document.createElement("template");
+
+        child.forEach((item) => {
+          listFragment.content.append(item.getContent());
+        });
+
+        stub.replaceWith(listFragment.content);
       }
-
-      const listFragment = document.createElement("template");
-
-      child.forEach((item) => {
-        listFragment.content.append(item.getContent());
-      });
-
-      stub.replaceWith(listFragment.content);
     });
 
     return fragment.content;
@@ -296,5 +320,14 @@ export default class Component implements IComponent {
 
   render(): DocumentFragment {
     return this.compile("");
+  }
+
+  hide(): void {
+    this.#element.style.display = "none";
+  }
+
+  show(): void {
+    this.#element.style.display = "block";
+    this.#eventBus().emit(Component.EVENTS.CDU);
   }
 }

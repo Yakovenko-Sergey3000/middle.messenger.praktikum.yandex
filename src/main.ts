@@ -6,65 +6,41 @@ import {
   ModuleChangeUserPassword,
   ModuleViewUserSetting,
 } from "@modules/user/index.ts";
-import { UiButton } from "@ui/buttons/index.ts";
-import { LayoutErrorPage } from "@layouts/_404-500/index.ts";
-import { renderComponent } from "./utils/rende-component.ts";
+import AuthActions from "@modules/auth/actions.ts";
+import { NotFound } from "@utils/router/NotFound.ts";
+import { ModuleDialog } from "@modules/chat/dialog/index.ts";
 import { PagesPath } from "./pages-path.ts";
+import Router from "./utils/router/index.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const path = window.location.pathname;
+  const authAction = new AuthActions();
+  const router = new Router();
 
-  if (path.includes("404")) {
-    renderComponent(
-      "#app",
-      LayoutErrorPage({
-        title: "404",
-        subtitle: "Не туда попали",
-        linkBackButton: UiButton({
-          variant: "link",
-          label: "Назад к чатам",
-          onClick: () => window.location.replace(PagesPath.HOME),
-        }),
-      }),
-    );
-  }
+  authAction
+    .getUser()
+    .then((user) => {
+      authAction.setUser(user);
 
-  if (path.includes("500")) {
-    renderComponent(
-      "#app",
-      LayoutErrorPage({
-        title: "500",
-        subtitle: "Мы уже фиксим",
-        linkBackButton: UiButton({
-          variant: "link",
-          label: "Назад к чатам",
-          onClick: () => window.location.replace(PagesPath.HOME),
-        }),
-      }),
-    );
-  }
-
-  if (path.includes("change-user-information")) {
-    renderComponent("#app", ModuleChangeUserInformation());
-  }
-
-  if (path.includes("change-user-password")) {
-    renderComponent("#app", ModuleChangeUserPassword());
-  }
-
-  if (path.includes("chat")) {
-    renderComponent("#app", ModuleChat());
-  }
-
-  if (path.includes("sign-in-page")) {
-    renderComponent("#app", ModuleSignIn());
-  }
-
-  if (path.includes("sign-out-page")) {
-    renderComponent("#app", ModuleSignOut());
-  }
-
-  if (path.includes("view-user-settings")) {
-    renderComponent("#app", ModuleViewUserSetting());
-  }
+      router
+        .use(PagesPath.MESSENGER, ModuleChat())
+        .use(PagesPath.USER_SETTING, ModuleViewUserSetting())
+        .use(PagesPath.CHANGE_USER_SETTING, ModuleChangeUserInformation())
+        .use(PagesPath.CHANGE_USER_PASSWORD, ModuleChangeUserPassword())
+        .use(
+          `${PagesPath.MESSENGER}/:id`,
+          ModuleChat((props) => ModuleDialog(props)),
+        )
+        .notFound(
+          NotFound(() => {
+            router.go(PagesPath.MESSENGER);
+          }),
+        );
+    })
+    .catch(() => {
+      router
+        .use(PagesPath.SIGN_IN, ModuleSignIn())
+        .use(PagesPath.SING_OUT, ModuleSignOut())
+        .notFound(() => router.go(PagesPath.SIGN_IN));
+    })
+    .finally(() => router.start());
 });

@@ -1,0 +1,16 @@
+.user-item {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  cursor: pointer;
+
+  &__avatar {
+    width: 47px;
+    height: 47px;
+  }
+
+  &:hover {
+    background-color: var(--ya-blue-50);
+  }
+}

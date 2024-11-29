@@ -28,6 +28,10 @@ class Validator {
 
     return regex.test(password);
   }
+
+  isEmptyString(str: string): boolean {
+    return !!str.trim();
+  }
 }
 
 export default Validator;

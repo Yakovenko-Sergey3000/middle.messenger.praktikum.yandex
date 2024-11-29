@@ -40,6 +40,9 @@
       ],
       "@icons/*": [
         "./src/static/icons/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   }

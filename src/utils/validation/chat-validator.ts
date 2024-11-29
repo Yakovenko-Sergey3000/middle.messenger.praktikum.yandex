@@ -1,3 +1,4 @@
+import { ChangePasswordType, SignInType } from "@modules/auth/types.ts";
 import Validator from "./validator.ts";
 
 export type SignOutValidationType = {
@@ -9,13 +10,19 @@ export type SignOutValidationType = {
   phone?: string;
 };
 
-export type SignOutValidationResponceType = {
+export type SignInValidationType = {
+  login?: string;
+  password?: string;
+};
+
+export type ValidationResponceType = {
   isValid: boolean;
   errors: { key: string; message: string }[];
 };
 
 export interface IChatValidator {
-  userInformation(obj: SignOutValidationType): SignOutValidationResponceType;
+  userInformation(obj: SignOutValidationType): ValidationResponceType;
+  signIn(obj: SignInValidationType): ValidationResponceType;
 }
 
 class ChatValidator extends Validator implements IChatValidator {
@@ -27,12 +34,91 @@ class ChatValidator extends Validator implements IChatValidator {
     this.savedPassword = "";
   }
 
-  userInformation(obj: SignOutValidationType): SignOutValidationResponceType {
-    const result: SignOutValidationResponceType = {
+  signIn(obj: SignInType): ValidationResponceType {
+    const result: ValidationResponceType = {
       isValid: true,
       errors: [],
     };
 
+    Object.entries(obj).forEach(([key, value]) => {
+      switch (key) {
+        case "login":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        case "password":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        default:
+      }
+    });
+
+    if (result.errors.length) {
+      result.isValid = false;
+    }
+
+    return result;
+  }
+
+  changePassword(obj: ChangePasswordType): ValidationResponceType {
+    const result: ValidationResponceType = {
+      isValid: true,
+      errors: [],
+    };
+
+    Object.entries(obj).forEach(([key, value]) => {
+      switch (key) {
+        case "oldPassword":
+          if (!this.isEmptyString(value)) {
+            result.errors.push({
+              key,
+              message: "Поле не может быть пустым",
+            });
+          }
+          break;
+        case "newPassword":
+          if (!this.isCorrectPassword(value)) {
+            result.errors.push({
+              key,
+              message: "Пароль должен быть от 8 до 40 символов и хотя бы одной заглавной буквы",
+            });
+          } else {
+            this.savedPassword = value;
+          }
+          break;
+        case "confirmPassword":
+          if (this.savedPassword !== value) {
+            result.errors.push({
+              key,
+              message: "Пароли не совпадают",
+            });
+          }
+          break;
+        default:
+      }
+    });
+
+    if (result.errors.length) {
+      result.isValid = false;
+    }
+
+    return result;
+  }
+
+  userInformation(obj: SignOutValidationType): ValidationResponceType {
+    const result: ValidationResponceType = {
+      isValid: true,
+      errors: [],
+    };
     Object.entries(obj).forEach(([key, value]) => {
       switch (key) {
         case "first_name":

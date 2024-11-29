@@ -1,5 +1,6 @@
 import "./styles.css";
 import { UiButton } from "@ui/buttons/index.ts";
+import Router from "@utils/router/index.ts";
 import template from "./template.hbs.ts";
 import Component, { IComponent } from "../../../../../utils/component.ts";
 
@@ -9,11 +10,12 @@ type SettingLayoutType = {
 
 class SettingLayout extends Component {
   constructor(props: SettingLayoutType) {
-    super("div", { ...props, attributes: { class: "user-settings" } });
+    super("div", props);
     this.children.returnBackButton = UiButton({
+      attributes: { type: "button" },
       label: "←",
       variant: "circle",
-      onClick: () => window.history.back(),
+      onClick: () => new Router().back(),
     });
   }
 

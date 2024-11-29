@@ -16,9 +16,19 @@ export type UserType = {
   id: number;
   first_name: string;
   second_name: string;
-  display_name: string;
+  display_name: string | null;
   login: string;
   email: string;
   phone: string;
-  avatar: string;
+  avatar: string | null;
+};
+
+export type ApiResponceActionType = {
+  onSuccess: (params?: unknown) => void;
+  onError: (params?: unknown) => void;
+};
+
+export type ActionForComponent<T> = {
+  onSuccess?: (params?: T) => void;
+  onError?: (params?: T) => void;
 };

@@ -1,0 +1,57 @@
+.change-avatar {
+  width: 130px;
+  height: 130px;
+  position: relative;
+}
+
+.change-wrapper {
+  width: 100%;
+  height: 130px;
+  border-radius: 100%;
+  position: absolute;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  top: 0;
+
+  &:hover > .change-wrapper-overlay {
+    opacity: 0.6;
+  }
+
+  &:hover > p {
+    opacity: 1;
+
+  }
+
+  & > p {
+    margin: 0 auto;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+  }
+}
+
+.change-avatar-loading {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.change-wrapper-overlay {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.2s linear;
+}
+
+.change-avatar-input-file {
+  position: absolute;
+  top: -100px;
+  display: none;
+}

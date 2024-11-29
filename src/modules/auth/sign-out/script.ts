@@ -3,12 +3,14 @@ import { UiFormLabel } from "@ui/form-label/index.ts";
 import { FIELDS } from "@modules/auth/sign-out/fields.ts";
 import { UiInput } from "@ui/inputs/index.ts";
 import { UiButton } from "@ui/buttons/index.ts";
-import { AuthFieldType } from "@modules/auth/types.ts";
+import { AuthFieldType, SignUpType } from "@modules/auth/types.ts";
+import { AuthAction } from "@modules/auth/index.ts";
 import template from "./template.hbs.ts";
 import Component from "../../../utils/component.ts";
 import AuthFormLayout from "../auth-form-layout/script.ts";
 import { PagesPath } from "../../../pages-path.ts";
 import ChatValidator, { IChatValidator } from "../../../utils/validation/chat-validator.ts";
+import Router from "../../../utils/router/index.ts";
 
 class SignOut extends Component {
   validator: IChatValidator;
@@ -24,9 +26,7 @@ class SignOut extends Component {
       variant: "link",
       label: "Войти",
       attributes: { type: "button" },
-      onClick: () => {
-        window.location.replace(PagesPath.SIGN_IN);
-      },
+      onClick: () => new Router().go(PagesPath.SIGN_IN),
     });
 
     this.validator = new ChatValidator();
@@ -74,6 +74,7 @@ class SignOut extends Component {
 
 export default () => {
   const signOutForm = new SignOut();
+  const action = new AuthAction();
 
   return AuthFormLayout({
     title: "Регистрация",
@@ -101,9 +102,10 @@ export default () => {
         return;
       }
 
-      console.log(data);
-
-      target.reset();
+      action.signUp(data as SignUpType, {
+        onSuccess: () => target.reset(),
+        onError: (msg) => signOutForm.setProps({ error: msg }),
+      });
     },
   });
 };

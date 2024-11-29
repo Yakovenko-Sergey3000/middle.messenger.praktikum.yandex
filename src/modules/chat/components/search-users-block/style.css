@@ -1,0 +1,33 @@
+.search-user {
+  margin-top: 20px;
+  width: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__menu {
+    margin-top: 20px;
+    padding: 0 30px;
+  }
+
+  &__list {
+    margin-top: 10px;
+    height: 300px;
+  }
+
+  & input {
+    margin-bottom: 10px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  & p {
+    text-align: center;
+  }
+}
