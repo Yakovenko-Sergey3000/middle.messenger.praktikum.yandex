@@ -15,6 +15,7 @@ import Router from "./utils/router/index.ts";
 document.addEventListener("DOMContentLoaded", () => {
   const authAction = new AuthActions();
   const router = new Router();
+  // const t
 
   authAction
     .getUser()
