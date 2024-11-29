@@ -10,7 +10,8 @@
     "prebuild": "tsc --noEmit",
     "eslint": "eslint . && tsc --noEmit",
     "eslint-fix": "eslint . --fix",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=20.0.0"
