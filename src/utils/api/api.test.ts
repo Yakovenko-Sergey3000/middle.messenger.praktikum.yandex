@@ -4,7 +4,7 @@ import Api from "./api.ts";
 
 const xhrMockClass = () => ({
   open: jest.fn(),
-  send: jest.fn(function (data) {
+  send: jest.fn(function Send(data) {
     if (data) {
       // @ts-ignore
       this.response = data;
