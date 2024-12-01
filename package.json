@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test eslint"
+      "pre-commit": "pre-commit"
     }
   },
   "pre-commit": [

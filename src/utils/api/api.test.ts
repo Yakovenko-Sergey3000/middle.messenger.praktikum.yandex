@@ -6,10 +6,10 @@ const xhrMockClass = () => ({
   open: jest.fn(),
   send: jest.fn(function Send(data) {
     if (data) {
-      // @ts-ignore
+      // @ts-ignore-error
       this.response = data;
     }
-    // @ts-ignore
+    // @ts-ignore-error
     this.onload();
   }),
   setRequestHeader: jest.fn(),
