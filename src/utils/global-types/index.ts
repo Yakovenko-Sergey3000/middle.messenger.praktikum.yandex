@@ -3,7 +3,7 @@ export type Any = any;
 
 export type ComponentType = {
   className?: string;
-  attributes?: Record<string, Any>;
+  attributes?: Record<string, unknown>;
 };
 
 export type ComponentEventsType = {

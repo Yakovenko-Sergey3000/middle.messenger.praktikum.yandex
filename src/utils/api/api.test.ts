@@ -17,7 +17,8 @@ const xhrMockClass = () => ({
   response: "OK",
 });
 
-globalThis.XMLHttpRequest = jest.fn().mockImplementation(xhrMockClass) as any;
+// @ts-expect-error ...
+globalThis.XMLHttpRequest = jest.fn().mockImplementation(xhrMockClass);
 
 describe("HTTP Transport", () => {
   let api: Api;

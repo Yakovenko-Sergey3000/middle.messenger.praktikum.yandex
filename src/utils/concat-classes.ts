@@ -1,9 +1,11 @@
-import { Any } from "./global-types/index.ts";
-
-const concatClasses = (...args: Any[]): string => {
+const concatClasses = (...args: unknown[]): string => {
   let str: string = "";
 
-  args.forEach((item: Any): void => {
+  args.forEach((item: unknown): void => {
+    if (item == null) {
+      return;
+    }
+
     if (typeof item === "string" || typeof item === "number") {
       str += str ? " " : "";
       str += item;

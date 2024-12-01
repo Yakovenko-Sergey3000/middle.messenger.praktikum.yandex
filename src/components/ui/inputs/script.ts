@@ -1,10 +1,10 @@
 import "./style.css";
 import Component from "../../../utils/component.ts";
-import { Any, ComponentEventsType } from "../../../utils/global-types/index.ts";
+import { ComponentEventsType } from "../../../utils/global-types/index.ts";
 import concatClasses from "../../../utils/concat-classes.ts";
 
 type UiInputType = ComponentEventsType & {
-  attributes?: Any;
+  attributes?: Record<string, unknown>;
   className?: string;
   variant?: "filled" | "flushed" | "un-styled";
 };

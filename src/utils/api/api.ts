@@ -1,9 +1,8 @@
-import { Any } from "../global-types/index.ts";
 import { YA_ENDPOINTS } from "../../enums.ts";
 
 type ApiPropsType = {
   headers?: Record<string, string>;
-  data?: Record<string, Any>;
+  data?: Record<string, unknown> | FormData;
   method?: string;
   timeout?: number;
 };
@@ -31,9 +30,11 @@ class Api implements IApi {
     this.#base_url = `${YA_ENDPOINTS.api}${url}`;
   }
 
-  #queryStringify(url: string, data: Record<string, Any>): string {
+  #queryStringify(url: string, data: unknown): string {
     const newUrl = new URL(url);
-    Object.entries(data).forEach(([key, val]) => newUrl.searchParams.set(key, val));
+    if (data && typeof data === "object") {
+      Object.entries(data).forEach(([key, val]) => newUrl.searchParams.set(key, val as string));
+    }
 
     return newUrl.toString();
   }
@@ -59,7 +60,7 @@ class Api implements IApi {
       });
 
       xhr.onload = () => {
-        const responce: { status: number; response: Any } = {
+        const responce: { status: number; response: unknown } = {
           status: xhr.status,
           response: xhr.response,
         };
@@ -68,7 +69,8 @@ class Api implements IApi {
           reject(responce);
         }
 
-        resolve(responce as Any);
+        // @ts-expect-error ...
+        resolve(responce);
       };
       xhr.onabort = reject;
       xhr.onerror = reject;

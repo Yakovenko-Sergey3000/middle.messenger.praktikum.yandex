@@ -1,7 +1,6 @@
 import uuid from "uuid4";
 import Handlebars from "handlebars";
 import EventBus from "./event-bus.ts";
-import { Any } from "./global-types/index.ts";
 
 export interface IComponent {
   id: string;
@@ -23,7 +22,7 @@ export interface IComponent {
 
   compile(template: string, options: IComponent): DocumentFragment;
 
-  setProps(newProps: Any): void;
+  setProps(newProps: unknown): void;
 
   getContent(): HTMLElement;
 
@@ -56,7 +55,7 @@ export default class Component<Props extends Record<string, unknown> = Record<st
 
   id: string;
 
-  #eventBus: () => EventBus<IComponent>;
+  #eventBus: () => EventBus<Record<string, unknown>>;
 
   props: PropsType;
 
@@ -76,12 +75,12 @@ export default class Component<Props extends Record<string, unknown> = Record<st
       props: shiftedProps.props,
     };
 
-    this.props = this.#makeProxyProps(shiftedProps.props);
-    this.children = this.#makeProxyProps(shiftedProps.children);
-    this.listChildren = this.#makeProxyProps(shiftedProps.listChildren);
+    this.props = this.#makeProxyProps<PropsType>(shiftedProps.props);
+    this.children = this.#makeProxyProps<ChildrenType>(shiftedProps.children);
+    this.listChildren = this.#makeProxyProps<ListChildrenType>(shiftedProps.listChildren);
     this.events = shiftedProps.events;
     this.attributes = shiftedProps.attributes;
-    const eventBus = new EventBus<IComponent>();
+    const eventBus = new EventBus<Record<string, unknown>>();
 
     this.id = uuid();
     this.#element = this.#createElement(tagName);
@@ -139,13 +138,13 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     return key.startsWith("on") && typeof item === "function";
   }
 
-  #makeProxyProps(props: Any) {
+  #makeProxyProps<T extends Record<string, unknown>>(props: T): T {
     return ((self) =>
       new Proxy(props, {
         set(target, key: string, newValue): boolean {
           const oldValue = { ...target };
           // eslint-disable-next-line no-param-reassign
-          target[key] = newValue;
+          target[key as keyof T] = newValue;
 
           self.#eventBus().emit(Component.EVENTS.CDU, oldValue, target);
           return true;
@@ -160,7 +159,7 @@ export default class Component<Props extends Record<string, unknown> = Record<st
       }))(this);
   }
 
-  #registrationEvents(eventBus: EventBus<IComponent>) {
+  #registrationEvents(eventBus: EventBus<Record<string, unknown>>) {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.CDM, this.#componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.CDU, this.#componentDidUpdate.bind(this));
@@ -184,7 +183,7 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     });
   }
 
-  #componentDidUpdate(oldState: Any, newState: Any): void {
+  #componentDidUpdate(oldState: unknown, newState: unknown): void {
     if (!this.componentDidUpdate(oldState, newState)) {
       return;
     }
@@ -229,7 +228,7 @@ export default class Component<Props extends Record<string, unknown> = Record<st
 
   componentDidReRender(): void {}
 
-  componentDidUpdate(oldState: Any, newState: Any): boolean {
+  componentDidUpdate(oldState: unknown, newState: unknown): boolean {
     if (oldState && newState) {
       return true;
     }
@@ -250,8 +249,8 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     this.#eventBus().emit(Component.EVENTS.RENDER);
   }
 
-  compile(template: string, options: Any = {}): DocumentFragment {
-    const propsAndStubs = { ...options };
+  compile(template: string, options: object = {}) {
+    const propsAndStubs: Record<string, unknown> = { ...options };
 
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
@@ -298,8 +297,8 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     return fragment.content;
   }
 
-  setProps(newProps: Any): void {
-    if (!newProps) {
+  setProps(newProps: Props): void {
+    if (newProps === null && typeof newProps !== "object") {
       return;
     }
 
@@ -318,7 +317,7 @@ export default class Component<Props extends Record<string, unknown> = Record<st
     }
   }
 
-  render(): DocumentFragment {
+  render() {
     return this.compile("");
   }
 

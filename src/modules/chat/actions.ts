@@ -1,11 +1,13 @@
 import ChatsApi from "@modules/chat/api.ts";
 import Router from "@utils/router/index.ts";
-import { Any, UserType } from "@utils/global-types/index.ts";
+import { UserType } from "@utils/global-types/index.ts";
 import WS, { WSEvents } from "@utils/web-socket.ts";
 import IntervalGetChats from "@modules/chat/interval-get-chats.ts";
 import { UserApi } from "@modules/user/index.ts";
 import store from "../../store/store.ts";
 import { PagesPath } from "../../pages-path.ts";
+
+type WSSubscribeType = { type: string; messages: string };
 
 class ChatsActions {
   api: ChatsApi;
@@ -102,8 +104,8 @@ class ChatsActions {
       const chatToken = await this.api.getChatToken(chatId);
 
       if (chatToken.token) {
-        const ws = new WS(`/${user?.id}/${chatId}/${chatToken.token}`);
-        ws.on(WSEvents.MESSAGE, this.#setMessages.bind(this));
+        const ws = new WS<WSSubscribeType>(`/${user?.id}/${chatId}/${chatToken.token}`);
+        ws.on(WSEvents.MESSAGE, this.#subscribeOnMessages.bind(this));
         ws.connect().then(() => {
           ws.send({ content: "0", type: "get old" });
           store.setState({ dialogData: { ...params, ws } });
@@ -145,7 +147,7 @@ class ChatsActions {
     }
   }
 
-  #setMessages(data: Any) {
+  #subscribeOnMessages(data: WSSubscribeType) {
     IntervalGetChats.restart();
 
     const { dialogData } = store.getState();
