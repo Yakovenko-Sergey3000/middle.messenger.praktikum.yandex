@@ -11,7 +11,7 @@
     "eslint": "eslint . && tsc --noEmit",
     "eslint-fix": "eslint . --fix",
     "test": "jest",
-    "prepare": "husky",
+    "prepare": "husky install",
     "pre-commit": "npm test && npm run eslint"
   },
   "engines": {
