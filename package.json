@@ -10,9 +10,10 @@
     "prebuild": "tsc --noEmit",
     "eslint": "eslint . && tsc --noEmit",
     "eslint-fix": "eslint . --fix",
+    "stylelint": "stylelint **/*.css",
     "test": "jest",
     "prepare": "husky install",
-    "pre-commit": "npm test && npm run eslint"
+    "pre-commit": "npm test && npm run eslint && npm run stylelint"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -54,6 +55,7 @@
     "postcss-nested": "6.2.0",
     "prettier": "3.3.3",
     "stylelint": "16.10.0",
+    "stylelint-config-standard": "^36.0.1",
     "ts-node": "10.9.2",
     "typescript": "5.7.2",
     "typescript-eslint": "8.11.0",

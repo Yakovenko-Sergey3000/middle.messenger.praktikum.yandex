@@ -4,18 +4,20 @@
   font-weight: 500;
   font-size: 13px;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   --ya-blue-500: #3369F3;
   --ya-blue-50: #E4EDFD;
   --ya-gray-100: #FBFBFB;
   --ya-gray-150: #EAEAEA;
   --ya-gray-200: #EFEFEF;
   --ya-gray-250: #F8F8F8;
-  --ya-gray-500: #999999;
-  --ya-red-500: #FF0000;
+  --ya-gray-500: #999;
+  --ya-red-500: #F00;
   --ya-error: #FF2F2F;
+  --ya-shadow-black-014: rgba(0,0,0, 14%)
 
 }
 
